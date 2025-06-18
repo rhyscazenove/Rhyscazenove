@@ -14,12 +14,6 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-
-Here is an expanded and polished README.md for your GitHub profile. It blends your AI focus with your broader experience in digital product development, leadership, and purpose-driven technology work — while keeping a clean, confident tone suitable for recruiters and collaborators.
-
-⸻
-
-
 # 👋 Hello, I'm Rhys Cazenove
 
 I'm a software engineering leader and AI practitioner based in London. Over the past 15+ years, I've built scalable digital platforms across health, culture, and media — from AI-assisted internal tooling at the Natural History Museum to enhanced reading experiences for authors like Barack Obama and Hilary Mantel.
