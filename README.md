@@ -14,3 +14,11 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## 👋 About Me
+I'm Rhys — a software engineering leader currently exploring the intersection of AI workflows, observability, and human-centred automation. I build tooling to make AI safer, more accountable, and more useful.
+
+## 🔍 Current Focus
+- Prompt audit tooling with LangGraph-style metadata
+- Observability in RAG workflows (Grafana + OpenTelemetry)
+- Centralised AI usage policies for orgs
