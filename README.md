@@ -28,35 +28,6 @@ Testing:       Cypress • Jest • Playwright • Lighthouse CI
 
 ---
 
-## 🔧 Sample Projects (coming soon)
-
-| Project | Description |
-|--------|-------------|
-| `rag-hr-bot` | Internal HR chatbot using RAG on SharePoint + Azure OpenAI; versioned prompts & feedback loop |
-| `ai-persona-audit` | LangGraph-style agent workflows emitting structured logs for AI metadata auditability |
-| `prompt-injection-tests` | Experimental repo exploring injection resistance patterns à la Simon Willison |
-| `grafana-ai-dashboard` | OpenTelemetry + Prometheus logs for AI service usage, prompt timing, error rates |
-| `cloud-nhm-replatform` | Architecture & migration notes from NHM’s full move to AKS + headless AEM (public parts only) |
-
----
-
-## 🧠 Past Highlights
-
-- 🦕 **Natural History Museum**: Led replatforming of 25+ apps to AKS, CI/CD pipelines, built AI chatbot integrated into MS Teams, implemented observability patterns and prompt versioning.
-- 📚 **Enhanced Editions**: Co-founded a startup that pioneered enhanced iPhone books; won multiple UX awards and worked with major authors.
-- 📺 **Comedy Central (Viacom)**: Led product dev for The Daily Show, South Park and more; scaled SEO traffic 150%, built video infrastructure and analytics dashboards.
-- 🥣 **Brothee Organic Foods**: Founded an ethical food company, ran ecommerce + retail logistics, and led sustainability practices aligned with B-Corp standards.
-
----
-
-## 💬 Values & Philosophy
-
-- **Human-first AI**: I believe AI should support humans, not impersonate them. I’m currently exploring ways to make agentic workflows safer, more transparent, and more useful to real teams.
-- **Results over rituals**: Strong delivery culture matters more than process dogma. I favor tight feedback loops, clear ownership, and thoughtful defaults.
-- **Purpose-driven work**: Whether at a museum, food startup, or AI lab, I gravitate toward work that improves wellbeing and builds systems people can trust.
-
----
-
 ## 📖 What I'm Reading / Exploring
 
 - [The Lethal Trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) – Simon Willison  
