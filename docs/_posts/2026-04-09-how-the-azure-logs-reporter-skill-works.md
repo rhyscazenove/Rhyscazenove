@@ -1,5 +1,5 @@
 ---
-published: true
+published: false
 layout: post
 title: "How the Azure Logs Reporter Skill Works"
 date: 2026-04-09

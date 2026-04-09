@@ -1,5 +1,6 @@
 ---
 layout: post
+published: false
 title: "Building a Team Activity Pipeline: From Trello Cards to AI-Powered Reports"
 date: 2026-04-08
 categories: [engineering, automation]
