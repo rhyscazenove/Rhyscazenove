@@ -276,6 +276,17 @@ pre code {
   color: inherit;
 }
 
+/* ── MERMAID DIAGRAMS ── */
+.mermaid {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* ── BLOCKQUOTE ── */
 blockquote {
   border-left: 2px solid var(--ink);

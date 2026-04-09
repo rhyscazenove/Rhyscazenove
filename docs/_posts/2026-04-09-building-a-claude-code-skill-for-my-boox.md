@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-title: "Building a Coding Agent Skill to Make EPUBs for My Boox E-Reader"
+title: "How I Built a Reusable Skill That Makes EPUBs for My E-Ink Tablet"
 date: 2026-04-06
 categories: [ai, tooling, e-ink]
 tags: [claude-code, github-copilot, codex, epub, boox, e-ink, ai-skills, pandoc]
@@ -50,7 +50,7 @@ The problems I kept hitting with vanilla `pandoc input.md -o output.epub`:
 
 The skill defines a three-stage pipeline that handles all of this:
 
-```
+```text
 Markdown source
     |
     +-- Mermaid blocks? --> Render to PNG (mmdc, 2000px wide, white bg)
@@ -65,6 +65,32 @@ Markdown source
          --epub-embed-font JetBrainsMono-Bold.ttf
          --syntax-highlighting=monochrome
          --toc --toc-depth=3
+```
+
+**Option A (detailed):**
+
+```mermaid
+graph TD
+    A[Markdown source] --> B{Mermaid blocks?}
+    B -->|Yes| C[Render to PNG via mmdc]
+    C --> D[Replace fenced blocks with images]
+    D --> E[Download JetBrains Mono]
+    B -->|No| E
+    E --> F[Pandoc conversion]
+    F --> G[EPUB3 output]
+```
+
+**Option B (simple):**
+
+```mermaid
+graph TD
+    A[Markdown source] --> B{Mermaid blocks?}
+    B -->|Yes| C[Render to PNG via mmdc]
+    C --> D[Replace fenced blocks with images]
+    D --> E[Font embedding]
+    B -->|No| E
+    E --> F[Pandoc with e-ink CSS]
+    F --> G[EPUB3 for Boox]
 ```
 
 A Python script (`boox-epub-convert.py`) orchestrates the pipeline. The agent invokes it as part of the skill.
