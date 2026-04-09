@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+{{ content }}
+
+{% if site.posts.size > 0 %}
+<h4>Recent posts</h4>
+<ul class="post-list">
+  {% for post in site.posts %}
+  <li>
+    <div class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    <div class="post-meta">{{ post.date | date: "%d %b %Y" }}</div>
+    {% if post.description %}
+    <div class="post-excerpt">{{ post.description }}</div>
+    {% elsif post.excerpt %}
+    <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
