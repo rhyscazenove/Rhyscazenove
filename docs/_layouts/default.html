@@ -19,30 +19,6 @@
     {% include header.html %}
     <main class="site-content">
       {{ content }}
-      {% if site.posts.size > 0 %}
-<ul class="post-list">
-  {% for post in site.posts %}
-  <li>
-    <div class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
-    <div class="post-meta">{{ post.date | date: "%d %b %Y" }}</div>
-    {% if post.description %}
-    <div class="post-excerpt">{{ post.description }}</div>
-    {% elsif post.excerpt %}
-    <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</div>
-    {% endif %}
-    {% if post.tags.size > 0 %}
-    <div class="post-tags">
-      {% for tag in post.tags %}
-      <span class="tag">{{ tag }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No posts yet.</p>
-{% endif %}
     </main>
     {% include footer.html %}
   </div>
@@ -56,6 +32,13 @@
         return document.documentElement.getAttribute('data-theme') || 'auto';
       }
 
+      function isDark() {
+        var theme = current();
+        if (theme === 'dark') return true;
+        if (theme === 'light') return false;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
       function apply(theme) {
         if (theme === 'auto') {
           document.documentElement.removeAttribute('data-theme');
@@ -65,6 +48,54 @@
           localStorage.setItem('theme', theme);
         }
         btn.textContent = labels[theme];
+        if (window.mermaid) {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: isDark()
+              ? {
+                  primaryColor: '#1a1a1a',
+                  primaryTextColor: '#ede8e0',
+                  primaryBorderColor: '#555',
+                  lineColor: '#999',
+                  secondaryColor: '#2a2a2a',
+                  tertiaryColor: '#141414',
+                  background: '#141414',
+                  mainBkg: '#1a1a1a',
+                  nodeBorder: '#555',
+                  clusterBkg: '#1a1a1a',
+                  clusterBorder: '#555',
+                  titleColor: '#ede8e0',
+                  edgeLabelBackground: '#141414',
+                  nodeTextColor: '#ede8e0',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '14px'
+                }
+              : {
+                  primaryColor: '#f0ede8',
+                  primaryTextColor: '#111',
+                  primaryBorderColor: '#aaa',
+                  lineColor: '#888',
+                  secondaryColor: '#fafaf8',
+                  tertiaryColor: '#fafaf8',
+                  background: '#fafaf8',
+                  mainBkg: '#f0ede8',
+                  nodeBorder: '#aaa',
+                  clusterBkg: '#fafaf8',
+                  clusterBorder: '#aaa',
+                  titleColor: '#111',
+                  edgeLabelBackground: '#fafaf8',
+                  nodeTextColor: '#111',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '14px'
+                }
+          });
+          document.querySelectorAll('.mermaid[data-processed]').forEach(function(el) {
+            el.removeAttribute('data-processed');
+            el.innerHTML = el.getAttribute('data-original');
+          });
+          mermaid.run();
+        }
       }
 
       btn.addEventListener('click', function() {
@@ -73,6 +104,71 @@
       });
 
       apply(current());
+    })();
+  </script>
+  <script>
+    (function() {
+      var codeBlocks = document.querySelectorAll('pre code.language-mermaid');
+      if (!codeBlocks.length) return;
+
+      codeBlocks.forEach(function(code) {
+        var pre = code.parentElement;
+        var div = document.createElement('div');
+        div.className = 'mermaid';
+        div.setAttribute('data-original', code.textContent);
+        div.textContent = code.textContent;
+        pre.parentElement.replaceChild(div, pre);
+      });
+
+      var theme = document.documentElement.getAttribute('data-theme') || 'auto';
+      var dark = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      script.onload = function() {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'base',
+          themeVariables: dark
+            ? {
+                primaryColor: '#1a1a1a',
+                primaryTextColor: '#ede8e0',
+                primaryBorderColor: '#555',
+                lineColor: '#999',
+                secondaryColor: '#2a2a2a',
+                tertiaryColor: '#141414',
+                background: '#141414',
+                mainBkg: '#1a1a1a',
+                nodeBorder: '#555',
+                clusterBkg: '#1a1a1a',
+                clusterBorder: '#555',
+                titleColor: '#ede8e0',
+                edgeLabelBackground: '#141414',
+                nodeTextColor: '#ede8e0',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px'
+              }
+            : {
+                primaryColor: '#f0ede8',
+                primaryTextColor: '#111',
+                primaryBorderColor: '#aaa',
+                lineColor: '#888',
+                secondaryColor: '#fafaf8',
+                tertiaryColor: '#fafaf8',
+                background: '#fafaf8',
+                mainBkg: '#f0ede8',
+                nodeBorder: '#aaa',
+                clusterBkg: '#fafaf8',
+                clusterBorder: '#aaa',
+                titleColor: '#111',
+                edgeLabelBackground: '#fafaf8',
+                nodeTextColor: '#111',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px'
+              }
+        });
+      };
+      document.body.appendChild(script);
     })();
   </script>
 </body>
