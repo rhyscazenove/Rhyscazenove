@@ -36,7 +36,9 @@ In my case, the skill encodes e-ink display constraints, NeoReader's CSS renderi
 
 ## Why Not Just Run Pandoc?
 
-The display is sharp (2480x1860 at 300 PPI) but limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats. (Full research into NeoReader's rendering capabilities, font choices, and device specs is in the [research catalogue](/boox-epub-research).)
+> The display is 2480x1860 at 300 PPI, limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats.
+
+Full research into NeoReader's rendering capabilities, font choices, and device specs is in the [research catalogue](/boox-epub-research).
 
 The problems I kept hitting with vanilla `pandoc input.md -o output.epub`:
 
@@ -84,15 +86,19 @@ The `--syntax-highlighting=monochrome` flag tells Pandoc to use bold and italic 
 
 The stylesheet (`epub-eink.css`) took the most iteration. Every decision traces back to the 16-level greyscale display.
 
-Code blocks use `pre-wrap` to soft-wrap long lines instead of clipping them. Font size is set to `0.82em`, small enough to fit roughly 75 characters per line at readable size. A `border-left: 3px solid #666` provides a visual separator that renders as a clear dark grey.
+> Code blocks use `pre-wrap` to soft-wrap long lines instead of clipping them. Font size is set to `0.82em`, roughly 75 characters per line at readable size. A `border-left: 3px solid #666` provides a visual separator that renders as a clear dark grey.
+>
+> Syntax highlighting is monochrome. Keywords and data types get `font-weight: bold`. Comments get `font-style: italic` with `color: #555`. Everything else is unstyled.
+>
+> All font sizes use `em` or `%` units, never `px`. Everything scales proportionally when you adjust NeoReader's font size slider.
+>
+> Tables are set to `0.9em` and `width: 100%` to help wide tables fit. Table headers get a `#e0e0e0` background, visible enough on greyscale to distinguish them from data rows.
+>
+> Page breaks use `page-break-after: avoid` on headings to prevent orphaned headers at the bottom of a page, and `orphans: 2; widows: 2` to avoid single-line paragraph fragments.
 
-Syntax highlighting is monochrome. Keywords and data types get `font-weight: bold`. Comments get `font-style: italic` with `color: #555`. Everything else is unstyled. On e-ink, this is more readable than any colour theme, because bold and italic remain distinct in greyscale where different colours collapse to the same shade.
+On e-ink, monochrome highlighting is more readable than any colour theme. Bold and italic remain distinct in greyscale where different colours collapse to the same shade.
 
-All font sizes use `em` or `%` units, never `px`. Everything scales proportionally when you adjust NeoReader's font size slider. People adjust text size constantly on e-ink; one `px` value and the slider stops working.
-
-Tables are set to `0.9em` and `width: 100%` to help wide tables fit. Table headers get a `#e0e0e0` background, visible enough on greyscale to distinguish them from data rows.
-
-Page breaks use `page-break-after: avoid` on headings to prevent orphaned headers at the bottom of a page, and `orphans: 2; widows: 2` to avoid single-line paragraph fragments.
+People adjust text size constantly on e-ink; one `px` value and the slider stops working.
 
 The greyscale visibility guide I worked out through trial and error:
 
@@ -106,9 +112,9 @@ The greyscale visibility guide I worked out through trial and error:
 
 ## Writing the Skill Definition
 
-The skill definition file (`SKILL.md`) contains YAML front matter with trigger conditions, device specs, step-by-step instructions with flags, content authoring guidelines, and a troubleshooting table.
+> The skill definition file (`SKILL.md`) contains YAML front matter with trigger conditions, device specs, step-by-step instructions with flags, content authoring guidelines, and a troubleshooting table. The agent pattern-matches against the trigger description when deciding which skills to activate.
 
-The trigger description matters. Mine includes phrases like "make an epub", "create a document for my boox", "format this for e-ink", and "make this into something I can read on my tablet". The agent pattern-matches against these when deciding which skills to activate.
+The trigger description matters. Mine includes phrases like "make an epub", "create a document for my boox", "format this for e-ink", and "make this into something I can read on my tablet".
 
 The body reads like instructions for a knowledgeable colleague. It explains *what* to do and *why*, because any capable coding agent can adapt instructions to new situations if it understands the reasoning. For example:
 
