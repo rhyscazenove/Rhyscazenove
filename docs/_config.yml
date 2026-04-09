@@ -5,10 +5,11 @@ baseurl: ""
 
 # Build settings
 markdown: kramdown
-theme: minima
+remote_theme: knhash/jekyllBear
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-remote-theme
 
 # Permalink style
 permalink: /:year/:month/:day/:title/
@@ -17,7 +18,22 @@ permalink: /:year/:month/:day/:title/
 author:
   name: Rhys Cazenove
 
+# Navbar links
+navbar_links:
+  - title: Blog
+    url: /blog
+  - title: About
+    url: /about
+
+# Tags
+tag_page_dir: tag
+tag_page_layout: tag_page
+tag_feed_layout: tag_feed
+tag_feed_dir: tag
+
 # Exclude from build
 exclude:
   - CNAME
   - README.md
+  - Gemfile
+  - Gemfile.lock
