@@ -11,7 +11,7 @@ Last night I gave a talk at [CCCL #5](https://cccl.dev) in London, hosted by [Vi
 
 Other talks by Jan Peer, Ruslan Zavackis, Daniel Buchele, Valera Latsho, Aris Mandor and Talha Sheikh were all fascinating. I love learning about where people are at in their AI journey. Some impressive and pioneering demos.
 
-I was impressed with the audience, and enjoyed meeting some of the community. They are very engaged and had some very good follow-up questions for me. It was their enthusiasm which prompted me to launch this blog!
+The audience, about a hundred, were great. They are very engaged and I enjoyed our conversations after the talks. It was their enthusiasm which prompted me to publish this blog :)
 
 This is a write-up of what I covered. The short version: Claude Code skills are easy to get running locally. Making them trustworthy enough to run unattended in production is a different problem, and one worth solving well.
 
@@ -50,7 +50,7 @@ Observability: visibility into everything the agent does, including what it's *a
 
 ## Simon Willison's Lethal Trifecta
 
-The risk model we're designing against is Simon Willison's Lethal Trifecta: three things that are each fine in isolation but dangerous together.
+The risk model we're designing against is [Simon Willison's Lethal Trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/): three things that are each fine in isolation but dangerous together.
 
 1. Access to private or sensitive data
 2. Exposure to untrusted content
