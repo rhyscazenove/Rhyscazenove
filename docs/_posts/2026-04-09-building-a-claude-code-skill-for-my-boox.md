@@ -1,8 +1,8 @@
 ---
-published: false
+published: true
 layout: post
 title: "Building a Claude Code Skill to Make EPUBs for My Boox E-Reader"
-date: 2026-04-09
+date: 2026-04-06
 categories: [ai, tooling, e-ink]
 tags: [claude-code, epub, boox, e-ink, ai-skills, pandoc]
 description: "How I built a custom Claude Code skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet, and what Claude Code skills are."
