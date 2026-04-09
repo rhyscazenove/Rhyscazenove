@@ -50,25 +50,6 @@ The problems I kept hitting with vanilla `pandoc input.md -o output.epub`:
 
 The skill defines a three-stage pipeline that handles all of this:
 
-```text
-Markdown source
-    |
-    +-- Mermaid blocks? --> Render to PNG (mmdc, 2000px wide, white bg)
-    |                       Replace ```mermaid blocks with ![](image.png)
-    |
-    +-- Download JetBrains Mono if not cached (~/.cache/boox-epub-fonts/)
-    |
-    +-- Pandoc conversion:
-         -f gfm -> -t epub3
-         --css epub-eink.css
-         --epub-embed-font JetBrainsMono-Regular.ttf
-         --epub-embed-font JetBrainsMono-Bold.ttf
-         --syntax-highlighting=monochrome
-         --toc --toc-depth=3
-```
-
-**Option A (detailed):**
-
 ```mermaid
 graph TD
     A[Markdown source] --> B{Mermaid blocks?}
@@ -78,19 +59,6 @@ graph TD
     B -->|No| E
     E --> F[Pandoc conversion]
     F --> G[EPUB3 output]
-```
-
-**Option B (simple):**
-
-```mermaid
-graph TD
-    A[Markdown source] --> B{Mermaid blocks?}
-    B -->|Yes| C[Render to PNG via mmdc]
-    C --> D[Replace fenced blocks with images]
-    D --> E[Font embedding]
-    B -->|No| E
-    E --> F[Pandoc with e-ink CSS]
-    F --> G[EPUB3 for Boox]
 ```
 
 A Python script (`boox-epub-convert.py`) orchestrates the pipeline. The agent invokes it as part of the skill.
