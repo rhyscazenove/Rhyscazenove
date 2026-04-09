@@ -1,11 +1,11 @@
 ---
 published: true
 layout: post
-title: "How I Built a Reusable Skill That Makes EPUBs for My E-Ink Tablet"
+title: "How I Built a Reusable Agentic Skill That Makes EPUBs for My E-Ink Tablet"
 date: 2026-04-06
 categories: [ai, tooling, e-ink]
 tags: [claude-code, github-copilot, codex, epub, boox, e-ink, ai-skills, pandoc]
-description: "How I built a reusable skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet. Originally built for Claude Code, the same pattern works with GitHub Copilot, OpenAI Codex, and other coding agents."
+description: "How I built a reusable agentic skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet. Originally built for Claude Code, the same pattern works with GitHub Copilot, OpenAI Codex, and other coding agents."
 ---
 
 I read a lot of technical documentation on my Boox Go 10.3. It's a 10.3-inch e-ink tablet with a 300 PPI display, and it's the best way I've found to absorb a long technical document without the distractions of a backlit screen. One problem: most documents look terrible on it.
@@ -14,9 +14,9 @@ PDFs don't reflow. Web pages need Wi-Fi. Generic EPUBs treat code blocks as an a
 
 So I built a **skill** for it: a reusable capability that a coding agent can invoke whenever I ask it to create a document for my tablet. I built it in Claude Code, but the same pattern works with GitHub Copilot, OpenAI Codex, and other LLM-powered coding tools.
 
-## What's a Skill?
+## What's an Agentic Skill?
 
-A skill is a Markdown file that tells a coding agent *when* to activate and *how* to carry out a task. You write the expertise once; the agent applies it whenever the situation matches. Claude Code calls them skills. GitHub Copilot and Codex have their own conventions for custom instructions, but the content is the same: a file with trigger conditions and a body of instructions that the agent reads at invocation time.
+An agentic skill is a Markdown file that tells a coding agent *when* to activate and *how* to carry out a task. You write the expertise once; the agent applies it whenever the situation matches. Claude Code calls them skills. GitHub Copilot and Codex have their own conventions for custom instructions, but the content is the same: a file with trigger conditions and a body of instructions that the agent reads at invocation time.
 
 The front matter defines when it fires:
 
