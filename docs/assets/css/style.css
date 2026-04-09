@@ -42,13 +42,21 @@ html, body {
 
 /* ── DARK MODE ── */
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not([data-theme="light"]) {
     --bg:     #141414;
     --ink:    #ede8e0;
     --mid:    #999;
     --light:  #555;
     --xlight: #1a1a1a;
   }
+}
+
+html[data-theme="dark"] {
+  --bg:     #141414;
+  --ink:    #ede8e0;
+  --mid:    #999;
+  --light:  #555;
+  --xlight: #1a1a1a;
 }
 
 /* ── LAYOUT ── */
@@ -116,6 +124,26 @@ header nav a {
 }
 
 header nav a:hover {
+  color: var(--ink);
+}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--light);
+  border-radius: 3px;
+  padding: 4px 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--mid);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  border-color: var(--mid);
   color: var(--ink);
 }
 
