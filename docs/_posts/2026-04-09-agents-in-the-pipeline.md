@@ -7,9 +7,13 @@ tags: [claude-code, agents, gitlab-ci, azure, governance, security]
 description: "A write-up of my talk at CCCL #5 in London — how we built a production governance harness for agentic AI workflows at the Natural History Museum."
 ---
 
-Last night I gave a talk at [CCCL #5](https://cccl.dev) in London. This is a write-up of what I covered. You can also [view the slides](/presentations/cccl-april-2026.html) directly.
+Last night I gave a talk at [CCCL #5](https://cccl.dev) in London, hosted by [Vikram Pawar](https://www.linkedin.com/in/vikrammpawar/), Claude Code Community Leader, and [Rob Hart](https://www.linkedin.com/in/roberthartuk/), founder of GitNation. The [full agenda is available here](https://cccl-ai.github.io/meetups-live/cccl-5b/agenda). You can also [view the slides](/presentations/cccl-april-2026.html) directly.
 
-The short version: Claude Code skills are easy to get running locally. Making them trustworthy enough to run unattended in production is a different problem entirely — and one worth solving deliberately.
+Other talks by Jan Peer, Ruslan Zavacky, Daniel Buchele, Valera Latsho, Aris Mandor and Talha Sheikh were all really fascinating. I love learning about where people are at in their AI journey. Some very impressive and pioneering demos.
+
+I was impressed with the audience, and enjoyed meeting some of the community. They are very engaged and had some very good follow-up questions for me. It was their enthusiasm which prompted me to launch this blog!
+
+This is a write-up of what I covered. The short version: Claude Code skills are easy to get running locally. Making them trustworthy enough to run unattended in production is a different problem entirely — and one worth solving deliberately.
 
 ---
 
@@ -140,16 +144,6 @@ All three use the same harness. The hooks, container, and pipeline config don't 
 For those who want the technical specifics: we're running on Azure with GitLab CI as the orchestration layer. The container registry is GitLab's built-in registry. Hooks are bash scripts. Azure MCP is used for the Incident Analysis use case to query Application Insights.
 
 The whole thing is platform-agnostic by design — the hooks are bash or PowerShell, the container runs anywhere, and the pipeline config is YAML. We've tested it against Azure DevOps and GitHub Actions as well as GitLab CI.
-
----
-
-## The event
-
-CCCL #5 was hosted by [Vikram Pawar](https://www.linkedin.com/in/vikrammpawar/), Claude Code Community Leader, and [Rob Hart](https://www.linkedin.com/in/roberthartuk/), founder of GitNation. The [full agenda is available here](https://cccl-ai.github.io/meetups-live/cccl-5b/agenda).
-
-Other talks by Jan Peer, Ruslan Zavacky, Daniel Buchele, Valera Latsho, Aris Mandor and Talha Sheikh were all really fascinating. I love learning about where people are at in their AI journey. Some very impressive and pioneering demos.
-
-I was impressed with the audience, and enjoyed meeting some of the community. They are very engaged and had some very good follow-up questions for me. It was their enthusiasm which prompted me to launch this blog!
 
 ---
 
