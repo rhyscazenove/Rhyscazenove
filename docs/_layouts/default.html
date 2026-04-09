@@ -51,10 +51,44 @@
         if (window.mermaid) {
           mermaid.initialize({
             startOnLoad: false,
-            theme: isDark() ? 'dark' : 'default',
+            theme: 'base',
             themeVariables: isDark()
-              ? { primaryColor: '#2a2a2a', primaryTextColor: '#ede8e0', lineColor: '#999' }
-              : { primaryColor: '#f0ede8', primaryTextColor: '#111', lineColor: '#888' }
+              ? {
+                  primaryColor: '#1a1a1a',
+                  primaryTextColor: '#ede8e0',
+                  primaryBorderColor: '#555',
+                  lineColor: '#999',
+                  secondaryColor: '#2a2a2a',
+                  tertiaryColor: '#141414',
+                  background: '#141414',
+                  mainBkg: '#1a1a1a',
+                  nodeBorder: '#555',
+                  clusterBkg: '#1a1a1a',
+                  clusterBorder: '#555',
+                  titleColor: '#ede8e0',
+                  edgeLabelBackground: '#141414',
+                  nodeTextColor: '#ede8e0',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '14px'
+                }
+              : {
+                  primaryColor: '#f0ede8',
+                  primaryTextColor: '#111',
+                  primaryBorderColor: '#aaa',
+                  lineColor: '#888',
+                  secondaryColor: '#fafaf8',
+                  tertiaryColor: '#fafaf8',
+                  background: '#fafaf8',
+                  mainBkg: '#f0ede8',
+                  nodeBorder: '#aaa',
+                  clusterBkg: '#fafaf8',
+                  clusterBorder: '#aaa',
+                  titleColor: '#111',
+                  edgeLabelBackground: '#fafaf8',
+                  nodeTextColor: '#111',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '14px'
+                }
           });
           document.querySelectorAll('.mermaid[data-processed]').forEach(function(el) {
             el.removeAttribute('data-processed');
@@ -94,10 +128,44 @@
       script.onload = function() {
         mermaid.initialize({
           startOnLoad: true,
-          theme: dark ? 'dark' : 'default',
+          theme: 'base',
           themeVariables: dark
-            ? { primaryColor: '#2a2a2a', primaryTextColor: '#ede8e0', lineColor: '#999' }
-            : { primaryColor: '#f0ede8', primaryTextColor: '#111', lineColor: '#888' }
+            ? {
+                primaryColor: '#1a1a1a',
+                primaryTextColor: '#ede8e0',
+                primaryBorderColor: '#555',
+                lineColor: '#999',
+                secondaryColor: '#2a2a2a',
+                tertiaryColor: '#141414',
+                background: '#141414',
+                mainBkg: '#1a1a1a',
+                nodeBorder: '#555',
+                clusterBkg: '#1a1a1a',
+                clusterBorder: '#555',
+                titleColor: '#ede8e0',
+                edgeLabelBackground: '#141414',
+                nodeTextColor: '#ede8e0',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px'
+              }
+            : {
+                primaryColor: '#f0ede8',
+                primaryTextColor: '#111',
+                primaryBorderColor: '#aaa',
+                lineColor: '#888',
+                secondaryColor: '#fafaf8',
+                tertiaryColor: '#fafaf8',
+                background: '#fafaf8',
+                mainBkg: '#f0ede8',
+                nodeBorder: '#aaa',
+                clusterBkg: '#fafaf8',
+                clusterBorder: '#aaa',
+                titleColor: '#111',
+                edgeLabelBackground: '#fafaf8',
+                nodeTextColor: '#111',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px'
+              }
         });
       };
       document.body.appendChild(script);
