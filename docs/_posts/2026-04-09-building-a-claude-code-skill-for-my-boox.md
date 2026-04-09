@@ -1,24 +1,22 @@
 ---
 published: true
 layout: post
-title: "Building a Claude Code Skill to Make EPUBs for My Boox E-Reader"
+title: "Building a Coding Agent Skill to Make EPUBs for My Boox E-Reader"
 date: 2026-04-06
 categories: [ai, tooling, e-ink]
-tags: [claude-code, epub, boox, e-ink, ai-skills, pandoc]
-description: "How I built a custom Claude Code skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet, and what Claude Code skills are."
+tags: [claude-code, github-copilot, codex, epub, boox, e-ink, ai-skills, pandoc]
+description: "How I built a reusable skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet. Originally built for Claude Code, the same pattern works with GitHub Copilot, OpenAI Codex, and other coding agents."
 ---
 
 I read a lot of technical documentation on my Boox Go 10.3. It's a 10.3-inch e-ink tablet with a 300 PPI display, and it's the best way I've found to absorb a long technical document without the distractions of a backlit screen. One problem: most documents look terrible on it.
 
 PDFs don't reflow. Web pages need Wi-Fi. Generic EPUBs treat code blocks as an afterthought. Syntax highlighting that relies on colour is meaningless on a 16-level greyscale display, and code that runs off the right edge of the screen is gone. E-ink doesn't scroll horizontally.
 
-So I built a **Claude Code skill** for it: a reusable capability that Claude can invoke whenever I ask it to create a document for my tablet.
+So I built a **skill** for it: a reusable capability that a coding agent can invoke whenever I ask it to create a document for my tablet. I built it for Claude Code, but the same pattern works with GitHub Copilot, OpenAI Codex, and other LLM-powered coding tools.
 
-## What's a Claude Code Skill?
+## What's a Skill?
 
-[Claude Code](https://claude.ai/claude-code) is Anthropic's CLI tool for working with Claude. It reads files, writes code, runs commands. Skills extend what it can do.
-
-A skill is a specialised instruction set: a Markdown file with YAML front matter that tells Claude *when* to activate and *how* to carry out the task. You write the expertise once, and Claude applies it whenever the situation matches, without you spelling out the details each time.
+A skill is a specialised instruction set: a Markdown file that tells the coding agent *when* to activate and *how* to carry out the task. You write the expertise once, and the agent applies it whenever the situation matches, without you spelling out the details each time. Claude Code pioneered the format. GitHub Copilot and OpenAI Codex now support the same concept under different names, but the principle is identical: encode domain knowledge in a file that the agent reads at invocation time.
 
 The front matter defines the trigger conditions:
 
@@ -32,9 +30,9 @@ description: "Create EPUB documents optimised for reading on a Boox Go 10.3
 ---
 ```
 
-The body of the file provides the full instructions: what tools to use, what flags to pass, what CSS to apply. Claude reads this at invocation time and follows the recipe, adapting it to whatever content is at hand.
+The body of the file provides the full instructions: what tools to use, what flags to pass, what CSS to apply. The agent reads this at invocation time and follows the recipe, adapting it to whatever content is at hand.
 
-Skills encode *domain expertise*. In my case: e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. I figure out the hard stuff once, write it down in a format Claude can follow, and stop thinking about it.
+Skills encode *domain expertise*. In my case: e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. I figure out the hard stuff once, write it down in a format the agent can follow, and stop thinking about it.
 
 ## Why Not Just Run Pandoc?
 
@@ -69,7 +67,7 @@ Markdown source
          --toc --toc-depth=3
 ```
 
-A Python script (`boox-epub-convert.py`) orchestrates the pipeline. Claude invokes it as part of the skill.
+A Python script (`boox-epub-convert.py`) orchestrates the pipeline. The agent invokes it as part of the skill.
 
 ### Stage 1: Mermaid Diagram Pre-rendering
 
@@ -116,23 +114,23 @@ The greyscale visibility guide I worked out through trial and error:
 
 The skill definition file (`SKILL.md`) contains YAML front matter with trigger conditions, device specs, step-by-step instructions with flags, content authoring guidelines, and a troubleshooting table.
 
-The trigger description matters. Mine includes phrases like "make an epub", "create a document for my boox", "format this for e-ink", and "make this into something I can read on my tablet". Claude pattern-matches against these when deciding which skills to activate.
+The trigger description matters. Mine includes phrases like "make an epub", "create a document for my boox", "format this for e-ink", and "make this into something I can read on my tablet". The agent pattern-matches against these when deciding which skills to activate.
 
-The body reads like instructions for a knowledgeable colleague. It explains *what* to do and *why*, because Claude can adapt instructions to new situations if it understands the reasoning. For example:
+The body reads like instructions for a knowledgeable colleague. It explains *what* to do and *why*, because any capable coding agent can adapt instructions to new situations if it understands the reasoning. For example:
 
 > Use `-b white` (essential; transparent backgrounds render as black on e-ink)
 
-That parenthetical tells Claude *why* the flag matters. If it later needs to render a PlantUML diagram, it can apply the same logic without me adding a new instruction.
+That parenthetical tells the agent *why* the flag matters. If it later needs to render a PlantUML diagram, it can apply the same logic without me adding a new instruction.
 
 ## Using It
 
 After setting this up, my workflow for creating a Boox-readable document is:
 
-1. Write content in Markdown (or ask Claude to help me write it)
+1. Write content in Markdown (or ask the agent to help me write it)
 2. Say "make an epub of this for my Boox"
 3. Transfer the EPUB to my tablet
 
-Step 2 is one sentence. Claude recognises the intent, activates the skill, processes Mermaid diagrams, downloads fonts if needed, runs Pandoc with the right flags, and hands me an EPUB. I don't think about CSS selectors or NeoReader's rendering quirks.
+Step 2 is one sentence. The agent recognises the intent, activates the skill, processes Mermaid diagrams, downloads fonts if needed, runs Pandoc with the right flags, and hands me an EPUB. I don't think about CSS selectors or NeoReader's rendering quirks.
 
 ## Lessons Learned
 
@@ -142,14 +140,14 @@ Monochrome syntax highlighting turned out better than I expected. Bold keywords 
 
 Relative units (`em`, `%`) are non-negotiable. One `px` value breaks the font size slider, and e-ink readers depend on that slider.
 
-Skills that explain their reasoning age better than skills that list steps. "Use `-b white` because transparent backgrounds render as black on e-ink" lets Claude generalise to new diagram tools. "Use `-b white`" alone is brittle.
+Skills that explain their reasoning age better than skills that list steps. "Use `-b white` because transparent backgrounds render as black on e-ink" lets the agent generalise to new diagram tools. "Use `-b white`" alone is brittle.
 
 ## Try It Yourself
 
-The full skill is [on GitHub](https://github.com/rhys/boox-epub-maker-skill). If you have a Boox (or any e-ink reader), fork it and adjust the CSS for your device's specs. The pipeline works with any EPUB3-compatible reader. The CSS is the device-specific part.
+The full skill is [on GitHub](https://github.com/rhyscazenove). If you have a Boox (or any e-ink reader), fork it and adjust the CSS for your device's specs. The pipeline works with any EPUB3-compatible reader. The CSS is the device-specific part.
 
-If you don't have an e-ink tablet but want to try Claude Code skills, the structure is the same: a `SKILL.md` file with YAML front matter defining triggers and a Markdown body containing the instructions. Drop it into your project or your Claude Code config, and Claude picks it up automatically.
+If you don't have an e-ink tablet but want to try building skills, the structure is the same regardless of which coding agent you use: a Markdown file with front matter defining triggers and a body containing the instructions. In Claude Code, this is a `SKILL.md` file dropped into your project. GitHub Copilot and Codex have their own conventions for custom instructions, but the content transfers directly.
 
 I use this a few times a week now. Technical docs on e-ink with proper code formatting and working diagrams, with no manual Pandoc flags to remember.
 
-If you want to see the full research behind the design decisions (nine searches, three deep-dives, sources for every CSS value), I published the [research catalogue](/output/boox-epub-research) alongside this post.
+If you want to see the full research behind the design decisions (nine searches, three deep-dives, sources for every CSS value), I published the [research catalogue](/boox-epub-research) alongside this post.
