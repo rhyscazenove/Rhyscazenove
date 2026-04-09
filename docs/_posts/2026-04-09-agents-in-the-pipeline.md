@@ -70,7 +70,7 @@ The foundation. You decide exactly which libraries, frameworks, and tools are av
 
 ### Security Hooks
 
-Claude Code's hook system fires before and after every tool call. We use this for two things: security (PreToolUse validation that can block calls before they execute) and observability (PostToolUse metrics capture on every completed call).
+Claude Code's hook system fires before and after every tool call. We use this for two things: security (PreToolUse validation that can block calls before they execute) and observability (PostToolUse metrics capture on every completed call). For the full list of what the security hooks cover, see the [Security Hooks for Agentic Harness](/hooks-for-harness/) reference page.
 
 A useful pattern we've found: configure your hooks to log every *rejected* call. Review these regularly to understand what the agent tried to do. Then add or remove tools from the container accordingly. The rejected log is one of the most informative signals in the whole system.
 
