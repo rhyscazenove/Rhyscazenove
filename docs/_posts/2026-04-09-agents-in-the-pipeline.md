@@ -9,7 +9,7 @@ description: "A write-up of my talk at CCCL #5 in London — how we built a prod
 
 Last night I gave a talk at [CCCL #5](https://cccl.dev) in London, hosted by [Vikram Pawar](https://www.linkedin.com/in/vikrammpawar/), Claude Code Community Leader, and [Rob Hart](https://www.linkedin.com/in/roberthartuk/), founder of GitNation. The [full agenda is available here](https://cccl-ai.github.io/meetups-live/cccl-5b/agenda). You can also [view the slides](/presentations/cccl-april-2026.html) directly.
 
-Other talks by Jan Peer, Ruslan Zavacky, Daniel Buchele, Valera Latsho, Aris Mandor and Talha Sheikh were all fascinating. I love learning about where people are at in their AI journey. Some impressive and pioneering demos.
+Other talks by Jan Peer, Ruslan Zavackis, Daniel Buchele, Valera Latsho, Aris Mandor and Talha Sheikh were all fascinating. I love learning about where people are at in their AI journey. Some impressive and pioneering demos.
 
 I was impressed with the audience, and enjoyed meeting some of the community. They are very engaged and had some very good follow-up questions for me. It was their enthusiasm which prompted me to launch this blog!
 
