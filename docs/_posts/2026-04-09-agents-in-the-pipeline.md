@@ -141,7 +141,7 @@ AI analyses, humans approve and refine. The goal is to give humans better inform
 
 For those who want the technical specifics: we're running on Azure with GitLab CI as the orchestration layer. The container registry is GitLab's built-in registry. Hooks are bash scripts. Azure MCP is used for the Incident Analysis use case to query Application Insights.
 
-The whole thing is platform-agnostic by design. The hooks are bash or PowerShell, the container runs anywhere, and the pipeline config is YAML. We've tested it against Azure DevOps and GitHub Actions as well as GitLab CI.
+The whole thing is platform-agnostic by design. The hooks are bash or PowerShell, the container runs anywhere, and the pipeline config is YAML. 
 
 ---
 
@@ -153,4 +153,4 @@ If you're building something similar or thinking through the governance model fo
 
 ---
 
-*Rhys Cazenove is AI Lead at the Natural History Museum, South Kensington, working within Technology Solutions on the AI Proof of Value programme.*
+*Rhys Cazenove is AI Lead at the Natural History Museum, South Kensington*

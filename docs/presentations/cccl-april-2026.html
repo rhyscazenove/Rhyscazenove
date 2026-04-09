@@ -571,7 +571,7 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
 <!-- 01 TITLE -->
 <div class="slide active">
   <div class="content">
-    <div class="eyebrow">CCCL #5 · London · April 2025</div>
+    <div class="eyebrow">CCCL #5 · London · April 2026</div>
     <h1>Agents<br>in the<br><em>Pipeline</em></h1>
     <div class="rule"></div>
     <p class="sub">From a skill that runs well locally to a service you can trust in production</p>
@@ -865,51 +865,54 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
   <div class="section-tag">06 / Security</div>
   <div class="content top">
     <div class="eyebrow">Defense in Depth</div>
-    <h2><em>7 independent</em> protection layers.</h2>
-    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; margin-top:20px; flex-shrink:0;">
+    <h2 style="font-size:clamp(28px, 5vw, 56px);"><em>7 independent</em> protection layers.</h2>
+    <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; min-height:260px; max-height:62vh; margin-top:12px; flex-shrink:0;">
 
       <!-- Agent -->
-      <rect x="280" y="8" width="120" height="26" rx="3" fill="var(--xlight)" stroke="var(--ink)" stroke-width="0.5"/>
-      <text x="340" y="21" text-anchor="middle" dominant-baseline="central" fill="var(--ink)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.12em">AGENT</text>
-      <line x1="340" y1="34" x2="340" y2="42" stroke="var(--light)" stroke-width="0.5"/>
+      <rect x="270" y="4" width="140" height="32" rx="3" fill="var(--xlight)" stroke="var(--ink)" stroke-width="0.8"/>
+      <text x="340" y="20" text-anchor="middle" dominant-baseline="central" fill="var(--ink)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.12em">AGENT</text>
+      <line x1="340" y1="36" x2="340" y2="48" stroke="var(--light)" stroke-width="0.5"/>
 
       <!-- ── action hooks ── -->
-      <line x1="30" y1="46" x2="650" y2="46" stroke="var(--light)" stroke-width="0.5"/>
-      <rect x="287" y="38" width="106" height="16" fill="var(--bg)"/>
-      <text x="340" y="46" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.1em">action hooks</text>
+      <line x1="40" y1="54" x2="640" y2="54" stroke="var(--light)" stroke-width="0.5"/>
+      <rect x="283" y="45" width="114" height="18" fill="var(--bg)"/>
+      <text x="340" y="54" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="0.1em">action hooks</text>
 
-      <rect x="240" y="52"  width="200" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="65"  text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L1 — Command blocklist</text>
-      <rect x="205" y="82"  width="270" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="95"  text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L2 — Path traversal guard</text>
-      <rect x="170" y="112" width="340" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="125" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L3 — Network egress control</text>
-      <rect x="135" y="142" width="410" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="155" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L4 — Credential pattern block</text>
+      <rect x="230" y="62" width="220" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="78" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L1 — Command blocklist</text>
+
+      <rect x="190" y="100" width="300" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="116" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L2 — Path traversal guard</text>
+
+      <rect x="150" y="138" width="380" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="154" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L3 — Network egress control</text>
+
+      <rect x="110" y="176" width="460" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="192" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L4 — Credential pattern block</text>
 
       <!-- ── input guard ── -->
-      <line x1="30" y1="172" x2="650" y2="172" stroke="var(--light)" stroke-width="0.5"/>
-      <rect x="291" y="164" width="98" height="16" fill="var(--bg)"/>
-      <text x="340" y="172" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.1em">input guard</text>
+      <line x1="40" y1="222" x2="640" y2="222" stroke="var(--light)" stroke-width="0.5"/>
+      <rect x="288" y="213" width="104" height="18" fill="var(--bg)"/>
+      <text x="340" y="222" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="0.1em">input guard</text>
 
-      <rect x="100" y="178" width="480" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="191" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L5 — Prompt injection guard</text>
+      <rect x="70" y="230" width="540" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="246" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L5 — Prompt injection guard</text>
 
       <!-- ── container ── -->
-      <line x1="30" y1="208" x2="650" y2="208" stroke="var(--light)" stroke-width="0.5"/>
-      <rect x="296" y="200" width="88" height="16" fill="var(--bg)"/>
-      <text x="340" y="208" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.1em">container</text>
+      <line x1="40" y1="276" x2="640" y2="276" stroke="var(--light)" stroke-width="0.5"/>
+      <rect x="293" y="267" width="94" height="18" fill="var(--bg)"/>
+      <text x="340" y="276" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="0.1em">container</text>
 
-      <rect x="65" y="214" width="550" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="227" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L6 — Container isolation</text>
+      <rect x="40" y="284" width="600" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="300" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L6 — Container isolation</text>
 
       <!-- ── audit ── -->
-      <line x1="30" y1="244" x2="650" y2="244" stroke="var(--light)" stroke-width="0.5"/>
-      <rect x="309" y="236" width="62" height="16" fill="var(--bg)"/>
-      <text x="340" y="244" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13" letter-spacing="0.1em">audit</text>
+      <line x1="40" y1="330" x2="640" y2="330" stroke="var(--light)" stroke-width="0.5"/>
+      <rect x="307" y="321" width="66" height="18" fill="var(--bg)"/>
+      <text x="340" y="330" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="0.1em">audit</text>
 
-      <rect x="30" y="250" width="620" height="26" rx="3" fill="none" stroke="var(--light)" stroke-width="0.5"/>
-      <text x="340" y="263" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L7 — Audit logging</text>
+      <rect x="40" y="338" width="600" height="32" rx="3" fill="none" stroke="var(--light)" stroke-width="0.6"/>
+      <text x="340" y="354" text-anchor="middle" dominant-baseline="central" fill="var(--mid)" font-family="'IBM Plex Mono',monospace" font-size="13">L7 — Audit logging</text>
 
     </svg>
   </div>
@@ -1079,17 +1082,17 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
 <!-- 10 CLOSE -->
 <div class="slide">
   <div class="content">
-    <div class="eyebrow">Thanks · Questions · Let's build things</div>
+    <div class="eyebrow">Thanks · Questions?</div>
     <h1>Rhys<br><em>Cazenove</em></h1>
     <div class="rule"></div>
-    <p class="sub">AI Lead · Natural History Museum · South Kensington<br>Technology Solutions · AI Proof of Value Programme</p>
+    <p class="sub">AI Lead · Natural History Museum · South Kensington</p>
     <div class="chips">
       <div class="chip dk">linkedin.com/in/rhyscazenove</div>
       <div class="chip">Natural History Museum</div>
       <div class="chip">Claude Code</div>
     </div>
     <div class="big-quote">"Build the governance harness before you need it — not after the agent does something you didn't expect."</div>
-    <div class="quote-by">Rhys Cazenove · CCCL #5 · April 2025</div>
+    <div class="quote-by">CCCL #5 · April 2026</div>
   </div>
 </div>
 
