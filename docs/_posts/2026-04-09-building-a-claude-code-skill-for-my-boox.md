@@ -10,15 +10,15 @@ description: "How I built a reusable skill that converts Markdown into EPUBs opt
 
 I read a lot of technical documentation on my Boox Go 10.3. It's a 10.3-inch e-ink tablet with a 300 PPI display, and it's the best way I've found to absorb a long technical document without the distractions of a backlit screen. One problem: most documents look terrible on it.
 
-PDFs don't reflow. Web pages need Wi-Fi. Generic EPUBs treat code blocks as an afterthought. Syntax highlighting that relies on colour is meaningless on a 16-level greyscale display, and code that runs off the right edge of the screen is gone. E-ink doesn't scroll horizontally.
+PDFs don't reflow. Web pages need Wi-Fi. Generic EPUBs treat code blocks as an afterthought, and syntax highlighting that relies on colour is meaningless on a 16-level greyscale display. Code that runs off the right edge of the screen is gone; e-ink doesn't scroll horizontally.
 
-So I built a **skill** for it: a reusable capability that a coding agent can invoke whenever I ask it to create a document for my tablet. I built it for Claude Code, but the same pattern works with GitHub Copilot, OpenAI Codex, and other LLM-powered coding tools.
+So I built a **skill** for it: a reusable capability that a coding agent can invoke whenever I ask it to create a document for my tablet. I built it in Claude Code, but the same pattern works with GitHub Copilot, OpenAI Codex, and other LLM-powered coding tools.
 
 ## What's a Skill?
 
-A skill is a specialised instruction set: a Markdown file that tells the coding agent *when* to activate and *how* to carry out the task. You write the expertise once, and the agent applies it whenever the situation matches, without you spelling out the details each time. Claude Code pioneered the format. GitHub Copilot and OpenAI Codex now support the same concept under different names, but the principle is identical: encode domain knowledge in a file that the agent reads at invocation time.
+A skill is a Markdown file that tells a coding agent *when* to activate and *how* to carry out a task. You write the expertise once; the agent applies it whenever the situation matches. Claude Code calls them skills. GitHub Copilot and Codex have their own conventions for custom instructions, but the content is the same: a file with trigger conditions and a body of instructions that the agent reads at invocation time.
 
-The front matter defines the trigger conditions:
+The front matter defines when it fires:
 
 ```yaml
 ---
@@ -30,13 +30,13 @@ description: "Create EPUB documents optimised for reading on a Boox Go 10.3
 ---
 ```
 
-The body of the file provides the full instructions: what tools to use, what flags to pass, what CSS to apply. The agent reads this at invocation time and follows the recipe, adapting it to whatever content is at hand.
+The body contains the full instructions: what tools to use, what flags to pass, what CSS to apply. The agent follows the recipe and adapts it to whatever content is at hand.
 
-Skills encode *domain expertise*. In my case: e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. I figure out the hard stuff once, write it down in a format the agent can follow, and stop thinking about it.
+In my case, the skill encodes e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. I figure out the hard stuff once, write it down in a format the agent can follow, and stop thinking about it.
 
 ## Why Not Just Run Pandoc?
 
-The Boox Go 10.3 has a 2480x1860 pixel display at 300 PPI, sharp but limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, has a CSS rendering engine that supports no flexbox, no grid, no `calc()`, no media queries, no floats. (I documented the full research into NeoReader's rendering capabilities, font choices, and device specs in a [separate research catalogue](/output/boox-epub-research) if you want the sources.)
+The display is sharp (2480x1860 at 300 PPI) but limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats. (Full research into NeoReader's rendering capabilities, font choices, and device specs is in the [research catalogue](/boox-epub-research).)
 
 The problems I kept hitting with vanilla `pandoc input.md -o output.epub`:
 
@@ -74,7 +74,7 @@ The script processes blocks in reverse order to preserve string offsets during r
 
 ### Stage 2: Font Embedding
 
-JetBrains Mono gets downloaded once and cached at `~/.cache/boox-epub-fonts/`. If the download fails (network restrictions in sandboxed environments), the script falls back to NeoReader's built-in monospace font. Acceptable, not as crisp. JetBrains Mono won out over Source Code Pro and Fira Mono because of its increased x-height and consistent stroke width, both of which matter on e-ink's limited greyscale (more on the font selection in the [research catalogue](/output/boox-epub-research)).
+JetBrains Mono gets downloaded once and cached at `~/.cache/boox-epub-fonts/`. If the download fails (network restrictions in sandboxed environments), the script falls back to NeoReader's built-in monospace font. Acceptable, not as crisp. JetBrains Mono won out over Source Code Pro and Fira Mono because of its increased x-height and consistent stroke width, both of which matter on e-ink's limited greyscale (more on the font selection in the [research catalogue](/boox-epub-research)).
 
 ### Stage 3: Pandoc with E-Ink CSS
 
@@ -124,9 +124,9 @@ After setting this up, my workflow for creating a Boox-readable document is:
 2. Say "make an epub of this for my Boox"
 3. Transfer the EPUB to my tablet
 
-Step 2 is one sentence. The agent recognises the intent, activates the skill, processes Mermaid diagrams, downloads fonts if needed, runs Pandoc with the right flags, and hands me an EPUB. I don't think about CSS selectors or NeoReader's rendering quirks.
+Step 2 is one sentence. The agent handles the rest: diagrams, fonts, Pandoc flags, CSS. I don't think about NeoReader's rendering quirks.
 
-## Lessons Learned
+## What I Got Wrong (and Right)
 
 I went through several iterations of the CSS before landing on values that worked on the device. Calibre's EPUB viewer lies. The greyscale rendering is not a simple linear mapping, and NeoReader's CSS support has gaps you only find by testing on hardware.
 
@@ -136,12 +136,12 @@ Relative units (`em`, `%`) are non-negotiable. One `px` value breaks the font si
 
 Skills that explain their reasoning age better than skills that list steps. "Use `-b white` because transparent backgrounds render as black on e-ink" lets the agent generalise to new diagram tools. "Use `-b white`" alone is brittle.
 
-## Try It Yourself
+## The Skill and the Source
 
-The full skill is [on GitHub](https://github.com/rhyscazenove). If you have a Boox (or any e-ink reader), fork it and adjust the CSS for your device's specs. The pipeline works with any EPUB3-compatible reader. The CSS is the device-specific part.
+The full skill is [on GitHub](https://github.com/rhyscazenove). If you have a Boox (or any e-ink reader), fork it and adjust the CSS for your device's specs. The pipeline works with any EPUB3-compatible reader; the CSS is the device-specific part.
 
-If you don't have an e-ink tablet but want to try building skills, the structure is the same regardless of which coding agent you use: a Markdown file with front matter defining triggers and a body containing the instructions. In Claude Code, this is a `SKILL.md` file dropped into your project. GitHub Copilot and Codex have their own conventions for custom instructions, but the content transfers directly.
+If you don't have an e-ink tablet but want to try building skills, the structure is the same regardless of agent: a Markdown file with front matter defining triggers and a body containing instructions. In Claude Code, drop a `SKILL.md` into your project. Copilot and Codex have their own conventions, but the content transfers directly.
 
-I use this a few times a week now. Technical docs on e-ink with proper code formatting and working diagrams, with no manual Pandoc flags to remember.
+I use this a few times a week now. Technical docs on e-ink with proper code formatting and working diagrams, no manual Pandoc flags to remember.
 
-If you want to see the full research behind the design decisions (nine searches, three deep-dives, sources for every CSS value), I published the [research catalogue](/boox-epub-research) alongside this post.
+The full research behind the design decisions is in the [research catalogue](/boox-epub-research).
