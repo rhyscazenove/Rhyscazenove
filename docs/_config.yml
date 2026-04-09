@@ -18,13 +18,6 @@ permalink: /:year/:month/:day/:title/
 author:
   name: Rhys Cazenove
 
-# Navbar links
-navbar_links:
-  - title: Blog
-    url: /blog
-  - title: About
-    url: /about
-
 # Tags
 tag_page_dir: tag
 tag_page_layout: tag_page
