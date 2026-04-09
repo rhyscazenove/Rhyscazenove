@@ -1,0 +1,23 @@
+title: Rhys Cazenove
+description: Software engineer based in London. Building digital products and platforms since 2001.
+url: "https://blog.rhyscazenove.com"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Permalink style
+permalink: /:year/:month/:day/:title/
+
+# Author
+author:
+  name: Rhys Cazenove
+
+# Exclude from build
+exclude:
+  - CNAME
+  - README.md
