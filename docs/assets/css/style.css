@@ -94,6 +94,19 @@ header {
   gap: 8px 24px;
 }
 
+/* Sticky header on mobile */
+@media (max-width: 599px) {
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    padding-top: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--xlight);
+  }
+}
+
 header .title {
   font-family: var(--sans);
   font-size: 18px;
