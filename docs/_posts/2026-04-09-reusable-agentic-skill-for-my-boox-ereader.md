@@ -32,11 +32,11 @@ description: "Create EPUB documents optimised for reading on a Boox Go 10.3
 
 The body contains the full instructions: what tools to use, what flags to pass, what CSS to apply. The agent follows the recipe and adapts it to whatever content is at hand.
 
-In my case, the skill encodes e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. I figure out the hard stuff once, write it down in a format the agent can follow, and stop thinking about it.
+In my case, the skill encodes e-ink display constraints, NeoReader's CSS rendering engine, and the pipeline needed to produce a good-looking EPUB. 
 
-## Why Not Just Run Pandoc?
+## Challenges and Learnings
 
-> The display is 2480x1860 at 300 PPI, limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats.
+The display is 2480x1860 at 300 PPI, limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats.
 
 Full research into NeoReader's rendering capabilities, font choices, and device specs is in the [research catalogue](/boox-epub-research).
 

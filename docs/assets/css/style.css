@@ -245,6 +245,45 @@ ul > li::before {
   content: none;
 }
 
+/* Article/page content lists get bullets and indentation */
+.post-content ul,
+.post-content ol {
+  padding-left: 1.5em;
+  margin: 12px 0;
+}
+
+.post-content ul {
+  list-style: disc outside;
+}
+
+.post-content ol {
+  list-style: decimal outside;
+}
+
+.post-content li {
+  padding: 4px 0;
+  padding-left: 0.25em;
+}
+
+.post-content li::marker {
+  color: var(--light);
+}
+
+.post-content ul ul,
+.post-content ol ol,
+.post-content ul ol,
+.post-content ol ul {
+  margin: 4px 0;
+}
+
+.post-content ul ul {
+  list-style: circle outside;
+}
+
+.post-content ul ul ul {
+  list-style: square outside;
+}
+
 /* ── CODE ── */
 code {
   font-family: var(--mono);

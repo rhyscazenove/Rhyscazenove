@@ -68,9 +68,11 @@ Our implementation uses GitLab CI, a Docker container, and Claude Code hooks. It
 
 The foundation. You decide exactly which libraries, frameworks, and tools are available to the agent. Nothing else. Built from a Dockerfile, cached in GitLab's container registry for reuse across every pipeline run. No dependency drift, no surprises. The container *is* the confinement.
 
+The full build, including the Dockerfile, the security hooks baked into the image, and the GitLab CI job that publishes it, is documented in [Building a Secure Docker Container for AI-Powered CI/CD Pipelines](/agentic-container-configuration/).
+
 ### Security Hooks
 
-Claude Code's hook system fires before and after every tool call. We use this for two things: security (PreToolUse validation that can block calls before they execute) and observability (PostToolUse metrics capture on every completed call). For the full list of what the security hooks cover, see the [Security Hooks for Agentic Harness](/hooks-for-harness/) reference page.
+Claude Code's hook system fires before and after every tool call. We use this for two things: security (PreToolUse validation that can block calls before they execute) and observability (PostToolUse metrics capture on every completed call). For the full list of what the security hooks cover, see the [Security Hooks for Agentic Harness](/hooks-for-harness/) reference page. The implementation details, including the command blocklist patterns and domain allowlist logic, are covered in the [container configuration writeup](/agentic-container-configuration/#the-security-hook-system).
 
 A useful pattern we've found: configure your hooks to log every *rejected* call. Review these regularly to understand what the agent tried to do. Then add or remove tools from the container accordingly. The rejected log is one of the most informative signals in the whole system.
 
@@ -141,7 +143,9 @@ AI analyses, humans approve and refine. The goal is to give humans better inform
 
 For those who want the technical specifics: we're running on Azure with GitLab CI as the orchestration layer. The container registry is GitLab's built-in registry. Hooks are bash scripts. Azure MCP is used for the Incident Analysis use case to query Application Insights.
 
-The whole thing is platform-agnostic by design. The hooks are bash or PowerShell, the container runs anywhere, and the pipeline config is YAML. 
+The whole thing is platform-agnostic by design. The hooks are bash or PowerShell, the container runs anywhere, and the pipeline config is YAML.
+
+For a full walkthrough of the container, the Dockerfile, and the security hook implementation, see [Building a Secure Docker Container for AI-Powered CI/CD Pipelines](/agentic-container-configuration/).
 
 ---
 
