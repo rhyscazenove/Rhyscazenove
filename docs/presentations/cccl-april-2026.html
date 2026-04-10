@@ -590,7 +590,10 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
     <h2>You've built something that <em>works.</em></h2>
     <div class="bullets">
       <div class="bi"><span>A Claude Code skill that runs locally — explores, reasons, produces something useful</span></div>
-      <div class="bi"><span><strong>A doc generator</strong> triggered when code merges. <strong>A code reviewer</strong> triggered on commit. <strong>A log investigator</strong> triggered by a webhook. <strong>An alert responder</strong> triggered when error rate spikes.</span></div>
+      <div class="bi"><span><strong>A doc generator</strong> triggered when code merges. </span></div>
+      <div class="bi"><span><strong>A code reviewer</strong> triggered on commit. </span></div>
+      <div class="bi"><span><strong>A log investigator</strong> triggered by a webhook. </span></div>
+      <div class="bi"><span><strong>An alert responder</strong> triggered when error rate spikes.</span></div>
       <div class="bi"><span>It works well. You've iterated on it. You trust it. Now you want to <strong>run it as a service.</strong></span></div>
     </div>
   </div>
@@ -650,23 +653,23 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
     <h2>Three things <em>dangerous together.</em></h2>
     <div class="cards c3" style="margin-top: 22px;">
       <div class="card">
-        <div class="card-n">01 — fine alone</div>
+        <div class="card-n">01</div>
         <h3>Access to private or sensitive data</h3>
         <p>Credentials, internal docs, personal data, confidential content</p>
       </div>
       <div class="card">
-        <div class="card-n">02 — fine alone</div>
+        <div class="card-n">02</div>
         <h3>Exposure to untrusted content</h3>
         <p>External URLs, user input, web pages, third-party data sources</p>
       </div>
       <div class="card">
-        <div class="card-n">03 — fine alone</div>
+        <div class="card-n">03</div>
         <h3>A mechanism to exfiltrate data</h3>
         <p>Outbound network access, file writes, API calls to external endpoints</p>
       </div>
     </div>
     <div class="callout">
-      Any one alone is manageable. All three together is the problem — untrusted content can inject instructions that use the exfiltration mechanism to leak private data. <strong>Break the flow across multiple agents.</strong> Design your architecture so no single agent holds all three.
+      Any one alone is manageable. All three together is the problem; untrusted content can inject instructions that use the exfiltration mechanism to leak private data. <strong>Break the flow across multiple agents.</strong> Design your architecture so no single agent holds all three.
     </div>
   </div>
 </div>
@@ -1053,12 +1056,6 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
         <div class="s-l">Extensible to any<br>agentic use case</div>
       </div>
     </div>
-    <div class="chips">
-      <div class="chip dk">GitLab CI</div>
-      <div class="chip">Azure DevOps</div>
-      <div class="chip">GitHub Actions</div>
-      <div class="chip">Any YAML CI/CD</div>
-    </div>
     <p class="sub" style="font-size:var(--fs-callout); margin-top:12px;">Hooks are bash/PowerShell. Container runs anywhere. Platform-agnostic by design.</p>
   </div>
 </div>
@@ -1089,9 +1086,8 @@ h2 em { font-style: normal; font-weight: 400; color: var(--mid); }
     <div class="chips">
       <div class="chip dk">linkedin.com/in/rhyscazenove</div>
       <div class="chip">Natural History Museum</div>
-      <div class="chip">Claude Code</div>
     </div>
-    <div class="big-quote">"Build the governance harness before you need it — not after the agent does something you didn't expect."</div>
+    <div class="big-quote"></div>
     <div class="quote-by">CCCL #5 · April 2026</div>
   </div>
 </div>
