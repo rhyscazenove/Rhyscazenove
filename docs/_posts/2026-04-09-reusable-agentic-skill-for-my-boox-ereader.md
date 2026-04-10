@@ -1,11 +1,11 @@
 ---
 published: true
 layout: post
-title: "How I Built a Reusable Agentic Skill That Makes EPUBs for My E-Ink Tablet"
+title: "Generating optimised ePubs for My E-Ink Tablet"
 date: 2026-04-06
 categories: [ai, tooling, e-ink]
 tags: [claude-code, github-copilot, codex, epub, boox, e-ink, ai-skills, pandoc]
-description: "How I built a reusable agentic skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet. Originally built for Claude Code, the same pattern works with GitHub Copilot, OpenAI Codex, and other coding agents."
+description: "How I built a reusable agentic skill that converts Markdown into EPUBs optimised for my Boox Go 10.3 e-ink tablet."
 ---
 
 I read a lot of technical documentation on my Boox Go 10.3. It's a 10.3-inch e-ink tablet with a 300 PPI display, and it's the best way I've found to absorb a long technical document without the distractions of a backlit screen. One problem: most documents look terrible on it.

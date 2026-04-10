@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Agents in the Pipeline: from a skill that works locally to a service you can trust"
+title: "Agents in the Pipeline"
 date: 2026-04-09
 categories: [ai, engineering]
 tags: [claude-code, agents, gitlab-ci, azure, governance, security]
