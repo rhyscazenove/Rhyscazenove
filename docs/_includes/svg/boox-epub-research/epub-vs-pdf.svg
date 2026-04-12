@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" fill="none" class="diagram" role="img" aria-label="Comparison of EPUB and PDF formats for e-ink reading, showing EPUB as primary and PDF as fallback">
+  <style>
+    /* Panel backgrounds */
+    rect[fill="#f0fdf4"] { fill: var(--svg-panel, #f0fdf4); }
+    rect[fill="#f5f5f5"] { fill: var(--svg-panel, #f5f5f5); }
+    /* White badge backgrounds */
+    rect[fill="#fff"] { fill: var(--svg-card, #fff); }
+  </style>
+  <!-- EPUB Panel (left) -->
+  <rect x="8" y="8" width="344" height="284" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <!-- EPUB header bar -->
+  <rect x="8" y="8" width="344" height="40" rx="10" fill="#16a34a"/>
+  <rect x="8" y="28" width="344" height="20" fill="#16a34a"/>
+  <text x="24" y="34" font-family="sans-serif" font-size="16" font-weight="700" fill="#fff">EPUB</text>
+  <!-- Primary badge -->
+  <rect x="276" y="16" width="64" height="22" rx="11" fill="#fff"/>
+  <text x="308" y="31" font-family="sans-serif" font-size="11" font-weight="700" fill="#16a34a" text-anchor="middle">Primary</text>
+
+  <!-- EPUB attributes -->
+  <text x="24" y="72" font-family="sans-serif" font-size="12" fill="#15803d" font-weight="600">Reflowable text</text>
+  <text x="170" y="72" font-family="sans-serif" font-size="11" fill="#4b5563">Adjusts to screen width</text>
+  <text x="14" y="72" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <text x="24" y="94" font-family="sans-serif" font-size="12" fill="#15803d" font-weight="600">Font size control</text>
+  <text x="170" y="94" font-family="sans-serif" font-size="11" fill="#4b5563">User can resize freely</text>
+  <text x="14" y="94" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <text x="24" y="116" font-family="sans-serif" font-size="12" fill="#15803d" font-weight="600">CSS customisation</text>
+  <text x="170" y="116" font-family="sans-serif" font-size="11" fill="#4b5563">Full stylesheet control</text>
+  <text x="14" y="116" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <text x="24" y="138" font-family="sans-serif" font-size="12" fill="#15803d" font-weight="600">Code blocks</text>
+  <text x="170" y="138" font-family="sans-serif" font-size="11" fill="#4b5563">pre-wrap for soft wrapping</text>
+  <text x="14" y="138" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <text x="24" y="160" font-family="sans-serif" font-size="12" fill="#15803d" font-weight="600">Navigation</text>
+  <text x="170" y="160" font-family="sans-serif" font-size="11" fill="#4b5563">Chapter-based with TOC</text>
+  <text x="14" y="160" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <!-- Divider -->
+  <line x1="20" y1="174" x2="340" y2="174" stroke="#bbf7d0" stroke-width="1"/>
+
+  <!-- Best for -->
+  <text x="14" y="194" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="600">Best for:</text>
+  <text x="14" y="210" font-family="sans-serif" font-size="11" fill="#374151">Text-heavy technical documents</text>
+  <text x="14" y="226" font-family="sans-serif" font-size="11" fill="#374151">with inline code</text>
+
+  <!-- Verdict -->
+  <rect x="14" y="244" width="148" height="28" rx="6" fill="#16a34a"/>
+  <text x="88" y="263" font-family="sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">PRIMARY FORMAT</text>
+
+  <!-- PDF Panel (right) -->
+  <rect x="368" y="8" width="344" height="284" rx="10" fill="#f5f5f5" stroke="#d4d4d4" stroke-width="1.5"/>
+  <!-- PDF header bar -->
+  <rect x="368" y="8" width="344" height="40" rx="10" fill="#6b7280"/>
+  <rect x="368" y="28" width="344" height="20" fill="#6b7280"/>
+  <text x="384" y="34" font-family="sans-serif" font-size="16" font-weight="700" fill="#fff">PDF</text>
+  <!-- Fallback badge -->
+  <rect x="628" y="16" width="72" height="22" rx="11" fill="#fff"/>
+  <text x="664" y="31" font-family="sans-serif" font-size="11" font-weight="700" fill="#6b7280" text-anchor="middle">Fallback</text>
+
+  <!-- PDF attributes -->
+  <text x="384" y="72" font-family="sans-serif" font-size="12" fill="#6b7280" font-weight="600">Fixed layout</text>
+  <text x="530" y="72" font-family="sans-serif" font-size="11" fill="#4b5563">Preserves exact positioning</text>
+  <text x="374" y="72" font-family="sans-serif" font-size="12" fill="#9ca3af">&#x2014;</text>
+
+  <text x="384" y="94" font-family="sans-serif" font-size="12" fill="#6b7280" font-weight="600">No reflow</text>
+  <text x="530" y="94" font-family="sans-serif" font-size="11" fill="#4b5563">Requires zoom/pan on 10.3"</text>
+  <text x="374" y="94" font-family="sans-serif" font-size="12" fill="#ef4444">&#x2717;</text>
+
+  <text x="384" y="116" font-family="sans-serif" font-size="12" fill="#6b7280" font-weight="600">No font control</text>
+  <text x="530" y="116" font-family="sans-serif" font-size="11" fill="#4b5563">Sizes are baked in</text>
+  <text x="374" y="116" font-family="sans-serif" font-size="12" fill="#ef4444">&#x2717;</text>
+
+  <text x="384" y="138" font-family="sans-serif" font-size="12" fill="#6b7280" font-weight="600">Complex layouts</text>
+  <text x="530" y="138" font-family="sans-serif" font-size="11" fill="#4b5563">Multi-col, precise diagrams</text>
+  <text x="374" y="138" font-family="sans-serif" font-size="12" fill="#16a34a">&#x2713;</text>
+
+  <text x="384" y="160" font-family="sans-serif" font-size="12" fill="#6b7280" font-weight="600">Navigation</text>
+  <text x="530" y="160" font-family="sans-serif" font-size="11" fill="#4b5563">Page-based</text>
+  <text x="374" y="160" font-family="sans-serif" font-size="12" fill="#9ca3af">&#x2014;</text>
+
+  <!-- Divider -->
+  <line x1="380" y1="174" x2="700" y2="174" stroke="#e5e5e5" stroke-width="1"/>
+
+  <!-- Best for -->
+  <text x="374" y="194" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="600">Best for:</text>
+  <text x="374" y="210" font-family="sans-serif" font-size="11" fill="#374151">Diagram-heavy documents,</text>
+  <text x="374" y="226" font-family="sans-serif" font-size="11" fill="#374151">precise spatial layouts</text>
+
+  <!-- Verdict -->
+  <rect x="374" y="244" width="148" height="28" rx="6" fill="#9ca3af"/>
+  <text x="448" y="263" font-family="sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">FALLBACK ONLY</text>
+</svg>

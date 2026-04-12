@@ -59,6 +59,67 @@ html[data-theme="dark"] {
   --xlight: #1a1a1a;
 }
 
+/* ── INLINE SVG DIAGRAMS ── */
+:root {
+  --svg-sub: #555;
+  --svg-dim: #777;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --svg-sub:  #b0a89e;
+    --svg-dim:  #908880;
+    --svg-panel: #1e1e1e;
+    --svg-card: #252525;
+    --svg-rule: #383838;
+  }
+}
+
+html[data-theme="dark"] {
+  --svg-sub:  #b0a89e;
+  --svg-dim:  #908880;
+  --svg-panel: #1e1e1e;
+  --svg-card: #252525;
+  --svg-rule: #383838;
+}
+
+.post-content svg.diagram {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0;
+}
+
+/* SVG text — map base grays to theme-aware values */
+.post-content svg.diagram [fill="#111"],
+.post-content svg.diagram [fill="#333"],
+.post-content svg.diagram [fill="#2a2a2a"] { fill: var(--ink); }
+
+.post-content svg.diagram [fill="#444"],
+.post-content svg.diagram [fill="#555"],
+.post-content svg.diagram [fill="#374151"] { fill: var(--svg-sub); }
+
+.post-content svg.diagram [fill="#666"],
+.post-content svg.diagram [fill="#4b5563"],
+.post-content svg.diagram [fill="#6b7280"] { fill: var(--svg-dim); }
+
+.post-content svg.diagram [fill="#888"],
+.post-content svg.diagram [fill="#999"],
+.post-content svg.diagram [fill="#9ca3af"],
+.post-content svg.diagram [fill="#94a3b8"] { fill: var(--mid); }
+
+/* SVG strokes — neutral borders */
+.post-content svg.diagram [stroke="#dde1e5"] { stroke: var(--svg-rule, #dde1e5); }
+.post-content svg.diagram [stroke="#c0c8d0"] { stroke: var(--svg-rule, #c0c8d0); }
+.post-content svg.diagram [stroke="#d0d0d0"] { stroke: var(--svg-rule, #d0d0d0); }
+.post-content svg.diagram [stroke="#ccc"]     { stroke: var(--svg-rule, #ccc); }
+.post-content svg.diagram [stroke="#bbb"]     { stroke: var(--svg-rule, #bbb); }
+.post-content svg.diagram [stroke="#ddd"]     { stroke: var(--svg-rule, #ddd); }
+.post-content svg.diagram [stroke="#d4d4d4"]  { stroke: var(--svg-rule, #d4d4d4); }
+.post-content svg.diagram [stroke="#e5e5e5"]  { stroke: var(--svg-rule, #e5e5e5); }
+.post-content svg.diagram [stroke="#e0e0e0"]  { stroke: var(--svg-rule, #e0e0e0); }
+.post-content svg.diagram [stroke="#cbd5e1"]  { stroke: var(--svg-rule, #cbd5e1); }
+
 /* ── LAYOUT ── */
 .site-wrapper {
   min-height: 100vh;

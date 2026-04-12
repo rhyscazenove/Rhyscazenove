@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160" font-family="sans-serif" class="diagram" role="img" aria-label="Greyscale visibility spectrum showing five zones from solid black to near-white, with warnings for barely visible and invisible ranges">
+  <style>
+    /* Pin strip swatches — these represent literal greyscale values and must not change in dark mode */
+    .swatch[fill="#111"] { fill: #111; }
+    .swatch[fill="#666"] { fill: #666; }
+    .swatch[fill="#bbb"] { fill: #bbb; }
+    .swatch[fill="#ddd"] { fill: #ddd; }
+    .swatch[fill="#f0f0f0"] { fill: #f0f0f0; }
+  </style>
+
+  <!-- Zone widths: 5 zones across 700px (10px left margin) -->
+  <!-- Zone 1: #000–#333  x=10  w=120 -->
+  <!-- Zone 2: #444–#999  x=130 w=180 -->
+  <!-- Zone 3: #aaa–#ccc  x=310 w=120 -->
+  <!-- Zone 4: #d0d–#e0e  x=430 w=120 -->
+  <!-- Zone 5: #e8e–#fff  x=550 w=160 -->
+
+  <!-- Zone fills (the actual greyscale strip) -->
+  <rect class="swatch" x="10" y="52" width="120" height="40" fill="#111" />
+  <rect class="swatch" x="130" y="52" width="180" height="40" fill="#666" />
+  <rect class="swatch" x="310" y="52" width="120" height="40" fill="#bbb" />
+  <rect class="swatch" x="430" y="52" width="120" height="40" fill="#ddd" />
+  <rect class="swatch" x="550" y="52" width="160" height="40" fill="#f0f0f0" />
+
+  <!-- Zone boundary lines -->
+  <line x1="10" y1="48" x2="10" y2="96" stroke="#888" stroke-width="1" />
+  <line x1="130" y1="48" x2="130" y2="96" stroke="#888" stroke-width="1" />
+  <line x1="310" y1="48" x2="310" y2="96" stroke="#888" stroke-width="1" />
+  <line x1="430" y1="48" x2="430" y2="96" stroke="#888" stroke-width="1" />
+  <line x1="550" y1="48" x2="550" y2="96" stroke="#888" stroke-width="1" />
+  <line x1="710" y1="48" x2="710" y2="96" stroke="#888" stroke-width="1" />
+
+  <!-- Dashed warning borders on zones 4 and 5 -->
+  <rect x="430" y="52" width="120" height="40" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3" />
+  <rect x="550" y="52" width="160" height="40" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3" />
+
+  <!-- Warning triangles for zones 4 and 5 -->
+  <g fill="#999" font-size="11" text-anchor="middle">
+    <text x="490" y="77" font-size="16">&#x26A0;</text>
+    <text x="630" y="77" font-size="16">&#x26A0;</text>
+  </g>
+
+  <!-- Top labels: hex ranges -->
+  <g fill="#111" font-size="11" text-anchor="middle" font-weight="600">
+    <text x="70" y="22">#000 – #333</text>
+    <text x="220" y="22">#444 – #999</text>
+    <text x="370" y="22">#aaa – #ccc</text>
+    <text x="490" y="22">#d0d – #e0e</text>
+    <text x="630" y="22">#e8e – #fff</text>
+  </g>
+
+  <!-- Connector lines from labels to strip -->
+  <g stroke="#bbb" stroke-width="0.5">
+    <line x1="70" y1="26" x2="70" y2="48" />
+    <line x1="220" y1="26" x2="220" y2="48" />
+    <line x1="370" y1="26" x2="370" y2="48" />
+    <line x1="490" y1="26" x2="490" y2="48" />
+    <line x1="630" y1="26" x2="630" y2="48" />
+  </g>
+
+  <!-- Bottom labels: appearance descriptions (two lines where needed) -->
+  <g fill="#111" font-size="9.5" text-anchor="middle">
+    <text x="70" y="114">Solid / near-black</text>
+    <text x="70" y="126" font-size="8.5" fill="#555">(text, borders)</text>
+
+    <text x="220" y="114">Clear mid-greys</text>
+    <text x="220" y="126" font-size="8.5" fill="#555">(secondary elements)</text>
+
+    <text x="370" y="114">Light but visible</text>
+    <text x="370" y="126" font-size="8.5" fill="#555">(subtle borders)</text>
+
+    <text x="490" y="114">Barely visible</text>
+    <text x="490" y="126" font-size="8.5" fill="#555">(faint backgrounds)</text>
+
+    <text x="630" y="114">May be invisible</text>
+    <text x="630" y="126" font-size="8.5" fill="#c00">use cautiously</text>
+  </g>
+
+  <!-- Gradient arrow along the bottom -->
+  <defs>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#000" />
+      <stop offset="100%" stop-color="#ccc" />
+    </linearGradient>
+    <marker id="arrowHead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0,0 6,2 0,4" fill="#aaa" />
+    </marker>
+  </defs>
+  <line x1="10" y1="145" x2="706" y2="145" stroke="url(#arrowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)" />
+  <text x="10" y="155" font-size="8" fill="#555">darker</text>
+  <text x="690" y="155" font-size="8" fill="#555" text-anchor="end">lighter</text>
+
+</svg>

@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" fill="none" class="diagram" role="img" aria-label="Four parts of the agent framework: container image, security hooks, pipeline config, and ownership model">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    [fill="#fafbfc"] { fill: var(--svg-panel, #fafbfc); }
+    [fill="#f0f4f6"] { fill: var(--svg-panel, #f0f4f6); }
+    [fill="#f0f6f2"] { fill: var(--svg-panel, #f0f6f2); }
+    [fill="#f5f3f0"] { fill: var(--svg-panel, #f5f3f0); }
+    [fill="#f3f0f5"] { fill: var(--svg-panel, #f3f0f5); }
+    [fill="#c0c8d0"] { fill: var(--svg-rule, #c0c8d0); }
+  </style>
+
+  <!-- Shared background panel -->
+  <rect x="16" y="16" width="688" height="368" rx="16" fill="#fafbfc" stroke="#dde1e5" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- Dotted connection lines between cards -->
+  <!-- Horizontal line top row -->
+  <line x1="348" y1="110" x2="372" y2="110" stroke="#c0c8d0" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- Horizontal line bottom row -->
+  <line x1="348" y1="298" x2="372" y2="298" stroke="#c0c8d0" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- Vertical line left col -->
+  <line x1="186" y1="194" x2="186" y2="210" stroke="#c0c8d0" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- Vertical line right col -->
+  <line x1="534" y1="194" x2="534" y2="210" stroke="#c0c8d0" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- ==================== -->
+  <!-- Card 1: Container Image (top-left) -->
+  <!-- ==================== -->
+  <rect x="40" y="36" width="308" height="158" rx="10" fill="#f0f4f6" stroke="#4a7c8a" stroke-width="1.5"/>
+
+  <!-- Icon: Box / Container -->
+  <g transform="translate(60, 56)">
+    <!-- Back face -->
+    <path d="M24 4 L44 14 L44 34 L24 44 L4 34 L4 14 Z" fill="none" stroke="#4a7c8a" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Middle horizontal -->
+    <line x1="4" y1="14" x2="44" y2="14" stroke="#4a7c8a" stroke-width="0" />
+    <path d="M4 14 L24 24 L44 14" fill="none" stroke="#4a7c8a" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Vertical center line -->
+    <line x1="24" y1="24" x2="24" y2="44" stroke="#4a7c8a" stroke-width="2"/>
+  </g>
+
+  <text x="116" y="74" fill="#111" font-size="16" font-weight="700">Container Image</text>
+  <text x="116" y="96" fill="#666" font-size="12">Confinement &amp; reproducibility</text>
+
+  <!-- Descriptive detail -->
+  <text x="60" y="130" fill="#555" font-size="11">Pre-built Docker image with exactly</text>
+  <text x="60" y="146" fill="#555" font-size="11">the tools needed. Nothing more.</text>
+
+  <!-- ==================== -->
+  <!-- Card 2: Security Hooks (top-right) -->
+  <!-- ==================== -->
+  <rect x="372" y="36" width="308" height="158" rx="10" fill="#f0f6f2" stroke="#5a8a7a" stroke-width="1.5"/>
+
+  <!-- Icon: Shield -->
+  <g transform="translate(392, 54)">
+    <path d="M24 2 L42 12 L42 26 C42 36 34 44 24 48 C14 44 6 36 6 26 L6 12 Z" fill="none" stroke="#5a8a7a" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Checkmark inside shield -->
+    <polyline points="16,26 22,32 34,18" fill="none" stroke="#5a8a7a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="448" y="74" fill="#111" font-size="16" font-weight="700">Security Hooks</text>
+  <text x="448" y="96" fill="#666" font-size="12">Runtime guardrails &amp; metrics</text>
+
+  <text x="392" y="130" fill="#555" font-size="11">PreToolUse / PostToolUse hooks fire</text>
+  <text x="392" y="146" fill="#555" font-size="11">before and after every tool call.</text>
+
+  <!-- ==================== -->
+  <!-- Card 3: Pipeline Config (bottom-left) -->
+  <!-- ==================== -->
+  <rect x="40" y="210" width="308" height="158" rx="10" fill="#f5f3f0" stroke="#8a7a4a" stroke-width="1.5"/>
+
+  <!-- Icon: Gears -->
+  <g transform="translate(60, 230)">
+    <!-- Large gear -->
+    <circle cx="20" cy="20" r="12" fill="none" stroke="#8a7a4a" stroke-width="2"/>
+    <circle cx="20" cy="20" r="5" fill="none" stroke="#8a7a4a" stroke-width="2"/>
+    <!-- Gear teeth (large) -->
+    <line x1="20" y1="4" x2="20" y2="8" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="32" x2="20" y2="36" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="4" y1="20" x2="8" y2="20" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="32" y1="20" x2="36" y2="20" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <!-- Diagonal teeth -->
+    <line x1="8.7" y1="8.7" x2="11.5" y2="11.5" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="28.5" y1="28.5" x2="31.3" y2="31.3" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="31.3" y1="8.7" x2="28.5" y2="11.5" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <line x1="11.5" y1="28.5" x2="8.7" y2="31.3" stroke="#8a7a4a" stroke-width="3" stroke-linecap="round"/>
+    <!-- Small gear -->
+    <circle cx="38" cy="36" r="7" fill="none" stroke="#8a7a4a" stroke-width="1.5"/>
+    <circle cx="38" cy="36" r="3" fill="none" stroke="#8a7a4a" stroke-width="1.5"/>
+    <line x1="38" y1="27" x2="38" y2="29" stroke="#8a7a4a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="38" y1="43" x2="38" y2="45" stroke="#8a7a4a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="29" y1="36" x2="31" y2="36" stroke="#8a7a4a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="45" y1="36" x2="47" y2="36" stroke="#8a7a4a" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <text x="116" y="250" fill="#111" font-size="16" font-weight="700">Pipeline Config</text>
+  <text x="116" y="272" fill="#666" font-size="12">Execution boundaries</text>
+
+  <text x="60" y="306" fill="#555" font-size="11">GitLab CI orchestration with triggers,</text>
+  <text x="60" y="322" fill="#555" font-size="11">timeouts, and artifact collection.</text>
+
+  <!-- ==================== -->
+  <!-- Card 4: Ownership Model (bottom-right) -->
+  <!-- ==================== -->
+  <rect x="372" y="210" width="308" height="158" rx="10" fill="#f3f0f5" stroke="#7a4a8a" stroke-width="1.5"/>
+
+  <!-- Icon: People -->
+  <g transform="translate(392, 228)">
+    <!-- Person 1 (center-left) -->
+    <circle cx="16" cy="12" r="6" fill="none" stroke="#7a4a8a" stroke-width="2"/>
+    <path d="M4 38 C4 28 10 24 16 24 C22 24 28 28 28 38" fill="none" stroke="#7a4a8a" stroke-width="2" stroke-linecap="round"/>
+    <!-- Person 2 (center-right) -->
+    <circle cx="36" cy="12" r="6" fill="none" stroke="#7a4a8a" stroke-width="2"/>
+    <path d="M24 38 C24 28 30 24 36 24 C42 24 48 28 48 38" fill="none" stroke="#7a4a8a" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <text x="448" y="250" fill="#111" font-size="16" font-weight="700">Ownership Model</text>
+  <text x="448" y="272" fill="#666" font-size="12">Clear accountability</text>
+
+  <text x="392" y="306" fill="#555" font-size="11">Security owns hooks. Infra owns the</text>
+  <text x="392" y="322" fill="#555" font-size="11">container. Engineering owns skills.</text>
+
+  <!-- Center cross connector dot -->
+  <circle cx="360" cy="202" r="4" fill="#c0c8d0"/>
+</svg>

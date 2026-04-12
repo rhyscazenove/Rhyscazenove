@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" width="720" height="280" font-family="system-ui, -apple-system, sans-serif" class="diagram" role="img" aria-label="Compression funnel showing data reduction from 1.4 MB extracted content down to 30 KB podcast script through four pipeline stages">
+
+  <!-- Stage bars - widths proportional to data size -->
+  <!-- Max bar width = 520px for 1400 KB -->
+  <!-- Extracted:      1400 KB = 520px -->
+  <!-- LLM-optimised:  1370 KB = 509px -->
+  <!-- Minimised:        99 KB =  37px -->
+  <!-- Podcast script:   30 KB =  11px -->
+
+  <!-- Left anchor for all bars -->
+  <g transform="translate(170, 0)">
+
+    <!-- Extracted: 1.4 MB -->
+    <rect x="0" y="16" width="520" height="48" rx="4" fill="#2563eb"/>
+    <text x="530" y="36" fill="#111" font-size="13" font-weight="600">1.4 MB</text>
+    <text x="530" y="52" fill="#666" font-size="11">baseline</text>
+
+    <!-- Connecting taper -->
+    <polygon points="0,64 520,64 509,80 0,80" fill="#3b82f6" opacity="0.25"/>
+
+    <!-- LLM-optimised: 1.37 MB -->
+    <rect x="0" y="80" width="509" height="48" rx="4" fill="#3b82f6"/>
+    <text x="519" y="100" fill="#111" font-size="13" font-weight="600">1.37 MB</text>
+    <text x="519" y="116" fill="#666" font-size="11">~3% reduction</text>
+
+    <!-- Connecting taper - the big drop -->
+    <polygon points="0,128 509,128 37,144 0,144" fill="#60a5fa" opacity="0.25"/>
+
+    <!-- Minimised: 99 KB -->
+    <rect x="0" y="144" width="37" height="48" rx="4" fill="#60a5fa"/>
+    <text x="47" y="164" fill="#111" font-size="13" font-weight="600">99 KB</text>
+    <text x="47" y="180" fill="#666" font-size="11">93% reduction</text>
+
+    <!-- Connecting taper -->
+    <polygon points="0,192 37,192 11,208 0,208" fill="#93c5fd" opacity="0.25"/>
+
+    <!-- Podcast script: 30 KB -->
+    <rect x="0" y="208" width="11" height="48" rx="3" fill="#93c5fd"/>
+    <text x="21" y="228" fill="#111" font-size="13" font-weight="600">~30 KB</text>
+    <text x="21" y="244" fill="#666" font-size="11">98% reduction</text>
+
+  </g>
+
+  <!-- Stage labels (left column) -->
+  <text x="160" y="36" fill="#111" font-size="14" font-weight="700" text-anchor="end">Extracted</text>
+  <text x="160" y="52" fill="#888" font-size="10" text-anchor="end">Deep reading</text>
+
+  <text x="160" y="100" fill="#111" font-size="14" font-weight="700" text-anchor="end">LLM-optimised</text>
+  <text x="160" y="116" fill="#888" font-size="10" text-anchor="end">RAG, embeddings</text>
+
+  <text x="160" y="164" fill="#111" font-size="14" font-weight="700" text-anchor="end">Minimised</text>
+  <text x="160" y="180" fill="#888" font-size="10" text-anchor="end">Quick reference</text>
+
+  <text x="160" y="228" fill="#111" font-size="14" font-weight="700" text-anchor="end">Podcast script</text>
+  <text x="160" y="244" fill="#888" font-size="10" text-anchor="end">Audio production</text>
+
+</svg>

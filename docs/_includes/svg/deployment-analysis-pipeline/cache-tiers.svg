@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" class="diagram" role="img" aria-label="Multi-tier caching strategy showing how TTL increases with data age, from no cache for today's data to 30-day TTL for data older than 7 days">
+  <style>
+    /* Hatch pattern adapts to dark mode */
+    @media (prefers-color-scheme: dark) {
+      svg:not([data-theme="light"]) #hatch line { stroke: var(--mid, #aaa); }
+    }
+    [data-theme="dark"] #hatch line { stroke: var(--mid, #aaa); }
+  </style>
+  <defs>
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#aaa" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+    <!-- Clip paths for rounded ends -->
+    <clipPath id="clip-left">
+      <rect x="40" y="40" width="640" height="56" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#111">Multi-Tier Caching Strategy</text>
+
+  <!-- Grouped bar with rounded outer corners -->
+  <g clip-path="url(#clip-left)">
+    <!-- Today: hatched, 100px wide -->
+    <rect x="40" y="40" width="100" height="56" fill="url(#hatch)"/>
+    <!-- < 2 days: light teal, 140px -->
+    <rect x="140" y="40" width="140" height="56" fill="#c8ece6"/>
+    <!-- 2-7 days: medium teal, 180px -->
+    <rect x="280" y="40" width="180" height="56" fill="#6fc4b3"/>
+    <!-- 7+ days: dark teal, 220px -->
+    <rect x="460" y="40" width="220" height="56" fill="#1a8a72"/>
+  </g>
+  <!-- Outer border for the full bar -->
+  <rect x="40" y="40" width="640" height="56" rx="4" fill="none" stroke="#999" stroke-width="1"/>
+  <!-- Inner dividers -->
+  <line x1="140" y1="40" x2="140" y2="96" stroke="#999" stroke-width="0.75"/>
+  <line x1="280" y1="40" x2="280" y2="96" stroke="#999" stroke-width="0.75"/>
+  <line x1="460" y1="40" x2="460" y2="96" stroke="#999" stroke-width="0.75"/>
+
+  <!-- Zone header labels (data age) -->
+  <text x="90" y="62" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Today</text>
+  <text x="210" y="62" text-anchor="middle" font-size="13" font-weight="600" fill="#333">&lt; 2 days</text>
+  <text x="370" y="62" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">2-7 days</text>
+  <text x="570" y="62" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">7+ days</text>
+
+  <!-- TTL labels -->
+  <text x="90" y="82" text-anchor="middle" font-size="12" fill="#555">No cache</text>
+  <text x="210" y="82" text-anchor="middle" font-size="12" fill="#555">1 hour TTL</text>
+  <text x="370" y="82" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.85)">1 day TTL</text>
+  <text x="570" y="82" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.85)">30 day TTL</text>
+
+  <!-- Rationale labels below each zone -->
+  <text x="90" y="115" text-anchor="middle" font-size="11" fill="#888">Still changing</text>
+  <text x="210" y="115" text-anchor="middle" font-size="11" fill="#888">Late updates possible</text>
+  <text x="370" y="115" text-anchor="middle" font-size="11" fill="#888">Unlikely to change</text>
+  <text x="570" y="115" text-anchor="middle" font-size="11" fill="#888">Effectively frozen</text>
+
+  <!-- Bottom arrow: "Data age" axis -->
+  <line x1="40" y1="155" x2="672" y2="155" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="360" y="175" text-anchor="middle" font-size="13" fill="#666" font-style="italic">Data age</text>
+</svg>

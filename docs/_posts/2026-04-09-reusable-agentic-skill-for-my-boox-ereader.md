@@ -36,7 +36,7 @@ In my case, the skill encodes e-ink display constraints, NeoReader's CSS renderi
 
 ## Challenges and Learnings
 
-![Boox Go 10.3 device constraints: 2480x1860 at 300 PPI, 16 greyscale levels, NeoReader with no flexbox, grid, calc(), media queries, or floats](/assets/images/boox-epub-skill/device-constraints.svg)
+{% include svg/boox-epub-skill/device-constraints.svg %}
 
 The display is 2480x1860 at 300 PPI, limited to 16 levels of grey. No colour. NeoReader, the built-in reader app, supports no flexbox, no grid, no `calc()`, no media queries, no floats.
 
@@ -54,7 +54,7 @@ The problems I kept hitting with vanilla `pandoc input.md -o output.epub`:
 
 The skill defines a three-stage pipeline that handles all of this:
 
-![Three-stage conversion pipeline: Mermaid pre-rendering, font embedding, and Pandoc conversion to EPUB3](/assets/images/boox-epub-skill/conversion-pipeline.svg)
+{% include svg/boox-epub-skill/conversion-pipeline.svg %}
 
 A Python script (`boox-epub-convert.py`) orchestrates the pipeline. The agent invokes it as part of the skill.
 
@@ -91,13 +91,13 @@ The stylesheet (`epub-eink.css`) took the most iteration. Every decision traces 
 
 On e-ink, monochrome highlighting is more readable than any colour theme. Bold and italic remain distinct in greyscale where different colours collapse to the same shade.
 
-![Side-by-side comparison: colour syntax theme collapses to indistinguishable greys on e-ink, while monochrome theme uses bold and italic for clear contrast](/assets/images/boox-epub-skill/syntax-comparison.svg)
+{% include svg/boox-epub-skill/syntax-comparison.svg %}
 
 People adjust text size constantly on e-ink; one `px` value and the slider stops working.
 
 The greyscale visibility guide I worked out through trial and error:
 
-![Greyscale visibility guide showing actual hex colour ranges from solid black to potentially invisible on e-ink](/assets/images/boox-epub-skill/greyscale-visibility.svg)
+{% include svg/boox-epub-skill/greyscale-visibility.svg %}
 
 ## Writing the Skill Definition
 

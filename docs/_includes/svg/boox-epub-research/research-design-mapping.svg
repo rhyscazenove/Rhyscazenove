@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -6 720 526" width="720" height="526" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" class="diagram" role="img" aria-label="Mapping of nine research sources to eleven skill components, showing which sources informed each design decision">
+  <style>
+    /* Source node backgrounds (blue) */
+    rect[fill="#dce8f5"] { fill: var(--svg-panel, #dce8f5); }
+    /* Component node backgrounds (green) */
+    rect[fill="#d9f0df"] { fill: var(--svg-panel, #d9f0df); }
+    /* Source node strokes */
+    rect[stroke="#9bb8d8"] { stroke: var(--svg-rule, #9bb8d8); }
+    /* Component node strokes */
+    rect[stroke="#8cc69e"] { stroke: var(--svg-rule, #8cc69e); }
+    /* Source node text */
+    text[fill="#2c4a6e"] { fill: var(--svg-sub, #2c4a6e); }
+    /* Component node text */
+    text[fill="#2c5e3a"] { fill: var(--svg-sub, #2c5e3a); }
+    /* Column headers */
+    text[fill="#6b7f96"] { fill: var(--svg-dim, #6b7f96); }
+    text[fill="#5a8068"] { fill: var(--svg-dim, #5a8068); }
+  </style>
+
+  <defs>
+    <!-- Subtle shadow for nodes -->
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!-- CONNECTION LINES (drawn first so nodes sit on top)           -->
+  <!-- ============================================================ -->
+  <!-- Colour palette for source lines - muted tones -->
+  <!-- S1 #7a9cbf  S2 #8b7fbf  S3 #bf7f8b  S4 #7fbf8b  S5 #bfa67f -->
+  <!-- S6 #7fbfbf  S7 #bf8f7f  S8 #9fbf7f  S9 #b07fbf              -->
+
+  <!-- S1 (y=42) → C1 EPUB3 format (y=26) -->
+  <path d="M 258,42 C 350,42 370,26 432,26" fill="none" stroke="#7a9cbf" stroke-width="1.5" opacity="0.45"/>
+  <!-- S1 (y=42) → C7 Mermaid pre-rendering (y=290) -->
+  <path d="M 258,42 C 350,42 370,290 432,290" fill="none" stroke="#7a9cbf" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S2 (y=98) → C2 Pandoc pipeline (y=70) -->
+  <path d="M 258,98 C 350,98 370,70 432,70" fill="none" stroke="#8b7fbf" stroke-width="1.5" opacity="0.45"/>
+  <!-- S2 (y=98) → C3 CSS stylesheet (y=114) -->
+  <path d="M 258,98 C 350,98 370,114 432,114" fill="none" stroke="#8b7fbf" stroke-width="1.5" opacity="0.45"/>
+  <!-- S2 (y=98) → C8 NeoReader CSS ref (y=334) -->
+  <path d="M 258,98 C 350,98 370,334 432,334" fill="none" stroke="#8b7fbf" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S3 (y=154) → C4 JetBrains Mono (y=158) -->
+  <path d="M 258,154 C 350,154 370,158 432,158" fill="none" stroke="#bf7f8b" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S4 (y=210) → C3 CSS stylesheet (y=114) -->
+  <path d="M 258,210 C 350,210 370,114 432,114" fill="none" stroke="#7fbf8b" stroke-width="1.5" opacity="0.45"/>
+  <!-- S4 (y=210) → C8 NeoReader CSS ref (y=334) -->
+  <path d="M 258,210 C 350,210 370,334 432,334" fill="none" stroke="#7fbf8b" stroke-width="1.5" opacity="0.45"/>
+  <!-- S4 (y=210) → C11 V2 engine (y=466) -->
+  <path d="M 258,210 C 350,210 370,466 432,466" fill="none" stroke="#7fbf8b" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S5 (y=266) → C4 JetBrains Mono (y=158) -->
+  <path d="M 258,266 C 350,266 370,158 432,158" fill="none" stroke="#bfa67f" stroke-width="1.5" opacity="0.45"/>
+  <!-- S5 (y=266) → C6 Code block sizing (y=246) -->
+  <path d="M 258,266 C 350,266 370,246 432,246" fill="none" stroke="#bfa67f" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S6 (y=322) → C2 Pandoc pipeline (y=70) -->
+  <path d="M 258,322 C 350,322 370,70 432,70" fill="none" stroke="#7fbfbf" stroke-width="1.5" opacity="0.45"/>
+  <!-- S6 (y=322) → C5 Monochrome highlighting (y=202) -->
+  <path d="M 258,322 C 350,322 370,202 432,202" fill="none" stroke="#7fbfbf" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S7 (y=378) → C6 Code block sizing (y=246) -->
+  <path d="M 258,378 C 350,378 370,246 432,246" fill="none" stroke="#bf8f7f" stroke-width="1.5" opacity="0.45"/>
+  <!-- S7 (y=378) → C9 Greyscale visibility (y=378) -->
+  <path d="M 258,378 C 350,378 370,378 432,378" fill="none" stroke="#bf8f7f" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S8 (y=434) → C10 Bolding slider (y=422) -->
+  <path d="M 258,434 C 350,434 370,422 432,422" fill="none" stroke="#9fbf7f" stroke-width="1.5" opacity="0.45"/>
+  <!-- S8 (y=434) → C9 Greyscale visibility (y=378) -->
+  <path d="M 258,434 C 350,434 370,378 432,378" fill="none" stroke="#9fbf7f" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- S9 (y=490) → C1 EPUB3 format (y=26) -->
+  <path d="M 258,490 C 350,490 370,26 432,26" fill="none" stroke="#b07fbf" stroke-width="1.5" opacity="0.45"/>
+
+
+  <!-- ============================================================ -->
+  <!-- LEFT COLUMN: Research Sources (S1-S9)                        -->
+  <!-- Node: x=10, width=248, height=36, spacing=56, start y=24    -->
+  <!-- ============================================================ -->
+
+  <!-- S1 -->
+  <rect x="10" y="24" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="47" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S1</tspan>  NeoReader Format Support</text>
+
+  <!-- S2 -->
+  <rect x="10" y="80" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="103" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S2</tspan>  EPUB CSS &amp; Code Blocks</text>
+
+  <!-- S3 -->
+  <rect x="10" y="136" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="159" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S3</tspan>  Monospace Fonts</text>
+
+  <!-- S4 -->
+  <rect x="10" y="192" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="215" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S4</tspan>  NeoReader HTML &amp; V2 Engine</text>
+
+  <!-- S5 -->
+  <rect x="10" y="248" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="271" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S5</tspan>  Best Fonts for E-Ink</text>
+
+  <!-- S6 -->
+  <rect x="10" y="304" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="327" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S6</tspan>  Pandoc EPUB Conversion</text>
+
+  <!-- S7 -->
+  <rect x="10" y="360" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="383" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S7</tspan>  Hardware Specifications</text>
+
+  <!-- S8 -->
+  <rect x="10" y="416" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="439" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S8</tspan>  Font Readability</text>
+
+  <!-- S9 -->
+  <rect x="10" y="472" width="248" height="36" rx="6" ry="6" fill="#dce8f5" stroke="#9bb8d8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="22" y="495" font-size="11.5" fill="#2c4a6e"><tspan font-weight="600" fill="#4a7aab">S9</tspan>  EPUB vs PDF</text>
+
+
+  <!-- ============================================================ -->
+  <!-- RIGHT COLUMN: Skill Components (C1-C11)                      -->
+  <!-- Node: x=432, width=278, height=32, spacing=44, start y=10   -->
+  <!-- ============================================================ -->
+
+  <!-- C1 -->
+  <rect x="432" y="10" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="31" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C1</tspan>  EPUB3 as target format</text>
+
+  <!-- C2 -->
+  <rect x="432" y="54" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="75" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C2</tspan>  Pandoc conversion pipeline</text>
+
+  <!-- C3 -->
+  <rect x="432" y="98" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="119" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C3</tspan>  epub-eink.css stylesheet</text>
+
+  <!-- C4 -->
+  <rect x="432" y="142" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="163" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C4</tspan>  JetBrains Mono font</text>
+
+  <!-- C5 -->
+  <rect x="432" y="186" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="207" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C5</tspan>  Monochrome highlighting</text>
+
+  <!-- C6 -->
+  <rect x="432" y="230" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="251" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C6</tspan>  Code block sizing (0.82em)</text>
+
+  <!-- C7 -->
+  <rect x="432" y="274" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="295" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C7</tspan>  Mermaid pre-rendering</text>
+
+  <!-- C8 -->
+  <rect x="432" y="318" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="339" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C8</tspan>  NeoReader CSS reference</text>
+
+  <!-- C9 -->
+  <rect x="432" y="362" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="383" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C9</tspan>  Greyscale visibility guide</text>
+
+  <!-- C10 -->
+  <rect x="432" y="406" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="427" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C10</tspan>  Bolding slider recommendation</text>
+
+  <!-- C11 -->
+  <rect x="432" y="450" width="278" height="32" rx="6" ry="6" fill="#d9f0df" stroke="#8cc69e" stroke-width="1" filter="url(#shadow)"/>
+  <text x="444" y="471" font-size="11.5" fill="#2c5e3a"><tspan font-weight="600" fill="#4a9e64">C11</tspan>  V2 engine recommendation</text>
+
+
+  <!-- ============================================================ -->
+  <!-- COLUMN HEADERS                                                -->
+  <!-- ============================================================ -->
+  <text x="134" y="14" font-size="11" fill="#6b7f96" text-anchor="middle" font-weight="600" letter-spacing="0.5">RESEARCH SOURCES</text>
+  <text x="571" y="504" font-size="11" fill="#5a8068" text-anchor="middle" font-weight="600" letter-spacing="0.5">SKILL COMPONENTS</text>
+
+</svg>

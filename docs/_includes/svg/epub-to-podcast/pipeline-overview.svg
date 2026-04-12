@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 700" width="720" height="700" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" class="diagram" role="img" aria-label="End-to-end pipeline overview from EPUB files through processing, script generation, audio production, and website publishing">
+  <style>
+    /* Phase band backgrounds */
+    rect[fill="#eef4fb"] { fill: var(--svg-panel, #eef4fb); }
+    rect[fill="#edf7ed"] { fill: var(--svg-panel, #edf7ed); }
+    rect[fill="#fdf5e6"] { fill: var(--svg-panel, #fdf5e6); }
+    rect[fill="#f3eef8"] { fill: var(--svg-panel, #f3eef8); }
+    /* Card backgrounds */
+    rect[fill="#fff"] { fill: var(--svg-card, #fff); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+    </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Phase 1: EPUB Processing - blue band -->
+  <rect x="0" y="0" width="720" height="270" rx="0" fill="#eef4fb" opacity="0.6"/>
+  <text x="16" y="22" font-size="11" font-weight="600" fill="#3b6fa0" letter-spacing="1.2" text-transform="uppercase">EPUB Processing</text>
+
+  <!-- Phase 2: Script Generation - green band -->
+  <rect x="0" y="270" width="720" height="130" rx="0" fill="#edf7ed" opacity="0.6"/>
+  <text x="16" y="292" font-size="11" font-weight="600" fill="#3a7a3a" letter-spacing="1.2" text-transform="uppercase">Script Generation</text>
+
+  <!-- Phase 3: Audio Production - amber band -->
+  <rect x="0" y="400" width="720" height="170" rx="0" fill="#fdf5e6" opacity="0.6"/>
+  <text x="16" y="422" font-size="11" font-weight="600" fill="#a07030" letter-spacing="1.2" text-transform="uppercase">Audio Production</text>
+
+  <!-- Phase 4: Website - purple band -->
+  <rect x="0" y="570" width="720" height="130" rx="0" fill="#f3eef8" opacity="0.6"/>
+  <text x="16" y="592" font-size="11" font-weight="600" fill="#6b4d8a" letter-spacing="1.2" text-transform="uppercase">Website</text>
+
+  <!-- ===== STEP 1: EPUB files ===== -->
+  <rect x="200" y="32" width="320" height="44" rx="8" fill="#fff" stroke="#4a90c4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#111">EPUB files</text>
+  <text x="360" y="67" text-anchor="middle" font-size="11" fill="#666">Source library</text>
+  <!-- Stat: 42 books -->
+  <rect x="530" y="38" width="80" height="24" rx="12" fill="#4a90c4" opacity="0.12"/>
+  <text x="570" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#4a90c4">42 books</text>
+
+  <!-- Arrow 1 -->
+  <line x1="360" y1="76" x2="360" y2="96" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="91" font-size="10" fill="#666">extract_epubs.py</text>
+
+  <!-- ===== STEP 2: Markdown + images ===== -->
+  <rect x="200" y="100" width="320" height="44" rx="8" fill="#fff" stroke="#4a90c4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="120" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Markdown + images</text>
+  <text x="360" y="135" text-anchor="middle" font-size="11" fill="#666">extracted/</text>
+
+  <!-- Arrow 2 -->
+  <line x1="360" y1="144" x2="360" y2="164" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="159" font-size="10" fill="#666">optimize_for_llm.py</text>
+
+  <!-- ===== STEP 3: Clean markdown ===== -->
+  <rect x="200" y="168" width="320" height="44" rx="8" fill="#fff" stroke="#4a90c4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="188" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Clean markdown</text>
+  <text x="360" y="203" text-anchor="middle" font-size="11" fill="#666">llm_optimized/</text>
+
+  <!-- Arrow 3 -->
+  <line x1="360" y1="212" x2="360" y2="232" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="227" font-size="10" fill="#666">create_minimized.py</text>
+
+  <!-- ===== STEP 4: Chapter summaries ===== -->
+  <rect x="200" y="236" width="320" height="44" rx="8" fill="#fff" stroke="#4a90c4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="256" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Chapter summaries</text>
+  <text x="360" y="271" text-anchor="middle" font-size="11" fill="#666">minimized/</text>
+  <!-- Stat: 87-98% smaller -->
+  <rect x="530" y="242" width="116" height="24" rx="12" fill="#4a90c4" opacity="0.12"/>
+  <text x="588" y="259" text-anchor="middle" font-size="11" font-weight="600" fill="#4a90c4">87-98% smaller</text>
+
+  <!-- Arrow 4 -->
+  <line x1="360" y1="280" x2="360" y2="306" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- ===== STEP 5: Claude Code Skills (two boxes side by side) ===== -->
+  <!-- Skill box 1: book-analyzer -->
+  <rect x="135" y="310" width="210" height="50" rx="10" fill="#fff" stroke="#3a9a5c" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#shadow)"/>
+  <!-- Lightning icon -->
+  <g transform="translate(148, 322)">
+    <path d="M8 0 L3 9 L7 9 L5 16 L12 6 L8 6 Z" fill="#e8a515" stroke="#c48a00" stroke-width="0.5"/>
+  </g>
+  <text x="240" y="333" text-anchor="middle" font-size="12" font-weight="600" fill="#111">/book-analyzer</text>
+  <text x="240" y="349" text-anchor="middle" font-size="10" fill="#666">Claude Code skill - visualisations</text>
+
+  <!-- Skill box 2: podcast-script-generator -->
+  <rect x="375" y="310" width="210" height="50" rx="10" fill="#fff" stroke="#3a9a5c" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#shadow)"/>
+  <!-- Lightning icon -->
+  <g transform="translate(388, 322)">
+    <path d="M8 0 L3 9 L7 9 L5 16 L12 6 L8 6 Z" fill="#e8a515" stroke="#c48a00" stroke-width="0.5"/>
+  </g>
+  <text x="480" y="333" text-anchor="middle" font-size="12" font-weight="600" fill="#111">/podcast-script-generator</text>
+  <text x="480" y="349" text-anchor="middle" font-size="10" fill="#666">Claude Code skill - dialogue</text>
+
+  <!-- Arrow from skills down to scripts output -->
+  <line x1="240" y1="360" x2="240" y2="376" stroke="#888" stroke-width="1.2"/>
+  <line x1="480" y1="360" x2="480" y2="376" stroke="#888" stroke-width="1.2"/>
+  <line x1="240" y1="376" x2="480" y2="376" stroke="#888" stroke-width="1.2"/>
+  <line x1="360" y1="376" x2="360" y2="392" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- AI badge -->
+  <rect x="332" y="368" width="56" height="16" rx="8" fill="#3a9a5c" opacity="0.15"/>
+  <text x="360" y="380" text-anchor="middle" font-size="9" font-weight="600" fill="#3a9a5c">AI-powered</text>
+
+  <!-- ===== STEP 6: Dialogue scripts ===== -->
+  <rect x="200" y="396" width="320" height="44" rx="8" fill="#fff" stroke="#c4850a" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="416" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Two-host dialogue scripts</text>
+  <text x="360" y="431" text-anchor="middle" font-size="11" fill="#666">podcast_scripts/</text>
+
+  <!-- Arrow 6 -->
+  <line x1="360" y1="440" x2="360" y2="460" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="455" font-size="10" fill="#666">tts_converter.py</text>
+
+  <!-- ===== STEP 7: Audio segments ===== -->
+  <rect x="200" y="464" width="320" height="44" rx="8" fill="#fff" stroke="#c4850a" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="484" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Audio segments</text>
+  <text x="360" y="499" text-anchor="middle" font-size="11" fill="#666">audio_output/</text>
+  <!-- Stat: 2,682 segments -->
+  <rect x="530" y="470" width="120" height="24" rx="12" fill="#c4850a" opacity="0.12"/>
+  <text x="590" y="487" text-anchor="middle" font-size="11" font-weight="600" fill="#c4850a">2,682 segments</text>
+
+  <!-- Arrow 7 -->
+  <line x1="360" y1="508" x2="360" y2="528" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="523" font-size="10" fill="#666">combine_podcast_audio.py</text>
+
+  <!-- ===== STEP 8: Podcast MP3s ===== -->
+  <rect x="200" y="532" width="320" height="44" rx="8" fill="#fff" stroke="#c4850a" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="552" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Podcast MP3s + metadata + cover art</text>
+  <text x="360" y="567" text-anchor="middle" font-size="11" fill="#666">Final output</text>
+  <!-- Stat: 55+ episodes -->
+  <rect x="530" y="538" width="104" height="24" rx="12" fill="#c4850a" opacity="0.12"/>
+  <text x="582" y="555" text-anchor="middle" font-size="11" font-weight="600" fill="#c4850a">55+ episodes</text>
+
+  <!-- Arrow 8 -->
+  <line x1="360" y1="576" x2="360" y2="604" stroke="#888" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <text x="370" y="597" font-size="10" fill="#666">Eleventy static site</text>
+
+  <!-- ===== STEP 9: Website ===== -->
+  <rect x="200" y="608" width="320" height="50" rx="8" fill="#fff" stroke="#7b5ea7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="360" y="630" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Browsable, searchable, listenable website</text>
+  <text x="360" y="648" text-anchor="middle" font-size="11" fill="#666">podcasts.rhyscazenove.com</text>
+
+  <!-- Legend -->
+  <g transform="translate(16, 675)">
+    <rect x="0" y="0" width="12" height="12" rx="3" fill="#fff" stroke="#4a90c4" stroke-width="1.2"/>
+    <text x="18" y="10" font-size="10" fill="#666">Script</text>
+    <rect x="70" y="0" width="12" height="12" rx="3" fill="#fff" stroke="#3a9a5c" stroke-width="1.2" stroke-dasharray="4 2"/>
+    <text x="88" y="10" font-size="10" fill="#666">AI Skill</text>
+    <g transform="translate(143, 2)">
+      <path d="M5 0 L2 6 L4.5 6 L3 11 L8 4 L5.5 4 Z" fill="#e8a515" stroke="#c48a00" stroke-width="0.4"/>
+    </g>
+    <text x="158" y="10" font-size="10" fill="#666">AI-powered step</text>
+  </g>
+</svg>

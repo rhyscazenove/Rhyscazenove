@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200" font-family="'Segoe UI', system-ui, sans-serif" class="diagram" role="img" aria-label="Research flow diagram showing nine searches and three deep reads feeding through synthesis into four output artefacts">
+  <style>
+    /* Input card stacks (blue) */
+    rect[fill="#e8f2fc"] { fill: var(--svg-panel, #e8f2fc); }
+    rect[fill="#d4e8f9"] { fill: var(--svg-panel, #d4e8f9); }
+    rect[fill="#c4ddf4"] { fill: var(--svg-panel, #c4ddf4); }
+    /* Synthesis node (purple) */
+    rect[fill="#ede5f5"] { fill: var(--svg-panel, #ede5f5); }
+    /* Output cards (green) */
+    rect[fill="#e6f5ec"] { fill: var(--svg-panel, #e6f5ec); }
+    /* Arrow marker */
+    path[fill="#888"] { fill: var(--mid, #888); }
+    /* Arrow lines */
+    line[stroke="#888"] { stroke: var(--mid, #888); }
+    /* Input card strokes */
+    rect[stroke="#8bb8e8"] { stroke: var(--svg-rule, #8bb8e8); }
+    /* Synthesis node stroke */
+    rect[stroke="#b09fd4"] { stroke: var(--svg-rule, #b09fd4); }
+    /* Output card strokes */
+    rect[stroke="#7cc49e"] { stroke: var(--svg-rule, #7cc49e); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- INPUT: 9 Searches -->
+  <g transform="translate(20, 38)">
+    <!-- Stacked cards effect -->
+    <rect x="4" y="4" width="130" height="52" rx="6" fill="#c4ddf4" stroke="#8bb8e8" stroke-width="1" opacity="0.45"/>
+    <rect x="2" y="2" width="130" height="52" rx="6" fill="#d4e8f9" stroke="#8bb8e8" stroke-width="1" opacity="0.65"/>
+    <rect x="0" y="0" width="130" height="52" rx="6" fill="#e8f2fc" stroke="#8bb8e8" stroke-width="1.2"/>
+    <!-- Search icon -->
+    <circle cx="22" cy="20" r="7" fill="none" stroke="#5a8cbf" stroke-width="1.5"/>
+    <line x1="27" y1="25" x2="32" y2="30" stroke="#5a8cbf" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="40" y="24" font-size="13" font-weight="600" fill="#2c5f8a">9 Searches</text>
+    <text x="22" y="42" font-size="10" fill="#5a8cbf">web queries</text>
+  </g>
+
+  <!-- INPUT: 3 Deep Reads -->
+  <g transform="translate(20, 118)">
+    <!-- Stacked cards effect -->
+    <rect x="3" y="3" width="130" height="52" rx="6" fill="#c4ddf4" stroke="#8bb8e8" stroke-width="1" opacity="0.5"/>
+    <rect x="0" y="0" width="130" height="52" rx="6" fill="#e8f2fc" stroke="#8bb8e8" stroke-width="1.2"/>
+    <!-- Document icon -->
+    <path d="M18,12 L18,38 L32,38 L32,18 L26,12 Z" fill="none" stroke="#5a8cbf" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M26,12 L26,18 L32,18" fill="none" stroke="#5a8cbf" stroke-width="1.4" stroke-linejoin="round"/>
+    <text x="40" y="24" font-size="13" font-weight="600" fill="#2c5f8a">3 Deep Reads</text>
+    <text x="22" y="42" font-size="10" fill="#5a8cbf">page fetches</text>
+  </g>
+
+  <!-- Arrows: inputs to synthesis -->
+  <line x1="156" y1="68" x2="268" y2="92" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="156" y1="144" x2="268" y2="112" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- SYNTHESIS node -->
+  <g transform="translate(272, 68)">
+    <rect x="0" y="0" width="150" height="64" rx="10" fill="#ede5f5" stroke="#b09fd4" stroke-width="1.5"/>
+    <!-- Gear/process icon -->
+    <circle cx="28" cy="32" r="10" fill="none" stroke="#7c6aa0" stroke-width="1.4"/>
+    <circle cx="28" cy="32" r="4" fill="#7c6aa0"/>
+    <line x1="28" y1="19" x2="28" y2="23" stroke="#7c6aa0" stroke-width="1.4"/>
+    <line x1="28" y1="41" x2="28" y2="45" stroke="#7c6aa0" stroke-width="1.4"/>
+    <line x1="15" y1="32" x2="19" y2="32" stroke="#7c6aa0" stroke-width="1.4"/>
+    <line x1="37" y1="32" x2="41" y2="32" stroke="#7c6aa0" stroke-width="1.4"/>
+    <text x="50" y="28" font-size="14" font-weight="700" fill="#4a3970">Synthesis</text>
+    <text x="50" y="46" font-size="10" fill="#7c6aa0">cross-referencing</text>
+  </g>
+
+  <!-- Arrows: synthesis to outputs -->
+  <line x1="422" y1="82" x2="488" y2="30" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="422" y1="93" x2="488" y2="76" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="422" y1="113" x2="488" y2="122" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="422" y1="120" x2="488" y2="168" stroke="#888" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- OUTPUT 1: SKILL.md -->
+  <g transform="translate(492, 8)">
+    <rect x="0" y="0" width="210" height="38" rx="6" fill="#e6f5ec" stroke="#7cc49e" stroke-width="1.2"/>
+    <text x="12" y="15" font-size="9" fill="#3d8c5c" font-weight="600">WORKFLOW</text>
+    <text x="12" y="30" font-size="13" font-family="'SF Mono', 'Cascadia Code', 'Consolas', monospace" fill="#2a6b44" font-weight="600">SKILL.md</text>
+  </g>
+
+  <!-- OUTPUT 2: epub-eink.css -->
+  <g transform="translate(492, 54)">
+    <rect x="0" y="0" width="210" height="38" rx="6" fill="#e6f5ec" stroke="#7cc49e" stroke-width="1.2"/>
+    <text x="12" y="15" font-size="9" fill="#3d8c5c" font-weight="600">STYLESHEET</text>
+    <text x="12" y="30" font-size="13" font-family="'SF Mono', 'Cascadia Code', 'Consolas', monospace" fill="#2a6b44" font-weight="600">epub-eink.css</text>
+  </g>
+
+  <!-- OUTPUT 3: boox-epub-convert.py -->
+  <g transform="translate(492, 100)">
+    <rect x="0" y="0" width="210" height="38" rx="6" fill="#e6f5ec" stroke="#7cc49e" stroke-width="1.2"/>
+    <text x="12" y="15" font-size="9" fill="#3d8c5c" font-weight="600">SCRIPT</text>
+    <text x="12" y="30" font-size="13" font-family="'SF Mono', 'Cascadia Code', 'Consolas', monospace" fill="#2a6b44" font-weight="600">boox-epub-convert.py</text>
+  </g>
+
+  <!-- OUTPUT 4: NeoReader reference -->
+  <g transform="translate(492, 146)">
+    <rect x="0" y="0" width="210" height="38" rx="6" fill="#e6f5ec" stroke="#7cc49e" stroke-width="1.2"/>
+    <text x="12" y="15" font-size="9" fill="#3d8c5c" font-weight="600">REFERENCE</text>
+    <text x="12" y="30" font-size="13" font-family="'SF Mono', 'Cascadia Code', 'Consolas', monospace" fill="#2a6b44" font-weight="600">NeoReader ref doc</text>
+  </g>
+</svg>

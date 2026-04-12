@@ -20,7 +20,7 @@ I built a multi-stage pipeline: Python scripts, Claude Code skills, and AI text-
 
 ## The Pipeline at a Glance
 
-![Full pipeline: EPUB processing, AI script generation, audio production, and Eleventy website](/assets/images/epub-to-podcast/pipeline-overview.svg)
+{% include svg/epub-to-podcast/pipeline-overview.svg %}
 
 Each stage feeds the next, but every intermediate output is useful on its own. The extracted markdown works for reading in any text editor. The LLM-optimised version is clean enough for RAG pipelines or embeddings. The minimised summaries work for quick reference before a meeting.
 
@@ -39,7 +39,7 @@ The real compression happens in the minimisation stage. For each chapter, the sc
 
 Across stages, a typical book compresses like this:
 
-![Compression funnel: 1.4 MB extracted to 1.37 MB optimised to 99 KB minimised to 30 KB podcast script](/assets/images/epub-to-podcast/compression-funnel.svg)
+{% include svg/epub-to-podcast/compression-funnel.svg %}
 
 A book that started as 1.4 megabytes of dense technical prose becomes a 30-kilobyte podcast script.
 
@@ -57,7 +57,7 @@ The skill chains together seven Python scripts (`extract_text.py`, `analyze_them
 
 ## Two Approaches to Script Generation
 
-![Comparison: V1 deterministic Python (fast, free, patterned) vs V2 Claude Code Skill (slower, costs tokens, natural dialogue)](/assets/images/epub-to-podcast/script-generation-comparison.svg)
+{% include svg/epub-to-podcast/script-generation-comparison.svg %}
 
 I ended up with two approaches.
 
@@ -191,6 +191,6 @@ Design for partial failure. The gap-filling pattern (diff what you expected agai
 
 ## By the Numbers
 
-![Stats: 42 books, 55+ episodes, 2,682 segments, 1.4 GB audio, ~£50 TTS cost, £25 purchase, 0.63s build time](/assets/images/epub-to-podcast/stats-infographic.svg)
+{% include svg/epub-to-podcast/stats-infographic.svg %}
 
 That Humble Bundle paid for itself.

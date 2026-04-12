@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="120" viewBox="0 0 720 120" fill="none" class="diagram" role="img" aria-label="Five attention-item categories: Red RAG, Blocked, Unassigned, Stale, and High Activity">
+  <style>
+    text { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink, #111); }
+    .header { font-size: 11px; font-weight: 700; fill: #92400e; letter-spacing: 0.5px; text-transform: uppercase; }
+    .cat-name { font-size: 12px; font-weight: 600; }
+    .cat-desc { font-size: 10px; fill: var(--svg-sub, #555); }
+  </style>
+
+  <!-- Outer container with amber top border -->
+  <rect x="0.5" y="0.5" width="719" height="119" rx="6" ry="6" fill="none" stroke="#d4d4d8" stroke-width="1"/>
+  <rect x="1" y="1" width="718" height="5" rx="5 5 0 0" fill="#f59e0b"/>
+  <clipPath id="topClip"><rect x="0" y="0" width="720" height="6" rx="6" ry="6"/></clipPath>
+  <rect x="0.5" y="0.5" width="719" height="5.5" fill="#f59e0b" clip-path="url(#topClip)"/>
+
+  <!-- Header row -->
+  <text x="16" y="28" class="header">&#9888; Attention Items</text>
+  <line x1="16" y1="36" x2="704" y2="36" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Card 1: RED RAG — x: 10-146 -->
+  <rect x="10" y="44" width="132" height="64" rx="5" ry="5" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+  <rect x="10" y="44" width="5" height="64" rx="5 0 0 5" fill="#dc2626"/>
+  <clipPath id="c1"><rect x="10" y="44" width="5" height="64" rx="5" ry="5"/></clipPath>
+  <rect x="10" y="44" width="5" height="64" fill="#dc2626" clip-path="url(#c1)"/>
+  <circle cx="28" cy="64" r="4" fill="#dc2626"/>
+  <text x="38" y="68" class="cat-name" fill="#991b1b">Red RAG</text>
+  <text x="22" y="84" class="cat-desc">Issues with RED</text>
+  <text x="22" y="96" class="cat-desc">status (critical risk)</text>
+
+  <!-- Card 2: Blocked — x: 150-286 -->
+  <rect x="150" y="44" width="132" height="64" rx="5" ry="5" fill="#fff7ed" stroke="#fdba74" stroke-width="1"/>
+  <rect x="150" y="44" width="5" height="64" fill="#ea580c"/>
+  <clipPath id="c2"><rect x="150" y="44" width="5" height="64" rx="5" ry="5"/></clipPath>
+  <rect x="150" y="44" width="5" height="64" fill="#ea580c" clip-path="url(#c2)"/>
+  <circle cx="168" cy="64" r="4" fill="#ea580c"/>
+  <text x="178" y="68" class="cat-name" fill="#9a3412">Blocked</text>
+  <text x="162" y="84" class="cat-desc">Issues flagged</text>
+  <text x="162" y="96" class="cat-desc">as blocked</text>
+
+  <!-- Card 3: Unassigned — x: 290-426 -->
+  <rect x="290" y="44" width="132" height="64" rx="5" ry="5" fill="#fffbeb" stroke="#fcd34d" stroke-width="1"/>
+  <rect x="290" y="44" width="5" height="64" fill="#d97706"/>
+  <clipPath id="c3"><rect x="290" y="44" width="5" height="64" rx="5" ry="5"/></clipPath>
+  <rect x="290" y="44" width="5" height="64" fill="#d97706" clip-path="url(#c3)"/>
+  <circle cx="308" cy="64" r="4" fill="#d97706"/>
+  <text x="318" y="68" class="cat-name" fill="#92400e">Unassigned</text>
+  <text x="302" y="84" class="cat-desc">Issues with no</text>
+  <text x="302" y="96" class="cat-desc">assignee set</text>
+
+  <!-- Card 4: Stale — x: 430-566 -->
+  <rect x="430" y="44" width="132" height="64" rx="5" ry="5" fill="#f4f4f5" stroke="#d4d4d8" stroke-width="1"/>
+  <rect x="430" y="44" width="5" height="64" fill="#71717a"/>
+  <clipPath id="c4"><rect x="430" y="44" width="5" height="64" rx="5" ry="5"/></clipPath>
+  <rect x="430" y="44" width="5" height="64" fill="#71717a" clip-path="url(#c4)"/>
+  <circle cx="448" cy="64" r="4" fill="#71717a"/>
+  <text x="458" y="68" class="cat-name" fill="#3f3f46">Stale</text>
+  <text x="442" y="84" class="cat-desc">No updates in</text>
+  <text x="442" y="96" class="cat-desc">7+ days</text>
+
+  <!-- Card 5: High Activity — x: 570-706 -->
+  <rect x="570" y="44" width="140" height="64" rx="5" ry="5" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+  <rect x="570" y="44" width="5" height="64" fill="#2563eb"/>
+  <clipPath id="c5"><rect x="570" y="44" width="5" height="64" rx="5" ry="5"/></clipPath>
+  <rect x="570" y="44" width="5" height="64" fill="#2563eb" clip-path="url(#c5)"/>
+  <circle cx="588" cy="64" r="4" fill="#2563eb"/>
+  <text x="598" y="68" class="cat-name" fill="#1e40af">High Activity</text>
+  <text x="582" y="84" class="cat-desc">5+ comments</text>
+  <text x="582" y="96" class="cat-desc">(possible contention)</text>
+</svg>

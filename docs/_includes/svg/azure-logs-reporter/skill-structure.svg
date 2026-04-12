@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" class="diagram" role="img" aria-label="Skill structure diagram showing SKILL.md as the entry point connecting to reference documents and a supporting Python script">
+  <style>
+    /* SKILL.md accent panel */
+    rect[fill="#eef2ff"] { fill: var(--svg-panel, #eef2ff); }
+    /* Reference file card backgrounds */
+    rect[fill="#f8f9fb"] { fill: var(--svg-card, #f8f9fb); }
+    /* Helper script panel */
+    rect[fill="#fdf8f0"] { fill: var(--svg-panel, #fdf8f0); }
+    /* Subtitle text within boxes */
+    text[fill="#556"] { fill: var(--svg-dim, #556); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="8" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#7a8a9e"/>
+    </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- SKILL.md: central prominent box -->
+  <rect x="24" y="52" width="200" height="72" rx="6" fill="#eef2ff" stroke="#4f6df5" stroke-width="2" filter="url(#shadow)"/>
+  <text x="124" y="77" text-anchor="middle" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="13" font-weight="700" fill="#3451c7">SKILL.md</text>
+  <text x="124" y="96" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#556" letter-spacing="0.01em">Core workflow definition</text>
+  <text x="124" y="112" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.5" fill="#556" letter-spacing="0.01em">and orchestration logic</text>
+
+  <!-- Directory label -->
+  <text x="20" y="28" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11" fill="#667" letter-spacing="0.02em">.github/skills/azure-logs-reporter/</text>
+  <line x1="20" y1="34" x2="284" y2="34" stroke="#ccd3de" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- references/ folder label -->
+  <rect x="330" y="8" width="370" height="250" rx="8" fill="none" stroke="#ccd3de" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="346" y="28" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11" fill="#667" letter-spacing="0.02em">references/</text>
+
+  <!-- Reference file boxes -->
+  <!-- kql-queries.md -->
+  <rect x="346" y="40" width="340" height="36" rx="4" fill="#f8f9fb" stroke="#c5cdd8" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="358" y="57" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#334">kql-queries.md</text>
+  <text x="680" y="57" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#778" letter-spacing="0.01em">Reusable KQL query templates</text>
+  <text x="358" y="70" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9.5" fill="#999"></text>
+
+  <!-- table-schemas.md -->
+  <rect x="346" y="84" width="340" height="36" rx="4" fill="#f8f9fb" stroke="#c5cdd8" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="358" y="101" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#334">table-schemas.md</text>
+  <text x="680" y="101" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#778" letter-spacing="0.01em">Log Analytics table structures</text>
+
+  <!-- azure-portal-links.md -->
+  <rect x="346" y="128" width="340" height="36" rx="4" fill="#f8f9fb" stroke="#c5cdd8" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="358" y="145" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#334">azure-portal-links.md</text>
+  <text x="680" y="145" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#778" letter-spacing="0.01em">URL encoding and link format</text>
+
+  <!-- default-workspace.md -->
+  <rect x="346" y="172" width="340" height="36" rx="4" fill="#f8f9fb" stroke="#c5cdd8" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="358" y="189" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#334">default-workspace.md</text>
+  <text x="680" y="189" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#778" letter-spacing="0.01em">Pre-configured workspace config</text>
+
+  <!-- session-learnings.md -->
+  <rect x="346" y="216" width="340" height="36" rx="4" fill="#f8f9fb" stroke="#c5cdd8" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="358" y="233" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#334">session-learnings.md</text>
+  <text x="680" y="233" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#778" letter-spacing="0.01em">Practical lessons from real use</text>
+
+  <!-- Arrows from SKILL.md to each reference file -->
+  <line x1="224" y1="72" x2="342" y2="58" stroke="#7a8a9e" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="224" y1="82" x2="342" y2="102" stroke="#7a8a9e" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="224" y1="92" x2="342" y2="146" stroke="#7a8a9e" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="224" y1="98" x2="342" y2="190" stroke="#7a8a9e" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <line x1="224" y1="104" x2="342" y2="234" stroke="#7a8a9e" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- encode-azure-url.py: separate box at bottom -->
+  <rect x="24" y="166" width="200" height="52" rx="6" fill="#fdf8f0" stroke="#c9a34e" stroke-width="1.5" stroke-dasharray="5,3" filter="url(#shadow)"/>
+  <text x="124" y="188" text-anchor="middle" font-family="'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace" font-size="11.5" font-weight="600" fill="#8a6d1b">encode-azure-url.py</text>
+  <text x="124" y="206" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" fill="#998254" letter-spacing="0.01em">Helper script at repo root</text>
+
+  <!-- Label for repo root context -->
+  <text x="24" y="156" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9.5" fill="#998254" letter-spacing="0.03em" font-style="italic">repository root</text>
+
+  <!-- Dashed arrow from SKILL.md to encode script -->
+  <line x1="124" y1="124" x2="124" y2="162" stroke="#b8973e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- "consults" label on arrows -->
+  <text x="280" y="68" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" fill="#8a95a8" font-style="italic">consults</text>
+
+  <!-- "invokes" label on dashed arrow -->
+  <text x="132" y="147" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" fill="#b8973e" font-style="italic">invokes</text>
+
+  <!-- Legend dots -->
+  <circle cx="38" cy="280" r="4" fill="#4f6df5"/>
+  <text x="48" y="283" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" fill="#667">Skill entry point</text>
+  <circle cx="148" cy="280" r="4" fill="#c5cdd8"/>
+  <text x="158" y="283" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" fill="#667">Reference document</text>
+  <circle cx="278" cy="280" r="4" fill="#c9a34e"/>
+  <text x="288" y="283" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" fill="#667">Supporting script</text>
+</svg>

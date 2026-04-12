@@ -18,7 +18,7 @@ The Jira Catchup Reporter is a Python tool that automates this. It pulls data fr
 
 The architecture is a four-stage pipeline:
 
-![Data pipeline: Jira API v3 to JiraClient to Cache Layer to DataProcessor to Report Generators](/assets/images/jira-catchup-reporter/data-pipeline.svg)
+{% include svg/jira-catchup-reporter/data-pipeline.svg %}
 
 Everything starts with the Jira client, which forces the `jira` Python library to use API v3 instead of its default v2:
 
@@ -85,7 +85,7 @@ A similar `ChangelogWrapper` handles the changelog entries, wrapping each histor
 
 ## Multi-Tier Caching
 
-![Cache tiers by data age: today is skipped, under 2 days gets 1 hour TTL, 2-7 days gets 1 day, 7+ days gets 30 days](/assets/images/jira-catchup-reporter/cache-tiers.svg)
+{% include svg/jira-catchup-reporter/cache-tiers.svg %}
 
 Generating a quarterly report can hit the Jira API hundreds of times across paginated searches, changelog expansions, and comment fetches. Re-running the same report with a different template, or iterating on the output format during development, shouldn't re-fetch everything.
 
@@ -186,11 +186,11 @@ The `DataProcessor` is the analytics engine. Its `process_issues()` method runs 
 
 The attention items surface five categories: RED RAG status, blocked issues, unassigned issues, stale issues (no updates in 7+ days), and high comment activity (5+ comments, often indicating contention). These appear at the top of reports so managers see the problems first.
 
-![Five attention item categories: RED RAG, Blocked, Unassigned, Stale, and High Activity](/assets/images/jira-catchup-reporter/attention-items.svg)
+{% include svg/jira-catchup-reporter/attention-items.svg %}
 
 ## Three Entry Points, One Pipeline
 
-![Three entry points (CLI, Web UI, Production) all converging into the same shared JiraClient, DataProcessor, ReportGenerator pipeline](/assets/images/jira-catchup-reporter/three-entry-points.svg)
+{% include svg/jira-catchup-reporter/three-entry-points.svg %}
 
 The same JiraClient, DataProcessor, and ReportGenerator pipeline serves three contexts.
 
