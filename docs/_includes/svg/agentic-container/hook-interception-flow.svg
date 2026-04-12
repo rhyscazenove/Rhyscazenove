@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="260" viewBox="0 0 720 260" class="diagram" role="img" aria-label="Hook interception flow: every AI tool call passes through security-check.sh which either approves or blocks execution">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    rect[fill="#f8f9fb"] { fill: var(--svg-panel, #f8f9fb); }
+    rect[fill="#f0f7f4"] { fill: var(--svg-panel, #f0f7f4); }
+    rect[fill="#fdf2f2"] { fill: var(--svg-panel, #fdf2f2); }
+    rect[fill="#eef2ff"] { fill: var(--svg-panel, #eef2ff); }
+  </style>
+
+  <!-- AI Agent box -->
+  <rect x="16" y="60" width="130" height="80" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <!-- Robot icon -->
+  <g transform="translate(40, 76)">
+    <rect x="6" y="0" width="20" height="16" rx="4" fill="none" stroke="#6366f1" stroke-width="1.8"/>
+    <circle cx="12" cy="8" r="2" fill="#6366f1"/>
+    <circle cx="20" cy="8" r="2" fill="#6366f1"/>
+    <line x1="16" y1="16" x2="16" y2="22" stroke="#6366f1" stroke-width="1.8"/>
+    <line x1="8" y1="22" x2="24" y2="22" stroke="#6366f1" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+  <text x="81" y="96" font-size="13" font-weight="600" fill="#111" text-anchor="middle">AI Agent</text>
+  <text x="81" y="112" font-size="9" fill="#666" text-anchor="middle">Copilot / Claude</text>
+
+  <!-- Arrow: Agent → Hook -->
+  <line x1="146" y1="100" x2="224" y2="100" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="224,95 234,100 224,105" fill="#94a3b8"/>
+  <!-- Label on arrow -->
+  <rect x="155" y="68" width="68" height="20" rx="4" fill="#f8f9fb" stroke="#cbd5e1" stroke-width="0.5"/>
+  <text x="189" y="82" font-size="9" fill="#666" text-anchor="middle" font-family="'IBM Plex Mono', monospace">stdin JSON</text>
+
+  <!-- Security hook box (central) -->
+  <rect x="236" y="28" width="248" height="204" rx="10" fill="#f8f9fb" stroke="#475569" stroke-width="1.5"/>
+  <text x="360" y="52" font-size="12" font-weight="700" fill="#111" text-anchor="middle">preToolUse Hook</text>
+  <text x="360" y="68" font-size="10" fill="#666" text-anchor="middle" font-family="'IBM Plex Mono', monospace">security-check.sh</text>
+
+  <!-- Divider -->
+  <line x1="252" y1="78" x2="468" y2="78" stroke="#dde1e5" stroke-width="1"/>
+
+  <!-- Check 1: Command blocklist -->
+  <g transform="translate(256, 90)">
+    <!-- Shield icon -->
+    <path d="M10 2 L18 6 L18 13 C18 17 14 20 10 22 C6 20 2 17 2 13 L2 6 Z" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+    <line x1="10" y1="9" x2="10" y2="14" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="10" cy="16" r="1" fill="#dc2626"/>
+  </g>
+  <text x="282" y="104" font-size="11" font-weight="600" fill="#111">Command Blocklist</text>
+  <text x="282" y="118" font-size="9" fill="#666">~100 regex patterns: rm -rf, eval,</text>
+  <text x="282" y="130" font-size="9" fill="#666">base64|bash, pip install, nc ...</text>
+
+  <!-- Check 2: Domain allowlist -->
+  <g transform="translate(256, 146)">
+    <!-- Globe icon -->
+    <circle cx="10" cy="10" r="9" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+    <ellipse cx="10" cy="10" rx="4" ry="9" fill="none" stroke="#2563eb" stroke-width="1"/>
+    <line x1="1" y1="10" x2="19" y2="10" stroke="#2563eb" stroke-width="1"/>
+  </g>
+  <text x="282" y="158" font-size="11" font-weight="600" fill="#111">Domain Allowlist</text>
+  <text x="282" y="172" font-size="9" fill="#666">URLs checked against gitlab.com,</text>
+  <text x="282" y="184" font-size="9" fill="#666">github.com. All others blocked.</text>
+
+  <!-- Check 3: Self-protection -->
+  <g transform="translate(256, 198)">
+    <!-- Lock icon -->
+    <rect x="4" y="9" width="12" height="10" rx="2" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+    <path d="M7 9 L7 6 C7 3 13 3 13 6 L13 9" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+  </g>
+  <text x="282" y="212" font-size="11" font-weight="600" fill="#111">Self-Protection</text>
+  <text x="282" y="226" font-size="9" fill="#666">Blocks read/write to hook scripts</text>
+
+  <!-- Arrow: Hook → Approve -->
+  <line x1="484" y1="86" x2="546" y2="60" stroke="#16a34a" stroke-width="1.5"/>
+  <polygon points="543,54 553,57 546,64" fill="#16a34a"/>
+
+  <!-- Arrow: Hook → Block -->
+  <line x1="484" y1="174" x2="546" y2="200" stroke="#dc2626" stroke-width="1.5"/>
+  <polygon points="543,206 553,203 546,196" fill="#dc2626"/>
+
+  <!-- Approve box -->
+  <rect x="554" y="28" width="150" height="56" rx="8" fill="#f0f7f4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="629" y="52" font-size="13" font-weight="700" fill="#16a34a" text-anchor="middle">Execute</text>
+  <text x="629" y="68" font-size="9" fill="#666" text-anchor="middle" font-family="'IBM Plex Mono', monospace">{"approve": true}</text>
+
+  <!-- Block box -->
+  <rect x="554" y="176" width="150" height="56" rx="8" fill="#fdf2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="629" y="200" font-size="13" font-weight="700" fill="#dc2626" text-anchor="middle">Block</text>
+  <text x="629" y="216" font-size="9" fill="#666" text-anchor="middle" font-family="'IBM Plex Mono', monospace">{"approve": false}</text>
+</svg>

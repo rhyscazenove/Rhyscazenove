@@ -10,17 +10,19 @@ description: "A Python tool that pulls data from Jira's API v3, applies multi-ti
 
 # How the Jira Catchup Reporter Works
 
-The DIGIDEV Jira project tracks work across multiple product teams at the Natural History Museum. Stakeholders regularly need to know what changed: which issues moved, who got assigned, what went red. Assembling that picture manually from Jira's interface takes hours.
+The DIGIDEV Jira project tracks work across multiple product teams at the Natural History Museum. Every week, stakeholders need the same picture: which issues moved, who got assigned, what went red. Assembling this from Jira's interface takes hours. The filters are slow, the board views don't aggregate across teams, and exporting to a spreadsheet loses the changelog data that tells you *when* things changed.
 
-The Jira Catchup Reporter is a Python tool that automates this. It pulls data from Jira's REST API v3, caches it intelligently, runs it through a processing pipeline, and generates styled HTML reports. It works as both a CLI tool (for developers and cron jobs) and a web app (for project managers), deployed to Fly.io.
-
-## The Data Pipeline
-
-The architecture is a four-stage pipeline:
+I built a tool to automate it. The Jira Catchup Reporter pulls data from Jira's REST API v3, caches it with age-based TTLs, runs it through 11 analysis functions, and generates styled HTML reports. It works as both a CLI tool and a Flask web app, deployed to Fly.io.
 
 {% include svg/jira-catchup-reporter/data-pipeline.svg %}
 
-Everything starts with the Jira client, which forces the `jira` Python library to use API v3 instead of its default v2:
+---
+
+## Forcing API v3 on a v2 Library
+
+Jira's REST API has two versions in play. The `jira` Python library defaults to v2. I needed v3 for the Atlassian Document Format (rich text fields) and better custom field support on Cloud instances. Staying on v2 would have meant parsing raw wiki markup and working around gaps in custom field responses.
+
+I forced v3 on the library:
 
 ```python
 self.jira = JIRA(
@@ -35,13 +37,17 @@ self.jira = JIRA(
 )
 ```
 
-API v3 gives us the Atlassian Document Format for rich text fields, better custom field support on Cloud instances, and a more consistent response structure. The problem is that the `jira` library's object model doesn't understand v3 responses.
+This works. The library fetches v3 data. But the library's object model was built for v2 responses. It creates `Issue` objects with nested attribute access (`issue.fields.status.name`, `issue.fields.assignee.displayName`), and v3 JSON doesn't map onto those objects. Every downstream function in the codebase expects the v2-style attribute chain.
+
+Forcing v3 gave me the data I needed, but broke the interface every consumer relied on.
+
+---
 
 ## The IssueWrapper Pattern
 
-The `jira` Python library creates `Issue` objects with nested attribute access: `issue.fields.status.name`, `issue.fields.assignee.displayName`, and so on. When you force API v3, the library still fetches data, but the raw JSON doesn't map cleanly onto those objects. Every downstream function in the codebase expects the v2-style attribute chain.
+Every function in the codebase expected `issue.fields.status.name`. The v3 JSON had the data, but not in that shape. I had two options: rewrite every consumer to work with raw v3 JSON, or create wrapper classes that present v3 JSON through the v2 interface.
 
-Rather than rewrite every consumer, I created wrapper classes that present v3 JSON through the same interface:
+Rewriting every consumer would have been cleaner long-term but would have touched dozens of functions across the data processor, report generators, and attention item logic. I chose wrappers:
 
 ```python
 class IssueWrapper:
@@ -62,7 +68,6 @@ class IssueWrapper:
                 self.created = data.get('created', '')
                 self.updated = data.get('updated', '')
 
-                # Create objects with .name attribute to match v2 interface
                 status_data = data.get('status', {})
                 self.status = type('Status', (), {
                     'name': status_data.get('name', 'Unknown')
@@ -73,53 +78,24 @@ class IssueWrapper:
                     'name': issuetype_data.get('name', 'Unknown')
                 })()
 
-                # Store raw data for custom field access
                 self._fields_data = data
 
         return FieldsWrapper(fields_data)
 ```
 
-The `type('Status', (), {'name': ...})()` idiom creates an anonymous class inline with the attributes we need, then immediately instantiates it. This gives us `issue.fields.status.name` without defining a full class hierarchy. It keeps the wrapper self-contained and avoids a parallel set of data classes.
+The `type('Status', (), {'name': ...})()` idiom creates an anonymous class with the attributes I needed, then instantiates it. This gives `issue.fields.status.name` without defining a full class hierarchy. A similar `ChangelogWrapper` handles changelog entries, wrapping each history item into objects with `.field`, `.fromString`, and `.toString` attributes.
 
-A similar `ChangelogWrapper` handles the changelog entries, wrapping each history item and its constituent field changes into objects with `.field`, `.fromString`, and `.toString` attributes.
+If I were starting over, I'd skip the `jira` library and work with the REST API v3 JSON throughout. The library adds complexity without enough benefit when you're on v3, and the wrapper creates a maintenance surface where every Jira field structure change means updating both the wrapper and the consumers. But at the time, the wrapper was the fastest path to a working tool without rewriting the whole codebase.
 
-## Multi-Tier Caching
+The wrapper handled the structural mismatch. Custom fields were a separate problem.
 
-{% include svg/jira-catchup-reporter/cache-tiers.svg %}
+---
 
-Generating a quarterly report can hit the Jira API hundreds of times across paginated searches, changelog expansions, and comment fetches. Re-running the same report with a different template, or iterating on the output format during development, shouldn't re-fetch everything.
+## Jira's Custom Field Chaos
 
-The caching layer uses different TTLs based on data age:
+Custom fields in Jira return data in different formats depending on the field type, Jira version, and API version. The same field might come back as a `CustomFieldOption` object with a `.value` attribute, a JSON string, a Python dict literal string, a plain string, a list of any of the above, or `None`.
 
-| Data Age | Cache TTL | Rationale |
-|----------|-----------|-----------|
-| Today | Skipped | Still actively changing |
-| < 2 days | 1 hour | Might get late updates |
-| 2-7 days | 1 day | Unlikely to change much |
-| 7+ days | 30 days | Historical, effectively frozen |
-| Custom fields | 7 days | Schema-level, rarely changes |
-| Comments | 3 hours | Special handling for recent activity |
-
-The core decision logic:
-
-```python
-if days_ago >= 7:
-    return timedelta(days=30)   # Cache for 30 days
-elif days_ago >= 2:
-    return timedelta(days=1)    # Cache for 1 day
-else:
-    return timedelta(hours=1)   # Cache for 1 hour
-```
-
-Each API call's parameters are hashed with MD5 to produce a cache key. The response is serialized with pickle and stored in `cache/api/`. Before making a call, the client checks whether a valid cache file exists and whether its TTL has expired. If the JQL query targets today's date range, caching is bypassed entirely because the data is guaranteed to be incomplete.
-
-The cache duration is also configurable via environment variable (`JIRA_CACHE_DURATION`) with human-readable units: `"30m"`, `"2h"`, `"1d"`, `"1w"`. This overrides the automatic tiering for cases where you want explicit control.
-
-## Defensive Custom Field Parsing
-
-If you've built a Jira integration, you know this pain. Custom fields return data in wildly inconsistent formats depending on the field type, Jira version, and API version. The same field might come back as a `CustomFieldOption` object with a `.value` attribute, a JSON string, a Python dict literal string, a plain string, a list of any of the above, or `None`.
-
-The DigiDev-Devs field extraction handles all five paths:
+I could assume one format and let the tool break when Jira returns something else. Or I could parse defensively, handling every format I'd seen in production:
 
 ```python
 def _extract_digidev_devs(self, issue):
@@ -147,64 +123,78 @@ def _extract_digidev_devs(self, issue):
                 dev_names.append(str(dev))
         return dev_names
     elif hasattr(devs, 'value'):
-        return [devs.value]           # Single object
+        return [devs.value]
     elif isinstance(devs, str):
-        return [d.strip() for d in devs.split(',')]  # Comma-separated
+        return [d.strip() for d in devs.split(',')]
 ```
 
-The RAG status field gets similar treatment. It might arrive as `"3 GREEN Green"`, `{"value": "GREEN"}`, or a `CustomFieldOption` object. The parser normalises all of these to `RED`, `AMBER`, `GREEN`, or `UNKNOWN`.
+The RAG status field gets the same treatment. It might arrive as `"3 GREEN Green"`, `{"value": "GREEN"}`, or a `CustomFieldOption` object. The parser normalises all of these to `RED`, `AMBER`, `GREEN`, or `UNKNOWN`.
 
-To avoid running this expensive parsing 11 times (once per analysis function), the `DataProcessor` pre-processes all issues in a single pass. Extracted values are cached on each issue dictionary under `_processed_*` keys. The downstream grouping functions read from those cached values directly.
+To avoid running this expensive parsing 11 times (once per analysis function), the `DataProcessor` pre-processes all issues in a single pass. Extracted values are cached on each issue dictionary under `_processed_*` keys. The downstream grouping functions read from those cached values.
 
-## NHM Corporate Quarters
-
-The Natural History Museum uses a financial year starting in April. Standard for UK public sector, but not what most software assumes:
-
-```python
-QUARTERS = {
-    'Q1': [4, 5, 6],    # Apr-Jun
-    'Q2': [7, 8, 9],    # Jul-Sep
-    'Q3': [10, 11, 12], # Oct-Dec
-    'Q4': [1, 2, 3]     # Jan-Mar
-}
-```
-
-This feeds into the `--preset lastquarter` CLI option and the web UI's date range presets. The date calculation logic maps the current month to the correct quarter boundaries, so running `--preset lastquarter` in May 2026 gives you Q4 (January-March 2026), not Q1 (January-March in calendar quarters).
-
-## The Data Processor
-
-The `DataProcessor` is the analytics engine. Its `process_issues()` method runs 11 analysis functions and returns a single dictionary that all report generators consume:
-
-- Summary metrics: total issues, type distribution, status breakdown
-- Grouping by team, status, developer, and RAG status
-- Status change analysis, which reconstructs what status each issue had at the start of the reporting period by walking the changelog backwards, enabling statements like "3 issues moved from In Progress to Done"
-- Day-by-day timeline of status changes, comments, and assignments
-- Change frequency: which fields changed most often
-- Developer assignment tracking: net assignment changes (assigned minus unassigned)
-- Attention items: automated flags for issues needing immediate attention
-- Quarter distribution mapped to NHM corporate quarters
-
-The attention items surface five categories: RED RAG status, blocked issues, unassigned issues, stale issues (no updates in 7+ days), and high comment activity (5+ comments, often indicating contention). These appear at the top of reports so managers see the problems first.
+The data processor itself runs 11 analysis functions against the pre-processed issues: summary metrics, grouping by team and status, status change analysis (reconstructing what status each issue had at the start of the reporting period by walking the changelog backwards), day-by-day timelines, and attention items. The attention items surface five categories: RED RAG status, blocked issues, unassigned issues, stale issues (no updates in 7+ days), and high comment activity (5+ comments, which often indicates contention).
 
 {% include svg/jira-catchup-reporter/attention-items.svg %}
 
-## Three Entry Points, One Pipeline
+The Natural History Museum's financial year starts in April (standard UK public sector), so quarter mapping uses `Q1 = [4, 5, 6]` through `Q4 = [1, 2, 3]`. This feeds the CLI's `--preset lastquarter` option and the web UI's date range presets.
+
+This pre-processing and analysis pipeline produces a single dictionary that all report generators consume. But generating that dictionary hits the Jira API hundreds of times for a quarterly report, which created a caching problem.
+
+---
+
+## Caching Data That Ages at Different Rates
+
+Generating a quarterly report hits the Jira API hundreds of times across paginated searches, changelog expansions, and comment fetches. Re-running the same report with a different template, or iterating on the output format during development, shouldn't re-fetch everything.
+
+I could use a single cache TTL. But Jira data doesn't age uniformly. An issue updated today might change again in the next hour. An issue that last changed two weeks ago won't. A single TTL either caches too aggressively (serving stale data for recent issues) or too conservatively (re-fetching frozen historical data).
+
+{% include svg/jira-catchup-reporter/cache-tiers.svg %}
+
+I chose age-based tiering:
+
+| Data Age | Cache TTL | Rationale |
+|----------|-----------|-----------|
+| Today | Skipped | Still actively changing |
+| < 2 days | 1 hour | Might get late updates |
+| 2-7 days | 1 day | Unlikely to change much |
+| 7+ days | 30 days | Historical, frozen |
+| Custom fields | 7 days | Schema-level, rarely changes |
+| Comments | 3 hours | Special handling for recent activity |
+
+The core logic:
+
+```python
+if days_ago >= 7:
+    return timedelta(days=30)   # Cache for 30 days
+elif days_ago >= 2:
+    return timedelta(days=1)    # Cache for 1 day
+else:
+    return timedelta(hours=1)   # Cache for 1 hour
+```
+
+Each API call's parameters are hashed with MD5 to produce a cache key. The response is serialized with pickle and stored in `cache/api/`. Before making a call, the client checks whether a valid cache file exists and whether its TTL has expired. If the JQL query targets today's date range, caching is bypassed because the data is guaranteed to be incomplete.
+
+The cache duration is also configurable via environment variable (`JIRA_CACHE_DURATION`) with human-readable units: `"30m"`, `"2h"`, `"1d"`, `"1w"`. This overrides the automatic tiering when you want explicit control.
+
+Pickle files work for a single-instance deployment on Fly.io. If the tool needed horizontal scaling, Redis would be the next step; the cache key structure (MD5 of request parameters) would transfer directly.
+
+With caching in place, iterating on the output side became fast. That mattered, because the tool needed to serve different audiences.
+
+---
+
+## Three Contexts, One Pipeline
 
 {% include svg/jira-catchup-reporter/three-entry-points.svg %}
 
-The same JiraClient, DataProcessor, and ReportGenerator pipeline serves three contexts.
+Developers want CLI output for automation and cron jobs. Project managers want a web UI with dropdowns and progress bars. Production needs authentication. Building three separate tools would mean three copies of the Jira client, data processor, and report generation logic.
 
-### CLI
+I shared the pipeline and varied only the interface layer.
 
-`main.py` uses Click for argument parsing and Rich for terminal output. It supports presets (`--preset lastmonth`), explicit date ranges, team and RAG filters, and multiple output formats. Rich gives us progress spinners during API calls and formatted summary tables after generation. Good for automation and cron.
+The CLI (`main.py`) uses Click for argument parsing and Rich for terminal output. It supports presets (`--preset lastmonth`), explicit date ranges, team and RAG filters, and multiple output formats. Rich provides progress spinners during API calls and formatted summary tables after generation.
 
-### Web UI
+The web UI (`web_app.py`) is a Flask app with SocketIO for real-time progress. Report generation runs in a background thread. Progress updates go to a SocketIO room keyed by session ID, so multiple users can generate reports without cross-talk. The completed HTML report comes back through the WebSocket (with a 100MB buffer configured for large reports).
 
-`web_app.py` is a Flask app with SocketIO for real-time progress. Report generation runs in a background thread. Progress updates are emitted to a SocketIO room keyed by session ID, so multiple users can generate reports simultaneously without seeing each other's progress. The completed HTML report is sent back through the WebSocket (with a 100MB buffer configured for large reports).
-
-### Production
-
-`app.py` + `Dockerfile` + `fly.toml` deploys to Fly.io in the London region. Authentication is toggled by environment, checking for the `FLY_APP_NAME` variable to determine if it's running in production:
+Production (`app.py` + Dockerfile + `fly.toml`) deploys to Fly.io in the London region. Authentication is toggled by environment, checking for the `FLY_APP_NAME` variable:
 
 ```python
 if IS_PRODUCTION:
@@ -220,22 +210,12 @@ else:
         return f  # No-op in development
 ```
 
-This means the same codebase runs without authentication locally (no login friction during development) and with Flask-Login in production. The decorator is defined at module level based on the environment check, so there's no runtime overhead per request.
+The decorator is defined at module level based on the environment check, so there's no runtime overhead per request. Same codebase, no login friction during development, Flask-Login in production.
 
-## Report Generation
+The tool produces five output formats: Markdown (for pasting into Confluence or Slack), JSON, CSV via Pandas, and two HTML templates. The "Professional" template focuses on clean typography. The "Priority" template puts RAG status and attention items front and centre for executives. Both HTML generators produce self-contained files with inline CSS and no external dependencies. You can email the file or open it offline and it renders identically.
 
-The tool produces five output formats: Markdown (structured text with tables and Jira links, for pasting into Confluence or Slack), JSON, CSV via Pandas, and two HTML templates. The "Professional" HTML template focuses on clean typography and readability. The "Priority" template puts RAG status and attention items front and centre for executives.
-
-Both HTML generators produce self-contained files with inline CSS and no external dependencies. You can email the file or open it offline and it renders identically. The web UI lets users choose between templates via a dropdown, and the generated report displays in an iframe within the dashboard.
-
-## What I Would Do Differently
-
-The IssueWrapper pattern works, but it creates a maintenance surface. Every time Jira changes a field structure, both the wrapper and the consumers might need updating. If starting again, I'd skip the `jira` library entirely and work directly with the REST API v3 JSON throughout. The library adds complexity without enough benefit when you're already on v3.
-
-The two HTML report generators share significant structure but were built separately as requirements diverged. A Jinja2 template approach with shared base templates would reduce duplication while still allowing different layouts.
-
-Caching with pickle files works well for a single-instance deployment on Fly.io. If the tool needed horizontal scaling, Redis would be the next step. The cache key structure (MD5 of request parameters) would transfer directly.
+If I were building the HTML reports again, I'd use Jinja2 templates with a shared base. The two generators diverged from a common starting point, and the duplication shows.
 
 ---
 
-The Jira Catchup Reporter started as a script to save time on Monday morning standups and grew into a tool that project managers use weekly. Most of the engineering work was in the gaps between systems: bridging API versions, normalising Jira's inconsistent data formats, and tuning cache invalidation for data that ages at different rates. Be defensive about Jira's field formats and generous with your caching. The API is slow enough that even a short cache makes a real difference to the development loop.
+The Jira Catchup Reporter started as a script to save time on Monday morning standups and grew into a tool that project managers use weekly. Most of the engineering was in the gaps between systems: bridging API versions, normalising Jira's inconsistent data formats, and tuning cache invalidation for data that ages at different rates.

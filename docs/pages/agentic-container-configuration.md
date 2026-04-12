@@ -115,6 +115,8 @@ This copies the security hooks into both `.github/hooks/` (where Copilot CLI loo
 
 ## The Security Hook System
 
+{% include svg/agentic-container/hook-interception-flow.svg %}
+
 The hook is configured via `security-hooks.json`:
 
 ```json
@@ -252,6 +254,8 @@ image: registry.gitlab.com/naturalhistorymuseum/digital-development/experiments/
 
 ## How Downstream Pipelines Use It
 
+{% include svg/agentic-container/pipeline-usage-flow.svg %}
+
 Both documentation pipelines follow the same pattern:
 
 1. Start from the pre-built image (all tools already installed)
@@ -271,6 +275,8 @@ chmod +x .github/hooks/security-check.sh
 This serves as belt-and-suspenders. The hooks exist in the image at build time, but the working directory changes to the cloned target repo. Copying them again ensures they're present wherever `copilot` runs.
 
 ## Defence in Depth
+
+{% include svg/agentic-container/defence-layers.svg %}
 
 The security model has multiple layers:
 

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" class="diagram" role="img" aria-label="Six-step flow showing how downstream CI pipelines use the pre-built container: start from image, sparse checkout, setup environment, template prompt, authenticate and run, collect artifacts">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    rect[fill="#fff"] { fill: var(--svg-card, #fff); }
+    [fill="#f0f4f8"] { fill: var(--svg-panel, #f0f4f8); }
+  </style>
+
+  <!-- Background panel -->
+  <rect x="0" y="0" width="720" height="320" rx="0" fill="#f0f4f8" opacity="0.35"/>
+
+  <!-- Step 1 -->
+  <rect x="20" y="24" width="210" height="110" rx="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <rect x="28" y="32" width="28" height="20" rx="4" fill="#4a7c8a"/>
+  <text x="42" y="46" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+  <text x="66" y="46" font-size="12" font-weight="600" fill="#111">Start from Image</text>
+  <text x="30" y="70" font-size="10" fill="#666">Pre-built container with</text>
+  <text x="30" y="84" font-size="10" fill="#666">Node, Git, Python, gh,</text>
+  <text x="30" y="98" font-size="10" fill="#666">Copilot CLI, Mermaid CLI</text>
+  <text x="30" y="118" font-size="9" fill="#999" font-family="'IBM Plex Mono', monospace">image: .../ai-tools:latest</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="230" y1="79" x2="250" y2="79" stroke="#94a3b8" stroke-width="1.2"/>
+  <polygon points="250,75 258,79 250,83" fill="#94a3b8"/>
+
+  <!-- Step 2 -->
+  <rect x="260" y="24" width="200" height="110" rx="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <rect x="268" y="32" width="28" height="20" rx="4" fill="#4a7c8a"/>
+  <text x="282" y="46" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+  <text x="306" y="46" font-size="12" font-weight="600" fill="#111">Sparse Checkout</text>
+  <text x="270" y="70" font-size="10" fill="#666">Clone ai-tooling repo for</text>
+  <text x="270" y="84" font-size="10" fill="#666">latest skills, scripts, and</text>
+  <text x="270" y="98" font-size="10" fill="#666">security hooks</text>
+  <text x="270" y="118" font-size="9" fill="#999" font-family="'IBM Plex Mono', monospace">git sparse-checkout set ...</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="460" y1="79" x2="490" y2="79" stroke="#94a3b8" stroke-width="1.2"/>
+  <polygon points="490,75 498,79 490,83" fill="#94a3b8"/>
+
+  <!-- Step 3 -->
+  <rect x="500" y="24" width="200" height="110" rx="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <rect x="508" y="32" width="28" height="20" rx="4" fill="#4a7c8a"/>
+  <text x="522" y="46" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+  <text x="546" y="46" font-size="12" font-weight="600" fill="#111">Setup Environment</text>
+  <text x="510" y="70" font-size="10" fill="#666">Clone target repo, copy</text>
+  <text x="510" y="84" font-size="10" fill="#666">skills into place, re-copy</text>
+  <text x="510" y="98" font-size="10" fill="#666">security hooks to workdir</text>
+  <text x="510" y="118" font-size="9" fill="#999" font-family="'IBM Plex Mono', monospace">setup-environment.sh</text>
+
+  <!-- Arrow 3→4 (wrapping down) -->
+  <path d="M 700,134 L 700,164 L 20,164 L 20,186" stroke="#94a3b8" stroke-width="1.2" fill="none"/>
+  <polygon points="16,186 20,194 24,186" fill="#94a3b8"/>
+
+  <!-- Step 4 -->
+  <rect x="20" y="196" width="210" height="100" rx="8" fill="#fff" stroke="#5a8a7a" stroke-width="1.5"/>
+  <rect x="28" y="204" width="28" height="20" rx="4" fill="#5a8a7a"/>
+  <text x="42" y="218" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+  <text x="66" y="218" font-size="12" font-weight="600" fill="#111">Template Prompt</text>
+  <text x="30" y="242" font-size="10" fill="#666">Inject pipeline variables</text>
+  <text x="30" y="256" font-size="10" fill="#666">($MR_INFO, $SOURCE_URL)</text>
+  <text x="30" y="276" font-size="9" fill="#999" font-family="'IBM Plex Mono', monospace">envsubst &lt; prompt.md</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="230" y1="246" x2="250" y2="246" stroke="#94a3b8" stroke-width="1.2"/>
+  <polygon points="250,242 258,246 250,250" fill="#94a3b8"/>
+
+  <!-- Step 5 -->
+  <rect x="260" y="196" width="200" height="100" rx="8" fill="#fff" stroke="#5a8a7a" stroke-width="1.5"/>
+  <rect x="268" y="204" width="28" height="20" rx="4" fill="#5a8a7a"/>
+  <text x="282" y="218" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+  <text x="306" y="218" font-size="12" font-weight="600" fill="#111">Authenticate &amp; Run</text>
+  <text x="270" y="242" font-size="10" fill="#666">Login with gh, invoke</text>
+  <text x="270" y="256" font-size="10" fill="#666">Copilot with --allow-all-tools</text>
+  <text x="270" y="276" font-size="9" fill="#999" font-family="'IBM Plex Mono', monospace">copilot --allow-all-tools</text>
+
+  <!-- Arrow 5→6 -->
+  <line x1="460" y1="246" x2="490" y2="246" stroke="#94a3b8" stroke-width="1.2"/>
+  <polygon points="490,242 498,246 490,250" fill="#94a3b8"/>
+
+  <!-- Step 6 -->
+  <rect x="500" y="196" width="200" height="100" rx="8" fill="#fff" stroke="#5a8a7a" stroke-width="1.5"/>
+  <rect x="508" y="204" width="28" height="20" rx="4" fill="#5a8a7a"/>
+  <text x="522" y="218" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+  <text x="546" y="218" font-size="12" font-weight="600" fill="#111">Collect Artifacts</text>
+  <text x="510" y="242" font-size="10" fill="#666">Generated docs saved as</text>
+  <text x="510" y="256" font-size="10" fill="#666">pipeline artifacts, optionally</text>
+  <text x="510" y="270" font-size="10" fill="#666">create a merge request</text>
+</svg>

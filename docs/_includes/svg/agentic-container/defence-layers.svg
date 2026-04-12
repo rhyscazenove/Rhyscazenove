@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380" class="diagram" role="img" aria-label="Six defence-in-depth layers protecting the AI agent: pipeline controls, container confinement, network allowlisting, preToolUse hooks, Copilot deny-tool, and hook self-protection">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  </style>
+
+  <!-- Layer 6 (outermost): Pipeline -->
+  <rect x="16" y="10" width="688" height="360" rx="14" fill="#e8ecf4" fill-opacity="0.5" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="36" y="34" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.5">PIPELINE CONTROLS</text>
+  <text x="248" y="34" font-size="10" fill="#64748b">Manual triggers, timeouts, artifact collection</text>
+
+  <!-- Layer 5: Container -->
+  <rect x="40" y="46" width="640" height="310" rx="12" fill="#dbeafe" fill-opacity="0.4" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="60" y="68" font-size="11" font-weight="700" fill="#1d4ed8" letter-spacing="0.5">CONTAINER CONFINEMENT</text>
+  <text x="264" y="68" font-size="10" fill="#3b82f6">Pre-approved tools only, no package managers at runtime</text>
+
+  <!-- Layer 4: Network -->
+  <rect x="64" y="82" width="592" height="260" rx="10" fill="#dff5e3" fill-opacity="0.4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="84" y="104" font-size="11" font-weight="700" fill="#15803d" letter-spacing="0.5">NETWORK ALLOWLIST</text>
+  <text x="262" y="104" font-size="10" fill="#16a34a">Only gitlab.com and github.com reachable</text>
+
+  <!-- Layer 3: Hooks -->
+  <rect x="88" y="118" width="544" height="210" rx="8" fill="#fef3c7" fill-opacity="0.4" stroke="#d97706" stroke-width="1.5"/>
+  <text x="108" y="140" font-size="11" font-weight="700" fill="#b45309" letter-spacing="0.5">PRETOOLUSE HOOKS</text>
+  <text x="278" y="140" font-size="10" fill="#d97706">~100 blocked command patterns checked before every execution</text>
+
+  <!-- Layer 2: Copilot deny-tool -->
+  <rect x="112" y="154" width="496" height="160" rx="8" fill="#f3e8ff" fill-opacity="0.4" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="132" y="176" font-size="11" font-weight="700" fill="#6d28d9" letter-spacing="0.5">COPILOT DENY-TOOL</text>
+  <text x="298" y="176" font-size="10" fill="#7c3aed">--deny-tool 'shell(rm)' as native Copilot guard</text>
+
+  <!-- Layer 1 (innermost): Self-protection -->
+  <rect x="136" y="190" width="448" height="110" rx="8" fill="#fce7f3" fill-opacity="0.4" stroke="#db2777" stroke-width="1.5"/>
+  <text x="156" y="212" font-size="11" font-weight="700" fill="#be185d" letter-spacing="0.5">SELF-PROTECTION</text>
+  <text x="310" y="212" font-size="10" fill="#db2777">Hooks block access to their own source code</text>
+
+  <!-- Centre: AI Agent -->
+  <rect x="236" y="230" width="248" height="56" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="254" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle" letter-spacing="1">AI AGENT</text>
+  <text x="360" y="272" font-size="10" fill="#94a3b8" text-anchor="middle">Copilot CLI + shell access</text>
+</svg>
