@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="240" viewBox="0 0 720 240">
+  <style>
+    .label { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 600; }
+    .code { font-family: 'Courier New', Courier, monospace; font-size: 12px; }
+    .caption { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 12px; fill: #444; }
+    .indicator { font-size: 18px; font-weight: 700; }
+  </style>
+
+  <!-- Left panel: Colour theme on greyscale -->
+  <g transform="translate(16, 12)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="332" height="186" rx="6" fill="#f5f5f5" stroke="#d0d0d0" stroke-width="1"/>
+
+    <!-- Header -->
+    <text x="166" y="22" text-anchor="middle" class="label" fill="#333">Colour Theme (on greyscale)</text>
+
+    <!-- Indicator -->
+    <text x="306" y="23" class="indicator" fill="#b04040">&#x2717;</text>
+
+    <!-- Code block background -->
+    <rect x="12" y="32" width="308" height="140" rx="4" fill="#ebebeb" stroke="#ccc" stroke-width="0.5"/>
+
+    <!-- Line 1: def process(data): -->
+    <text x="20" y="54" class="code">
+      <tspan fill="#666">def</tspan>
+      <tspan fill="#777"> process</tspan>
+      <tspan fill="#888">(</tspan>
+      <tspan fill="#777">data</tspan>
+      <tspan fill="#888">):</tspan>
+    </text>
+
+    <!-- Line 2: # validate input -->
+    <text x="20" y="76" class="code">
+      <tspan fill="#777">    </tspan>
+      <tspan fill="#888"># validate input</tspan>
+    </text>
+
+    <!-- Line 3: if data.valid: -->
+    <text x="20" y="98" class="code">
+      <tspan fill="#777">    </tspan>
+      <tspan fill="#666">if</tspan>
+      <tspan fill="#777"> data</tspan>
+      <tspan fill="#888">.</tspan>
+      <tspan fill="#777">valid</tspan>
+      <tspan fill="#888">:</tspan>
+    </text>
+
+    <!-- Line 4: return transform(data) -->
+    <text x="20" y="120" class="code">
+      <tspan fill="#777">        </tspan>
+      <tspan fill="#666">return</tspan>
+      <tspan fill="#777"> transform</tspan>
+      <tspan fill="#888">(</tspan>
+      <tspan fill="#777">data</tspan>
+      <tspan fill="#888">)</tspan>
+    </text>
+
+    <!-- Squint hint -->
+    <text x="166" y="155" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="10" fill="#999" font-style="italic">all tokens blend into similar greys</text>
+  </g>
+
+  <!-- Right panel: Monochrome theme -->
+  <g transform="translate(372, 12)">
+    <!-- Panel background -->
+    <rect x="0" y="0" width="332" height="186" rx="6" fill="#f5f5f5" stroke="#d0d0d0" stroke-width="1"/>
+
+    <!-- Header -->
+    <text x="166" y="22" text-anchor="middle" class="label" fill="#333">Monochrome Theme</text>
+
+    <!-- Indicator -->
+    <text x="306" y="23" class="indicator" fill="#407040">&#x2713;</text>
+
+    <!-- Code block background -->
+    <rect x="12" y="32" width="308" height="140" rx="4" fill="#ebebeb" stroke="#ccc" stroke-width="0.5"/>
+
+    <!-- Line 1: def process(data): -->
+    <text x="20" y="54" class="code" fill="#111">
+      <tspan font-weight="bold">def</tspan>
+      <tspan> process</tspan>
+      <tspan>(data):</tspan>
+    </text>
+
+    <!-- Line 2: # validate input -->
+    <text x="20" y="76" class="code" fill="#555" font-style="italic">
+      <tspan>    # validate input</tspan>
+    </text>
+
+    <!-- Line 3: if data.valid: -->
+    <text x="20" y="98" class="code" fill="#111">
+      <tspan>    </tspan>
+      <tspan font-weight="bold">if</tspan>
+      <tspan> data.valid:</tspan>
+    </text>
+
+    <!-- Line 4: return transform(data) -->
+    <text x="20" y="120" class="code" fill="#111">
+      <tspan>        </tspan>
+      <tspan font-weight="bold">return</tspan>
+      <tspan> transform(data)</tspan>
+    </text>
+
+    <!-- Clarity hint -->
+    <text x="166" y="155" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="10" fill="#555" font-style="italic">weight and style create clear contrast</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="360" y="224" text-anchor="middle" class="caption">Bold and italic survive greyscale. Different colours don't.</text>
+</svg>
