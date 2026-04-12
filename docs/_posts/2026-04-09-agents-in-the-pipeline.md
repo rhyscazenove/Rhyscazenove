@@ -38,6 +38,8 @@ When an agent runs on a schedule and something goes wrong (a model update change
 
 ## Three pillars
 
+![Three pillars: Guardrails, Confinement, and Observability supporting a production agent](/assets/images/agents-in-the-pipeline/three-pillars.svg)
+
 Getting a Claude Code agent safely into production requires three things to be in place simultaneously.
 
 Guardrails: constrain what the agent can do at runtime. Block dangerous commands, confine it to its problem space, prevent unconventional tooling. The agent should only be able to do the things you've explicitly decided it should be able to do.
@@ -56,11 +58,15 @@ The risk model we're designing against is [Simon Willison's Lethal Trifecta](htt
 2. Exposure to untrusted content
 3. A mechanism to exfiltrate data
 
+![Venn diagram showing the three elements of the Lethal Trifecta overlapping in a central risk zone](/assets/images/agents-in-the-pipeline/lethal-trifecta.svg)
+
 Any one alone is manageable. All three together is the problem — untrusted content can inject instructions that use the exfiltration mechanism to leak private data. The framework we've built at NHM protects against many vectors of this, but it is not a complete guarantee. The design principle is to break the flow across multiple agents so no single agent ever holds all three.
 
 ---
 
 ## The framework: four parts
+
+![Four parts of the governance framework: Container Image, Security Hooks, Pipeline Config, and Ownership Model](/assets/images/agents-in-the-pipeline/framework-four-parts.svg)
 
 Our implementation uses GitLab CI, a Docker container, and Claude Code hooks. It's four separable parts, each with clear ownership.
 
@@ -90,20 +96,7 @@ This is the one that often gets skipped. Security shouldn't own the skills; doma
 
 Within this framework, we've implemented seven layers of defence, each providing independent protection:
 
-```
-         AGENT
-    ─── action hooks ───
-    L1 — Command blocklist
-   L2 — Path traversal guard
-  L3 — Network egress control
- L4 — Credential pattern block
-    ── input guard ──
-  L5 — Prompt injection guard
-      ─ container ─
-   L6 — Container isolation
-        ─ audit ─
-     L7 — Audit logging
-```
+![Seven concentric protection layers surrounding the agent: command blocklist, path traversal guard, network egress control, credential pattern block, prompt injection guard, container isolation, and audit logging](/assets/images/agents-in-the-pipeline/seven-layers.svg)
 
 The architecture mirrors defence in depth from traditional security: an attacker (or misbehaving agent) has to defeat each layer independently. L1 to L4 run as action hooks; L5 as an input guard; L6 is the container itself; L7 is continuous logging of everything.
 
@@ -112,6 +105,8 @@ The layers are designed to be independent so that a failure in one doesn't casca
 ---
 
 ## What we've built with it
+
+![Three use cases built on the same harness: Documentation Generator, Onboarding Generator, and Incident Analysis](/assets/images/agents-in-the-pipeline/use-cases.svg)
 
 Three use cases in production at NHM:
 
