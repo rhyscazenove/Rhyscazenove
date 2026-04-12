@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" width="720" height="280" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <!-- Excellent: filled circle -->
+    <symbol id="excellent" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="7" fill="#1a1a2e" stroke="none"/>
+    </symbol>
+    <!-- Good: half-filled circle -->
+    <symbol id="good" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="7" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
+      <path d="M8,1 A7,7 0 0,0 8,15 Z" fill="#1a1a2e"/>
+    </symbol>
+    <!-- Fair: empty circle -->
+    <symbol id="fair" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="7" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
+    </symbol>
+  </defs>
+
+  <!-- JetBrains Mono column highlight -->
+  <rect x="168" y="0" width="110" height="280" rx="4" fill="#e8f4f8" opacity="0.6"/>
+
+  <!-- Header row background -->
+  <rect x="0" y="0" width="720" height="62" fill="#f5f5f7" rx="4"/>
+
+  <!-- Column header divider -->
+  <line x1="0" y1="62" x2="720" y2="62" stroke="#d1d1d6" stroke-width="1"/>
+
+  <!-- Row dividers -->
+  <line x1="0" y1="102" x2="720" y2="102" stroke="#e8e8ed" stroke-width="0.5"/>
+  <line x1="0" y1="142" x2="720" y2="142" stroke="#e8e8ed" stroke-width="0.5"/>
+  <line x1="0" y1="182" x2="720" y2="182" stroke="#e8e8ed" stroke-width="0.5"/>
+  <line x1="0" y1="222" x2="720" y2="222" stroke="#e8e8ed" stroke-width="0.5"/>
+
+  <!-- Overall row background -->
+  <rect x="0" y="222" width="720" height="40" fill="#fafafa" rx="0"/>
+
+  <!-- Bottom border -->
+  <line x1="0" y1="262" x2="720" y2="262" stroke="#d1d1d6" stroke-width="1"/>
+
+  <!-- Column headers -->
+  <!-- Criteria label column -->
+  <text x="12" y="42" font-size="11" fill="#86868b" font-weight="500" letter-spacing="0.5">CRITERION</text>
+
+  <!-- JetBrains Mono header with badge -->
+  <text x="223" y="28" font-size="11.5" fill="#0a6e7a" font-weight="700" text-anchor="middle">JetBrains</text>
+  <text x="223" y="42" font-size="11.5" fill="#0a6e7a" font-weight="700" text-anchor="middle">Mono</text>
+  <rect x="196" y="48" width="54" height="13" rx="3" fill="#0a6e7a"/>
+  <text x="223" y="58" font-size="7.5" fill="#fff" font-weight="600" text-anchor="middle" letter-spacing="0.8">SELECTED</text>
+
+  <!-- Source Code Pro header -->
+  <text x="333" y="28" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">Source Code</text>
+  <text x="333" y="42" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">Pro</text>
+
+  <!-- Fira Mono header -->
+  <text x="443" y="35" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">Fira Mono</text>
+
+  <!-- Inconsolata header -->
+  <text x="553" y="35" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">Inconsolata</text>
+
+  <!-- DejaVu Sans Mono header -->
+  <text x="663" y="28" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">DejaVu Sans</text>
+  <text x="663" y="42" font-size="11.5" fill="#1a1a2e" font-weight="600" text-anchor="middle">Mono</text>
+
+  <!-- Row 1: x-height -->
+  <text x="12" y="87" font-size="12" fill="#3a3a3c">x-height ratio</text>
+  <use href="#excellent" x="215" y="75" width="16" height="16"/>
+  <use href="#good" x="325" y="75" width="16" height="16"/>
+  <use href="#good" x="435" y="75" width="16" height="16"/>
+  <use href="#fair" x="545" y="75" width="16" height="16"/>
+  <use href="#good" x="655" y="75" width="16" height="16"/>
+
+  <!-- Row 2: Stroke consistency -->
+  <text x="12" y="127" font-size="12" fill="#3a3a3c">Stroke consistency</text>
+  <use href="#excellent" x="215" y="115" width="16" height="16"/>
+  <use href="#good" x="325" y="115" width="16" height="16"/>
+  <use href="#good" x="435" y="115" width="16" height="16"/>
+  <use href="#fair" x="545" y="115" width="16" height="16"/>
+  <use href="#good" x="655" y="115" width="16" height="16"/>
+
+  <!-- Row 3: Character distinction -->
+  <text x="12" y="167" font-size="12" fill="#3a3a3c">Character distinction (0/O, 1/l/I)</text>
+  <use href="#excellent" x="215" y="155" width="16" height="16"/>
+  <use href="#good" x="325" y="155" width="16" height="16"/>
+  <use href="#excellent" x="435" y="155" width="16" height="16"/>
+  <use href="#good" x="545" y="155" width="16" height="16"/>
+  <use href="#fair" x="655" y="155" width="16" height="16"/>
+
+  <!-- Row 4: Greyscale rendering -->
+  <text x="12" y="207" font-size="12" fill="#3a3a3c">Greyscale rendering</text>
+  <use href="#excellent" x="215" y="195" width="16" height="16"/>
+  <use href="#good" x="325" y="195" width="16" height="16"/>
+  <use href="#good" x="435" y="195" width="16" height="16"/>
+  <use href="#fair" x="545" y="195" width="16" height="16"/>
+  <use href="#good" x="655" y="195" width="16" height="16"/>
+
+  <!-- Row 5: Overall -->
+  <text x="12" y="247" font-size="12" fill="#1a1a2e" font-weight="600">Overall</text>
+  <text x="223" y="247" font-size="10" fill="#0a6e7a" font-weight="700" text-anchor="middle">Winner</text>
+  <text x="333" y="247" font-size="10" fill="#5a5a6e" font-weight="500" text-anchor="middle">Runner-up</text>
+  <text x="443" y="247" font-size="10" fill="#5a5a6e" font-weight="500" text-anchor="middle">Runner-up</text>
+  <text x="553" y="247" font-size="10" fill="#86868b" font-weight="400" text-anchor="middle">Acceptable</text>
+  <text x="663" y="247" font-size="10" fill="#86868b" font-weight="400" text-anchor="middle">Acceptable</text>
+
+  <!-- Legend -->
+  <use href="#excellent" x="12" y="267" width="10" height="10"/>
+  <text x="26" y="275.5" font-size="9" fill="#86868b">Excellent</text>
+  <use href="#good" x="82" y="267" width="10" height="10"/>
+  <text x="96" y="275.5" font-size="9" fill="#86868b">Good</text>
+  <use href="#fair" x="132" y="267" width="10" height="10"/>
+  <text x="146" y="275.5" font-size="9" fill="#86868b">Fair</text>
+</svg>
