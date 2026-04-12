@@ -22,68 +22,7 @@ What started as a single script to pull deployment cards from Trello grew into a
 
 The pipeline is split into nine scripts, numbered 0 through 8.1. The numbering isn't arbitrary -- it reflects execution order. Script 0 is the orchestrator. Scripts 1-3 collect data. Scripts 4-5.2 process and aggregate it. Scripts 6-8.1 generate reports.
 
-```
-                         DATA COLLECTION
-                    ========================
-
-  Trello Board                              GitLab API
-  (deployment cards)                        (on-prem + cloud)
-        |                                        |
-        v                                        |
-  [Script 1]                                     |
-  Fetch Trello deployments                       |
-  Extract embedded GitLab URLs                   |
-        |                                        |
-        v                                        v
-  [Script 2] -------- fetch MR details -------> GitLab
-  Analyze each MR (code changes, reviews,        |
-  commits, approvals)                            |
-        |                                        |
-        v                                        v
-  [Script 3] -------- fetch open MRs ---------> GitLab
-  Track ongoing work (drafts, open MRs,
-  new issues)
-
-                       DATA PROCESSING
-                    ========================
-
-  Individual MR files        Ongoing activity
-  (data/merge-requests/)     (ongoing-activity.json)
-        |                           |
-        v                           |
-  [Script 4]                        |
-  Aggregate into                    |
-  deployed-work.json                |
-        |                           |
-        v                           v
-  [Script 5] <---- combines --------+
-  team-activity-report.json (master data file)
-        |
-        +---> [Script 5.1] Time-series metrics
-        |     (daily/weekly, per-user, per-project)
-        |
-        +---> [Script 5.2] Project historical data
-              (team-level aggregates for yearly reviews)
-
-                      REPORT GENERATION
-                    ========================
-
-  team-activity-report.json
-        |
-        v
-  [Script 6] AI-powered reports
-  Phase 1: structured JSON (schema-validated)
-  Phase 2: markdown narrative
-        |
-        +---> [Script 7] Developer activity reports
-        |     (trends, consistency scores, accomplishments)
-        |
-        +---> [Script 8] User HTML reports
-        |     (Jinja2 templates, YoY comparison)
-        |
-        +---> [Script 8.1] Project HTML reports
-              (releases, quarterly journey)
-```
+![Pipeline overview showing data collection from Trello and GitLab through processing and aggregation to AI-powered report generation](/assets/images/deployment-analysis-pipeline/pipeline-overview.svg)
 
 The orchestrator (Script 0) ties it all together with a single command:
 
@@ -147,6 +86,8 @@ Script 3 captures *ongoing* work: draft MRs, open MRs with recent activity, and 
 ---
 
 ## The Caching Layer: Respecting Rate Limits and Your Time
+
+![Cache TTL tiers: no cache for today, 1 hour for recent data, 1 day for week-old data, 30 days for historical data](/assets/images/deployment-analysis-pipeline/cache-tiers.svg)
 
 A full monthly report might hit the GitLab API several hundred times. A yearly report, several thousand. Without caching, that's slow and rude to the API.
 
@@ -216,6 +157,8 @@ This classification adds texture to reports. "The team shipped 47 MRs" is less u
 
 ## Token Optimization: Feeding Data to LLMs Efficiently
 
+![Bar chart comparing JSON at 15,000 tokens vs TOON at 8,000 tokens, a 47% reduction](/assets/images/deployment-analysis-pipeline/toon-compression.svg)
+
 A year's worth of team activity data can be thousands of lines of JSON, which means thousands of tokens. Tokens cost money, and large prompts push against context window limits.
 
 The pipeline uses TOON (Token-Oriented Object Notation) to compress data before sending it to the LLM. TOON is a compact format that achieves 30-60% token reduction compared to JSON while maintaining lossless data representation.
@@ -273,18 +216,7 @@ Phase 1 generates structured JSON. The prompt includes the raw team data, a repo
 
 Phase 2 generates a markdown narrative. It takes the Phase 1 JSON (not the raw data) and a report template, and produces a human-readable report. The narrative references the structured analysis without needing to re-derive it.
 
-```
-Phase 1:
-  team-activity-report.json
-  + report template
-  + JSON schema
-  ──> Claude API ──> validated JSON analysis
-
-Phase 2:
-  Phase 1 JSON output
-  + report template
-  ──> Claude API ──> markdown narrative
-```
+![Two-phase prompting: Phase 1 feeds data, template, and schema into Claude to produce validated JSON; Phase 2 feeds that JSON and a template into Claude to produce the narrative report](/assets/images/deployment-analysis-pipeline/two-phase-prompting.svg)
 
 Two phases because the Phase 1 JSON is inspectable. When the markdown report says "review participation increased 15%", you can trace that claim back to structured data. The JSON also feeds into other tools: Script 8 uses it for HTML report generation, and dashboards could consume it directly.
 
@@ -331,14 +263,9 @@ Script 8.1 does the same for projects. Give it a project name and time period, a
 
 ### The fiscal year problem
 
-One complication that permeates the entire pipeline: the Natural History Museum uses a non-standard fiscal year. Q1 is April-June, not January-March. This means every date calculation, every quarter mapping, every "previous period" lookup needs to account for it. The quarterly boundaries are:
+One complication that permeates the entire pipeline: the Natural History Museum uses a non-standard fiscal year. Q1 is April-June, not January-March. This means every date calculation, every quarter mapping, every "previous period" lookup needs to account for it.
 
-| Quarter | Months |
-|---------|--------|
-| Q1 | April - June |
-| Q2 | July - September |
-| Q3 | October - December |
-| Q4 | January - March |
+![Calendar year vs NHM fiscal year quarter mapping, showing how Q1-Q4 shift by three months](/assets/images/deployment-analysis-pipeline/fiscal-year.svg)
 
 This sounds minor until you're implementing "expand a year into its 12 months" and realize that `2025` means April 2025 through March 2026, not January through December. An early bug in the orchestrator expanded `2025` as just "April 2025", producing reports with a fraction of the expected data. The fiscal year logic now lives in shared utility functions, but the lesson is clear: if your organisation uses a non-standard fiscal calendar, centralise that logic from day one.
 

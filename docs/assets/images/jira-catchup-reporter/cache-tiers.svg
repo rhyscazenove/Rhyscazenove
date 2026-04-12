@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" fill="none">
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#999" stroke-width="1.2"/>
+    </pattern>
+  </defs>
+
+  <style>
+    text { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: #111; }
+    .label { font-size: 13px; font-weight: 600; }
+    .ttl { font-size: 11px; fill: #444; }
+    .arrow-label { font-size: 12px; fill: #555; font-style: italic; }
+    .badge-label { font-size: 11px; font-weight: 600; }
+    .badge-ttl { font-size: 11px; fill: #444; }
+  </style>
+
+  <!-- Main bar: y=20, height=52 -->
+  <!-- Zone 1: Today (hatched) -->
+  <rect x="40" y="20" width="120" height="52" rx="4" ry="4" fill="url(#hatch)" stroke="#bbb" stroke-width="1"/>
+  <text x="100" y="43" text-anchor="middle" class="label">Today</text>
+  <text x="100" y="60" text-anchor="middle" class="ttl">Skipped</text>
+
+  <!-- Zone 2: < 2 days -->
+  <rect x="160" y="20" width="150" height="52" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="235" y="43" text-anchor="middle" class="label">&lt; 2 days</text>
+  <text x="235" y="60" text-anchor="middle" class="ttl">1 hour</text>
+
+  <!-- Zone 3: 2-7 days -->
+  <rect x="310" y="20" width="170" height="52" fill="#93c5fd" stroke="#60a5fa" stroke-width="1"/>
+  <text x="395" y="43" text-anchor="middle" class="label">2&#8211;7 days</text>
+  <text x="395" y="60" text-anchor="middle" class="ttl">1 day</text>
+
+  <!-- Zone 4: 7+ days -->
+  <rect x="480" y="20" width="200" height="52" rx="0 4 4 0" fill="#3b82f6" stroke="#2563eb" stroke-width="1"/>
+  <text x="580" y="43" text-anchor="middle" class="label" fill="#fff">7+ days</text>
+  <text x="580" y="60" text-anchor="middle" class="ttl" fill="rgba(255,255,255,0.85)">30 days</text>
+
+  <!-- Round corners on outer edges only -->
+  <rect x="40" y="20" width="640" height="52" rx="6" ry="6" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <!-- Supplementary badges: y=90 -->
+  <rect x="40" y="90" width="180" height="32" rx="6" ry="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="50" y="111" class="badge-label">Custom fields</text>
+  <text x="175" y="111" class="badge-ttl" text-anchor="middle">7 days</text>
+
+  <rect x="240" y="90" width="160" height="32" rx="6" ry="6" fill="#fef3c7" stroke="#fbbf24" stroke-width="1"/>
+  <text x="250" y="111" class="badge-label">Comments</text>
+  <text x="360" y="111" class="badge-ttl" text-anchor="middle">3 hours</text>
+
+  <!-- Arrow along bottom -->
+  <line x1="40" y1="150" x2="660" y2="150" stroke="#888" stroke-width="1.5"/>
+  <polygon points="660,146 674,150 660,154" fill="#888"/>
+  <text x="357" y="170" text-anchor="middle" class="arrow-label">Data age &#8594;</text>
+</svg>

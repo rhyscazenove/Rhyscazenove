@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="260" viewBox="0 0 720 260" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+
+  <!-- Device outline -->
+  <rect x="24" y="16" width="310" height="195" rx="14" ry="14" fill="#fff" stroke="#bbb" stroke-width="2"/>
+  <!-- Inner screen -->
+  <rect x="36" y="28" width="286" height="171" rx="6" ry="6" fill="#f7f7f7" stroke="#ddd" stroke-width="1"/>
+
+  <!-- Screen content: specs -->
+  <text x="179" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#333" letter-spacing="0.5">BOOX GO 10.3</text>
+  <line x1="100" y1="62" x2="258" y2="62" stroke="#ccc" stroke-width="0.75"/>
+
+  <!-- Spec rows -->
+  <text x="60" y="84" font-size="11.5" fill="#555">Display</text>
+  <text x="290" y="84" text-anchor="end" font-size="11.5" fill="#222" font-weight="600">10.3" E Ink Carta 1200</text>
+
+  <text x="60" y="104" font-size="11.5" fill="#555">Resolution</text>
+  <text x="290" y="104" text-anchor="end" font-size="11.5" fill="#222" font-weight="600">2480 x 1860 px</text>
+
+  <text x="60" y="124" font-size="11.5" fill="#555">Density</text>
+  <text x="290" y="124" text-anchor="end" font-size="12" fill="#111" font-weight="700">300 PPI</text>
+
+  <text x="60" y="144" font-size="11.5" fill="#555">Colour depth</text>
+  <text x="290" y="144" text-anchor="end" font-size="12" fill="#111" font-weight="700">16 greyscale levels</text>
+
+  <text x="60" y="164" font-size="11.5" fill="#555">Reader</text>
+  <text x="290" y="164" text-anchor="end" font-size="11.5" fill="#222" font-weight="600">NeoReader</text>
+
+  <text x="60" y="184" font-size="11.5" fill="#555">Colour</text>
+  <text x="290" y="184" text-anchor="end" font-size="11.5" fill="#888" font-weight="600">None</text>
+
+  <!-- Right-side annotation -->
+  <text x="370" y="50" font-size="11" fill="#888" font-weight="600" letter-spacing="0.8">WHAT YOU GET</text>
+  <line x1="370" y1="57" x2="690" y2="57" stroke="#e0e0e0" stroke-width="0.75"/>
+
+  <circle cx="382" cy="78" r="4" fill="#5a5" opacity="0.85"/>
+  <text x="396" y="82" font-size="11.5" fill="#444">High-resolution monochrome screen</text>
+
+  <circle cx="382" cy="102" r="4" fill="#5a5" opacity="0.85"/>
+  <text x="396" y="106" font-size="11.5" fill="#444">Sharp text at 300 PPI</text>
+
+  <circle cx="382" cy="126" r="4" fill="#5a5" opacity="0.85"/>
+  <text x="396" y="130" font-size="11.5" fill="#444">Large viewport (no scrolling needed)</text>
+
+  <text x="370" y="162" font-size="11" fill="#888" font-weight="600" letter-spacing="0.8">WHAT YOU LOSE</text>
+  <line x1="370" y1="169" x2="690" y2="169" stroke="#e0e0e0" stroke-width="0.75"/>
+
+  <circle cx="382" cy="190" r="4" fill="#c44" opacity="0.8"/>
+  <text x="396" y="194" font-size="11.5" fill="#444">Colour (design for 16 greys only)</text>
+
+  <!-- "Not supported in NeoReader" badges row -->
+  <text x="360" y="237" font-size="10" fill="#999" font-weight="600" letter-spacing="0.6">NEOREADER CSS SUPPORT</text>
+
+  <!-- Badge: flexbox -->
+  <rect x="24" y="228" width="68" height="24" rx="4" ry="4" fill="#c44" opacity="0.9"/>
+  <text x="58" y="244" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">flexbox</text>
+  <line x1="30" y1="240" x2="86" y2="240" stroke="#fff" stroke-width="1.25" opacity="0.55"/>
+
+  <!-- Badge: grid -->
+  <rect x="100" y="228" width="52" height="24" rx="4" ry="4" fill="#c44" opacity="0.9"/>
+  <text x="126" y="244" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">grid</text>
+  <line x1="106" y1="240" x2="146" y2="240" stroke="#fff" stroke-width="1.25" opacity="0.55"/>
+
+  <!-- Badge: calc() -->
+  <rect x="160" y="228" width="56" height="24" rx="4" ry="4" fill="#c44" opacity="0.9"/>
+  <text x="188" y="244" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">calc()</text>
+  <line x1="166" y1="240" x2="210" y2="240" stroke="#fff" stroke-width="1.25" opacity="0.55"/>
+
+  <!-- Badge: media queries -->
+  <rect x="224" y="228" width="96" height="24" rx="4" ry="4" fill="#c44" opacity="0.9"/>
+  <text x="272" y="244" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">media queries</text>
+  <line x1="230" y1="240" x2="314" y2="240" stroke="#fff" stroke-width="1.25" opacity="0.55"/>
+
+  <!-- Badge: floats -->
+  <rect x="328" y="228" width="56" height="24" rx="4" ry="4" fill="#c44" opacity="0.9"/>
+  <text x="356" y="244" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">floats</text>
+  <line x1="334" y1="240" x2="378" y2="240" stroke="#fff" stroke-width="1.25" opacity="0.55"/>
+
+</svg>

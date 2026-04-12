@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" font-family="system-ui, -apple-system, sans-serif">
+  <!-- Quarter colours at low opacity -->
+  <!-- Q1: blue, Q2: green, Q3: amber, Q4: rose -->
+
+  <!-- === Row 1: Calendar Year 2025 === -->
+
+  <!-- Row label -->
+  <text x="58" y="52" text-anchor="end" font-size="13" font-weight="600" fill="#111">Calendar</text>
+  <text x="58" y="67" text-anchor="end" font-size="11" fill="#555">Year 2025</text>
+
+  <!-- Month cells - starting at x=72, each cell 52px wide -->
+  <!-- Q1: Jan Feb Mar - blue -->
+  <rect x="72" y="36" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+  <rect x="124" y="36" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+  <rect x="176" y="36" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+
+  <!-- Q2: Apr May Jun - green -->
+  <rect x="228" y="36" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+  <rect x="280" y="36" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+  <rect x="332" y="36" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+
+  <!-- Q3: Jul Aug Sep - amber -->
+  <rect x="384" y="36" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+  <rect x="436" y="36" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+  <rect x="488" y="36" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+
+  <!-- Q4: Oct Nov Dec - rose -->
+  <rect x="540" y="36" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+  <rect x="592" y="36" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+  <rect x="644" y="36" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+
+  <!-- Month labels (row 1) -->
+  <text x="98" y="60" text-anchor="middle" font-size="11" fill="#111">Jan</text>
+  <text x="150" y="60" text-anchor="middle" font-size="11" fill="#111">Feb</text>
+  <text x="202" y="60" text-anchor="middle" font-size="11" fill="#111">Mar</text>
+  <text x="254" y="60" text-anchor="middle" font-size="11" fill="#111">Apr</text>
+  <text x="306" y="60" text-anchor="middle" font-size="11" fill="#111">May</text>
+  <text x="358" y="60" text-anchor="middle" font-size="11" fill="#111">Jun</text>
+  <text x="410" y="60" text-anchor="middle" font-size="11" fill="#111">Jul</text>
+  <text x="462" y="60" text-anchor="middle" font-size="11" fill="#111">Aug</text>
+  <text x="514" y="60" text-anchor="middle" font-size="11" fill="#111">Sep</text>
+  <text x="566" y="60" text-anchor="middle" font-size="11" fill="#111">Oct</text>
+  <text x="618" y="60" text-anchor="middle" font-size="11" fill="#111">Nov</text>
+  <text x="670" y="60" text-anchor="middle" font-size="11" fill="#111">Dec</text>
+
+  <!-- Quarter labels (row 1) - below cells -->
+  <text x="150" y="88" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(59,130,246,0.85)">Q1</text>
+  <text x="306" y="88" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(34,197,94,0.85)">Q2</text>
+  <text x="462" y="88" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(180,120,0,0.85)">Q3</text>
+  <text x="618" y="88" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(244,63,94,0.85)">Q4</text>
+
+  <!-- Quarter bracket lines (row 1) -->
+  <line x1="74" y1="78" x2="226" y2="78" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
+  <line x1="230" y1="78" x2="382" y2="78" stroke="rgba(34,197,94,0.4)" stroke-width="1.5"/>
+  <line x1="386" y1="78" x2="538" y2="78" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="542" y1="78" x2="694" y2="78" stroke="rgba(244,63,94,0.4)" stroke-width="1.5"/>
+
+  <!-- === Row 2: NHM Fiscal Year 2025 === -->
+
+  <!-- Row label -->
+  <text x="58" y="142" text-anchor="end" font-size="13" font-weight="600" fill="#111">NHM Fiscal</text>
+  <text x="58" y="157" text-anchor="end" font-size="11" fill="#555">Year 2025</text>
+
+  <!-- Month cells - fiscal year starts April -->
+  <!-- Q1: Apr May Jun - blue -->
+  <rect x="72" y="126" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+  <rect x="124" y="126" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+  <rect x="176" y="126" width="52" height="38" rx="3" fill="rgba(59,130,246,0.22)" stroke="rgba(59,130,246,0.35)" stroke-width="1"/>
+
+  <!-- Q2: Jul Aug Sep - green -->
+  <rect x="228" y="126" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+  <rect x="280" y="126" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+  <rect x="332" y="126" width="52" height="38" rx="3" fill="rgba(34,197,94,0.22)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+
+  <!-- Q3: Oct Nov Dec - amber -->
+  <rect x="384" y="126" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+  <rect x="436" y="126" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+  <rect x="488" y="126" width="52" height="38" rx="3" fill="rgba(245,158,11,0.22)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+
+  <!-- Q4: Jan Feb Mar - rose -->
+  <rect x="540" y="126" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+  <rect x="592" y="126" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+  <rect x="644" y="126" width="52" height="38" rx="3" fill="rgba(244,63,94,0.22)" stroke="rgba(244,63,94,0.35)" stroke-width="1"/>
+
+  <!-- Month labels (row 2) -->
+  <text x="98" y="150" text-anchor="middle" font-size="11" fill="#111">Apr</text>
+  <text x="150" y="150" text-anchor="middle" font-size="11" fill="#111">May</text>
+  <text x="202" y="150" text-anchor="middle" font-size="11" fill="#111">Jun</text>
+  <text x="254" y="150" text-anchor="middle" font-size="11" fill="#111">Jul</text>
+  <text x="306" y="150" text-anchor="middle" font-size="11" fill="#111">Aug</text>
+  <text x="358" y="150" text-anchor="middle" font-size="11" fill="#111">Sep</text>
+  <text x="410" y="150" text-anchor="middle" font-size="11" fill="#111">Oct</text>
+  <text x="462" y="150" text-anchor="middle" font-size="11" fill="#111">Nov</text>
+  <text x="514" y="150" text-anchor="middle" font-size="11" fill="#111">Dec</text>
+  <text x="566" y="150" text-anchor="middle" font-size="11" fill="#111">Jan</text>
+  <text x="618" y="150" text-anchor="middle" font-size="11" fill="#111">Feb</text>
+  <text x="670" y="150" text-anchor="middle" font-size="11" fill="#111">Mar</text>
+
+  <!-- Quarter labels (row 2) - below cells -->
+  <text x="150" y="178" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(59,130,246,0.85)">Q1</text>
+  <text x="306" y="178" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(34,197,94,0.85)">Q2</text>
+  <text x="462" y="178" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(180,120,0,0.85)">Q3</text>
+  <text x="618" y="178" text-anchor="middle" font-size="10" font-weight="600" fill="rgba(244,63,94,0.85)">Q4</text>
+
+  <!-- Quarter bracket lines (row 2) -->
+  <line x1="74" y1="168" x2="226" y2="168" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"/>
+  <line x1="230" y1="168" x2="382" y2="168" stroke="rgba(34,197,94,0.4)" stroke-width="1.5"/>
+  <line x1="386" y1="168" x2="538" y2="168" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="542" y1="168" x2="694" y2="168" stroke="rgba(244,63,94,0.4)" stroke-width="1.5"/>
+
+  <!-- Year span annotations (subtle) -->
+  <text x="384" y="18" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Calendar Year 2025</text>
+  <text x="384" y="112" text-anchor="middle" font-size="12" font-weight="600" fill="#333">NHM Fiscal Year 2025-26</text>
+
+  <!-- Small year indicators on fiscal row months -->
+  <text x="98" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="150" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="202" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="254" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="306" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="358" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="410" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="462" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="514" y="159" text-anchor="middle" font-size="7.5" fill="#888">'25</text>
+  <text x="566" y="159" text-anchor="middle" font-size="7.5" fill="#888">'26</text>
+  <text x="618" y="159" text-anchor="middle" font-size="7.5" fill="#888">'26</text>
+  <text x="670" y="159" text-anchor="middle" font-size="7.5" fill="#888">'26</text>
+
+  <!-- Divider line between rows -->
+  <line x1="72" y1="98" x2="696" y2="98" stroke="#ddd" stroke-width="0.5" stroke-dasharray="4,3"/>
+</svg>

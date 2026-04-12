@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="200" viewBox="0 0 720 200" fill="none">
+  <!-- Critical -->
+  <rect x="0" y="0" width="720" height="46" rx="4" fill="#dc2626" fill-opacity="0.13"/>
+  <rect x="0" y="0" width="5" height="46" rx="2" fill="#dc2626"/>
+  <text x="24" y="28" font-family="sans-serif" font-size="14" font-weight="700" fill="#111">Critical</text>
+  <text x="120" y="28" font-family="sans-serif" font-size="13" fill="#444">Service outages, data loss risk, security incidents, >100 occurrences/hour</text>
+
+  <!-- High -->
+  <rect x="0" y="50" width="720" height="46" rx="4" fill="#ea580c" fill-opacity="0.13"/>
+  <rect x="0" y="50" width="5" height="46" rx="2" fill="#ea580c"/>
+  <text x="24" y="78" font-family="sans-serif" font-size="14" font-weight="700" fill="#111">High</text>
+  <text x="120" y="78" font-family="sans-serif" font-size="13" fill="#444">Repeated errors (>10/hour), failed dependencies, authentication failures</text>
+
+  <!-- Medium -->
+  <rect x="0" y="100" width="720" height="46" rx="4" fill="#d97706" fill-opacity="0.12"/>
+  <rect x="0" y="100" width="5" height="46" rx="2" fill="#d97706"/>
+  <text x="24" y="128" font-family="sans-serif" font-size="14" font-weight="700" fill="#111">Medium</text>
+  <text x="120" y="128" font-family="sans-serif" font-size="13" fill="#444">Occasional errors (1-10/hour), slow dependencies, warnings</text>
+
+  <!-- Low -->
+  <rect x="0" y="150" width="720" height="46" rx="4" fill="#6b7280" fill-opacity="0.12"/>
+  <rect x="0" y="150" width="5" height="46" rx="2" fill="#6b7280"/>
+  <text x="24" y="178" font-family="sans-serif" font-size="14" font-weight="700" fill="#111">Low</text>
+  <text x="120" y="178" font-family="sans-serif" font-size="13" fill="#444">Informational events, successful retries, performance variance</text>
+</svg>

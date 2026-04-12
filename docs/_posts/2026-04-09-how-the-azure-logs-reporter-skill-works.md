@@ -30,20 +30,13 @@ The default analysis window is the last 24 hours, but it handles anything from "
 
 The skill lives in `.github/skills/azure-logs-reporter/` and is composed of:
 
-```
-.github/skills/azure-logs-reporter/
-├── SKILL.md                          # Core workflow definition
-└── references/
-    ├── kql-queries.md                # Reusable KQL query templates
-    ├── table-schemas.md              # Log Analytics table structures
-    ├── azure-portal-links.md         # URL encoding and link format
-    ├── default-workspace.md          # Pre-configured workspace config
-    └── session-learnings.md          # Practical lessons from real use
-```
+![Skill structure: SKILL.md consults five reference documents and invokes a supporting encode-azure-url.py script](/assets/images/azure-logs-reporter/skill-structure.svg)
 
 A supporting Python script (`encode-azure-url.py`) at the repository root handles the gzip + base64 encoding required to generate shareable Azure Portal query links.
 
 ## The Four-Phase Workflow
+
+![Four-phase workflow: Discovery, Data Collection, Analysis, and Report Generation, with Azure MCP Server mediating phases 1-3](/assets/images/azure-logs-reporter/four-phase-workflow.svg)
 
 The skill follows a four-phase approach. Each phase builds on the previous one, and the skill runs without asking the user questions.
 
@@ -178,12 +171,7 @@ The resulting URL embeds the tenant ID, resource ID, and encoded query into a po
 
 The skill classifies findings into four severity levels based on clear criteria:
 
-| Severity | Criteria |
-|----------|----------|
-| Critical | Service outages, data loss risk, security incidents, >100 occurrences/hour |
-| High | Repeated errors (>10/hour), failed dependencies, authentication failures |
-| Medium | Occasional errors (1-10/hour), slow dependencies, warnings |
-| Low | Informational events, successful retries, performance variance |
+![Severity classification: Critical (red), High (orange), Medium (amber), Low (slate) with criteria for each level](/assets/images/azure-logs-reporter/severity-classification.svg)
 
 Each finding is also assessed for impact across four dimensions: frequency, scope (how many users/services affected), recoverability (does the system auto-recover?), and business impact (customer-facing vs internal).
 

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280">
+  <!-- Bars area: centred horizontally, bars start at y=60, max bar height=160, bottom at y=220 -->
+
+  <!-- JSON bar -->
+  <rect x="210" y="60" width="120" height="160" rx="4" fill="#7a9cbf"/>
+  <text x="270" y="45" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#111" font-weight="600">~15,000 tokens</text>
+  <text x="270" y="245" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#111">JSON</text>
+
+  <!-- TOON bar (47% shorter: 160 * 0.53 = ~85px) -->
+  <rect x="390" y="135" width="120" height="85" rx="4" fill="#6aab9a"/>
+  <text x="450" y="125" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#111" font-weight="600">~8,000 tokens</text>
+  <text x="450" y="245" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#111">TOON</text>
+
+  <!-- Annotation: downward arrow + label between bars -->
+  <!-- Arrow line from JSON top area down to TOON top area -->
+  <line x1="360" y1="80" x2="360" y2="155" stroke="#c0392b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <text x="360" y="185" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#c0392b" font-weight="700">47% reduction</text>
+
+  <!-- Caption -->
+  <text x="360" y="272" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#666">Token count for a yearly report with 500+ merge requests</text>
+</svg>

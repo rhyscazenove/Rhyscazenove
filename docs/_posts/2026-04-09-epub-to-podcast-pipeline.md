@@ -20,31 +20,7 @@ I built a multi-stage pipeline: Python scripts, Claude Code skills, and AI text-
 
 ## The Pipeline at a Glance
 
-```text
-EPUB files (42 books)
-  │  extract_epubs.py
-  v
-Markdown + images (extracted/)
-  │  optimize_for_llm.py
-  v
-Clean markdown (llm_optimized/)
-  │  create_minimized.py
-  v
-Chapter summaries (minimized/)         ← 87-98% smaller
-  │  /book-analyzer  ←  Claude Code skill (visualisations)
-  │  /podcast-script-generator  ←  Claude Code skill (dialogue)
-  v
-Two-host dialogue scripts (podcast_scripts/)
-  │  tts_converter.py
-  v
-2,682 audio segments (audio_output/)
-  │  combine_podcast_audio.py
-  v
-55+ podcast MP3s with metadata + cover art
-  │  Eleventy static site
-  v
-Browsable, searchable, listenable website
-```
+![Full pipeline: EPUB processing, AI script generation, audio production, and Eleventy website](/assets/images/epub-to-podcast/pipeline-overview.svg)
 
 Each stage feeds the next, but every intermediate output is useful on its own. The extracted markdown works for reading in any text editor. The LLM-optimised version is clean enough for RAG pipelines or embeddings. The minimised summaries work for quick reference before a meeting.
 
@@ -63,12 +39,7 @@ The real compression happens in the minimisation stage. For each chapter, the sc
 
 Across stages, a typical book compresses like this:
 
-| Stage            | Example Size | Reduction | Best For         |
-| ---------------- | ------------ | --------- | ---------------- |
-| Extracted        | 1.4 MB       | baseline  | Deep reading     |
-| LLM-optimised    | 1.37 MB      | ~3%       | RAG, embeddings  |
-| Minimised        | 99 KB        | 93%       | Quick reference  |
-| Podcast script   | ~30 KB       | 98%       | Audio production |
+![Compression funnel: 1.4 MB extracted to 1.37 MB optimised to 99 KB minimised to 30 KB podcast script](/assets/images/epub-to-podcast/compression-funnel.svg)
 
 A book that started as 1.4 megabytes of dense technical prose becomes a 30-kilobyte podcast script.
 
@@ -85,6 +56,8 @@ Before generating podcast scripts, I wanted to understand each book's thematic s
 The skill chains together seven Python scripts (`extract_text.py`, `analyze_themes.py`, and five generators). Running `/book-analyzer` on an EPUB produces all five SVGs in seconds. The timeline and heatmap were the most useful for planning podcast scripts, showing which chapters deserve extended discussion.
 
 ## Two Approaches to Script Generation
+
+![Comparison: V1 deterministic Python (fast, free, patterned) vs V2 Claude Code Skill (slower, costs tokens, natural dialogue)](/assets/images/epub-to-podcast/script-generation-comparison.svg)
 
 I ended up with two approaches.
 
@@ -218,14 +191,6 @@ Design for partial failure. The gap-filling pattern (diff what you expected agai
 
 ## By the Numbers
 
-- 42 books processed (22 security, 18 architecture, 7 AI/ML, 3 children's)
-- 55+ podcast episodes generated
-- 2,682 individual audio segments
-- 1.4 GB total audio output
-- 9 book-type profiles in the podcast skill
-- 5 visualisation types from the book-analyzer skill
-- ~£50 total TTS cost (ElevenLabs Flash v2.5)
-- 0.63s Eleventy build time for the entire site
-- £25 original Humble Bundle purchase price
+![Stats: 42 books, 55+ episodes, 2,682 segments, 1.4 GB audio, ~£50 TTS cost, £25 purchase, 0.63s build time](/assets/images/epub-to-podcast/stats-infographic.svg)
 
 That Humble Bundle paid for itself.
