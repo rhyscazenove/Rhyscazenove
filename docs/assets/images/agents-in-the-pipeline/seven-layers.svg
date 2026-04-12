@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 500" width="720" height="500" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+
+  <!-- L7 — Audit Logging (outermost) -->
+  <rect x="20" y="20" width="680" height="460" rx="24" ry="24" fill="#64748b" opacity="0.12" stroke="#64748b" stroke-width="1.5"/>
+  <text x="360" y="470" text-anchor="middle" font-size="13" fill="#475569" font-weight="600">L7 — Audit Logging</text>
+  <!-- Category label: Audit -->
+  <text x="690" y="470" text-anchor="end" font-size="10" fill="#94a3b8" font-weight="500" letter-spacing="0.05em">AUDIT</text>
+
+  <!-- L6 — Container Isolation -->
+  <rect x="50" y="48" width="620" height="400" rx="20" ry="20" fill="#16a34a" opacity="0.1" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="360" y="438" text-anchor="middle" font-size="13" fill="#15803d" font-weight="600">L6 — Container Isolation</text>
+  <!-- Category label: Container -->
+  <text x="660" y="438" text-anchor="end" font-size="10" fill="#86efac" font-weight="500" letter-spacing="0.05em" opacity="0.7">CONTAINER</text>
+
+  <!-- L5 — Prompt Injection Guard -->
+  <rect x="80" y="76" width="560" height="340" rx="18" ry="18" fill="#d97706" opacity="0.1" stroke="#d97706" stroke-width="1.5"/>
+  <text x="360" y="406" text-anchor="middle" font-size="13" fill="#b45309" font-weight="600">L5 — Prompt Injection Guard</text>
+  <!-- Category label: Input Guard -->
+  <text x="630" y="406" text-anchor="end" font-size="10" fill="#fbbf24" font-weight="500" letter-spacing="0.05em" opacity="0.6">INPUT GUARD</text>
+
+  <!-- Action Hooks group (L1-L4) -->
+  <!-- L4 — Credential Pattern Block -->
+  <rect x="110" y="104" width="500" height="280" rx="16" ry="16" fill="#0e7490" opacity="0.09" stroke="#0e7490" stroke-width="1.5"/>
+  <text x="360" y="374" text-anchor="middle" font-size="13" fill="#0e7490" font-weight="600">L4 — Credential Pattern Block</text>
+
+  <!-- L3 — Network Egress Control -->
+  <rect x="138" y="130" width="444" height="222" rx="14" ry="14" fill="#0891b2" opacity="0.09" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="360" y="343" text-anchor="middle" font-size="13" fill="#0891b2" font-weight="600">L3 — Network Egress Control</text>
+
+  <!-- L2 — Path Traversal Guard -->
+  <rect x="166" y="156" width="388" height="164" rx="12" ry="12" fill="#06b6d4" opacity="0.09" stroke="#06b6d4" stroke-width="1.5"/>
+  <text x="360" y="311" text-anchor="middle" font-size="13" fill="#0891b2" font-weight="600">L2 — Path Traversal Guard</text>
+
+  <!-- L1 — Command Blocklist -->
+  <rect x="194" y="182" width="332" height="106" rx="10" ry="10" fill="#22d3ee" opacity="0.1" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="360" y="279" text-anchor="middle" font-size="13" fill="#0e7490" font-weight="600">L1 — Command Blocklist</text>
+
+  <!-- Category label: Action Hooks (on L4 band, right side) -->
+  <text x="600" y="120" text-anchor="end" font-size="10" fill="#0e7490" font-weight="500" letter-spacing="0.05em" opacity="0.6">ACTION HOOKS</text>
+
+  <!-- AGENT label at centre -->
+  <rect x="300" y="208" width="120" height="44" rx="8" ry="8" fill="#0f172a"/>
+  <text x="360" y="236" text-anchor="middle" font-size="16" fill="#f8fafc" font-weight="700" letter-spacing="0.04em">AGENT</text>
+
+</svg>
