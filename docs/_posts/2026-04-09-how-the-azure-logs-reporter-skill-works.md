@@ -18,7 +18,7 @@ I built a Claude Code skill to automate it. The azure-logs-reporter connects to 
 
 The skill follows four phases (discovery, data collection, analysis, report generation) and runs without asking the user questions. The default window is the last 24 hours, but it handles anything from "last hour" to "last 30 days."
 
-The implementation required working around restrictive permissions, evolving table schemas, and an MCP server that chokes on certain KQL patterns. Those constraints shaped every decision.
+The implementation required working around restrictive permissions, evolving table schemas, and an MCP server that chokes on certain KQL patterns.
 
 ---
 
@@ -39,19 +39,19 @@ Usage
 
 This returns every table that received data in the last 24 hours, along with ingestion volume. The volume data turned out to be a bonus; it helps prioritise which tables to query first, since a table ingesting 500MB is more likely to contain interesting findings than one ingesting 2MB.
 
-This decision shaped the skill's approach to permissions more broadly. If resource group enumeration fails (which it does often in restricted environments), the skill falls back to using the workspace GUID directly. Log queries work even when resource group-level access is denied. The skill downgrades gracefully rather than failing outright, because the first query already proved that minimal permissions can still get you useful data.
+This decision shaped how the skill handles permissions everywhere else. If resource group enumeration fails (which it does in most restricted environments), the skill falls back to the workspace GUID. Log queries work even when resource group-level access is denied. The skill adapts rather than failing, because the first query proved that minimal permissions can get you useful data.
 
 ---
 
 ## Writing Queries That Survive MCP
 
-The Azure MCP server passes KQL queries through to Azure Monitor, but it doesn't pass them perfectly. Complex regex patterns in `extract()` break. Patterns like `extract(@'HTTP/1\.[01]" (\d{3})', 1, LogMessage)` fail silently or return no results.
+The Azure MCP server passes KQL queries through to Azure Monitor, but it mangles some of them. Complex regex patterns in `extract()` break. Patterns like `extract(@'HTTP/1\.[01]" (\d{3})', 1, LogMessage)` fail or return no results.
 
 I discovered this after an early version of the skill produced reports claiming zero HTTP errors on clusters that were throwing 502s. The queries looked correct. The results were empty. The MCP server's regex handling was stripping or mangling the patterns somewhere in transit.
 
-I could try to debug the MCP server's regex handling, but that's not my code to fix, and a fix would break with the next server update. The alternative: rewrite the queries to avoid regex entirely.
+I could try to debug the MCP server's regex handling, but that's not my code to fix, and a fix would break with the next server update. The alternative: rewrite the queries without regex.
 
-Simple string matching won out. Instead of parsing status codes with regex, the skill uses `where LogMessage contains '" 502 "'`. Less precise, but it works every time through MCP. All queries use the same MCP command pattern:
+I went with simple string matching. Instead of parsing status codes with regex, the skill uses `where LogMessage contains '" 502 "'`. Less precise, but it works every time through MCP. All queries use the same MCP command pattern:
 
 ```json
 {
@@ -89,9 +89,9 @@ These constraints shaped the entire KQL query library. Every template in `refere
 
 The first report I ran against a production cluster flagged 12,000 "errors" in 24 hours. The cluster was healthy. The on-call engineer confirmed nothing was wrong.
 
-Early versions of the skill counted all stderr output as errors. This seemed reasonable; stderr is the error stream. But ArgoCD, some Java services, and several other tools write INFO-level JSON logs to stderr. This isn't a bug in those tools. It's a common pattern where applications write structured logs to stderr and reserve stdout for unstructured output, or where logging frameworks default to stderr regardless of severity.
+Early versions of the skill counted all stderr output as errors. This seemed reasonable; stderr is the error stream. But ArgoCD, some Java services, and several other tools write INFO-level JSON logs to stderr. Applications write structured logs to stderr and reserve stdout for unstructured output; some logging frameworks default to stderr regardless of severity.
 
-I had two options: flag all stderr as errors and let users mentally filter the noise, or add a sampling step that classifies stderr content before counting it.
+I had two options: flag all stderr as errors and let users filter the noise themselves, or add a sampling step that classifies stderr content before counting it.
 
 Flagging everything would have been simpler, but a report that cries wolf 12,000 times is a report nobody trusts. I added the sampling step. The skill now runs a sampling query against stderr output and checks whether the lines contain INFO or DEBUG level indicators in their JSON structure. Lines that do get excluded from error counts.
 
@@ -126,7 +126,7 @@ Every finding in the report includes one of these links alongside a severity cla
 
 {% include svg/azure-logs-reporter/severity-classification.svg %}
 
-Each finding is assessed across four dimensions: frequency, scope (how many users or services are affected), recoverability (does the system auto-recover?), and business impact (customer-facing vs internal). The severity label gives you triage priority. The link gives you evidence.
+The skill scores each finding on four dimensions: frequency, scope (how many users or services affected), recoverability (does the system auto-recover?), and business impact (customer-facing vs internal). The severity label gives you triage priority. The link gives you evidence.
 
 The report itself follows a consistent structure:
 
@@ -160,7 +160,7 @@ Users should never have to take the report on trust alone.
 
 ## Keeping the Skill Extensible
 
-Every session against a new workspace reveals something. A table I hadn't seen before. A query that doesn't work for a specific AKS configuration. A permission edge case. The skill needed to absorb these lessons without requiring changes to the core workflow.
+Every session against a new workspace reveals something: a table I hadn't encountered, or a query that fails for a specific AKS configuration. The skill needed to absorb these lessons without requiring changes to the core workflow.
 
 I could keep everything in one large `SKILL.md` file. Simpler to ship, easier to read in one place. But updating a query template means editing the same file that defines the workflow, and a formatting mistake in a KQL snippet could break the skill's ability to parse its own instructions.
 
@@ -182,11 +182,9 @@ Add a query template to `kql-queries.md` and it's available on the next run. Upd
 
 ## Query the Full Time Range
 
-This one is brief because the constraint leaves one viable option.
-
 An early version queried the last 4 hours regardless of what the user asked for, then expanded the window if needed. When someone asked for 7 days, the skill discovered that data coverage didn't span the full range only after multiple rounds of queries.
 
-Now the skill queries the full requested time range upfront. If someone asks for a week, it queries all 168 hours. If data coverage doesn't span the full period, the report says so explicitly. No surprises.
+Now the skill queries the full requested time range upfront. If someone asks for a week, it queries all 168 hours. If data coverage doesn't span the full period, the report states the gap.
 
 ---
 
