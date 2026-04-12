@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 140" width="720" height="140" fill="none">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-auto">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Node 1: Jira API v3 (external, pill shape, Jira blue) -->
+  <rect x="8" y="36" width="108" height="68" rx="34" ry="34" fill="#2684FF" stroke="#1a6fdd" stroke-width="1.5"/>
+  <text x="62" y="66" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#fff">Jira API v3</text>
+  <text x="62" y="83" text-anchor="middle" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">external source</text>
+
+  <!-- Arrow 1 -->
+  <line x1="120" y1="70" x2="150" y2="70" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Node 2: JiraClient -->
+  <rect x="155" y="36" width="118" height="68" rx="8" ry="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <text x="214" y="66" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#111">JiraClient</text>
+  <text x="214" y="83" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#666">fetch + wrap</text>
+
+  <!-- Arrow 2 -->
+  <line x1="277" y1="70" x2="307" y2="70" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Node 3: Cache Layer -->
+  <rect x="312" y="36" width="118" height="68" rx="8" ry="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <text x="371" y="66" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#111">Cache Layer</text>
+  <text x="371" y="83" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#666">pickle / TTL</text>
+
+  <!-- Arrow 3 -->
+  <line x1="434" y1="70" x2="464" y2="70" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Node 4: DataProcessor -->
+  <rect x="469" y="36" width="118" height="68" rx="8" ry="8" fill="#fff" stroke="#4a7c8a" stroke-width="1.5"/>
+  <text x="528" y="66" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#111">DataProcessor</text>
+  <text x="528" y="83" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#666">11 analyses</text>
+
+  <!-- Arrow 4 -->
+  <line x1="591" y1="70" x2="621" y2="70" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Node 5: Report Generators (output, green-tinted border) -->
+  <rect x="626" y="36" width="86" height="68" rx="8" ry="8" fill="#f6faf7" stroke="#4a8a5c" stroke-width="1.5"/>
+  <text x="669" y="60" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#111">Report</text>
+  <text x="669" y="74" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#111">Generators</text>
+  <text x="669" y="91" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#666">HTML / MD / JSON / CSV</text>
+</svg>
