@@ -10,42 +10,25 @@ description: "How the azure-logs-reporter skill for Claude Code works: an automa
 
 # How the Azure Logs Reporter Skill Works
 
-If you've ever spent twenty minutes clicking through Azure Portal blades to figure out why your AKS pods are throwing 502s, this skill was built for you.
+ContainerLogV2, KubeEvents, AzureDiagnostics, Application Insights. Each in a different Azure Portal blade, each needing its own KQL query, each with its own schema. For a team running a dozen services on AKS, checking logs daily is a tax nobody budgets for. Twenty minutes clicking through portal blades to figure out why pods are throwing 502s, repeated every time something looks wrong.
 
-The **azure-logs-reporter** is a Claude Code skill that connects to Azure Monitor via the Azure MCP server, runs a battery of KQL queries against your Log Analytics workspace, and produces a structured, severity-classified report with clickable Azure Portal links so you can verify every finding yourself.
-
-## What It Does
-
-In plain terms: you say "check the Azure logs" and the skill autonomously:
-
-1. Discovers your Log Analytics workspace and what data it contains
-2. Runs parallel KQL queries across tables like `ContainerLogV2`, `KubeEvents`, `AzureDiagnostics`, and Application Insights
-3. Classifies findings by severity (Critical / High / Medium / Low)
-4. Generates a markdown report with an executive summary, detailed findings, metrics, and actionable recommendations
-5. Includes Azure Portal links for every query so you can drill into the data directly
-
-The default analysis window is the last 24 hours, but it handles anything from "last hour" to "last 30 days" based on your request.
-
-## Skill Structure
-
-The skill lives in `.github/skills/azure-logs-reporter/` and is composed of:
-
-{% include svg/azure-logs-reporter/skill-structure.svg %}
-
-A supporting Python script (`encode-azure-url.py`) at the repository root handles the gzip + base64 encoding required to generate shareable Azure Portal query links.
-
-## The Four-Phase Workflow
+I built a Claude Code skill to automate it. The azure-logs-reporter connects to Azure Monitor via the Azure MCP server, runs parallel KQL queries against your Log Analytics workspace, classifies findings by severity, and produces a markdown report with clickable Azure Portal links. You say "check the Azure logs" and it does the rest.
 
 {% include svg/azure-logs-reporter/four-phase-workflow.svg %}
 
-The skill follows a four-phase approach. Each phase builds on the previous one, and the skill runs without asking the user questions.
+The skill follows four phases (discovery, data collection, analysis, report generation) and runs without asking the user questions. The default window is the last 24 hours, but it handles anything from "last hour" to "last 30 days."
 
-### Phase 1: Discovery
+The implementation required working around restrictive permissions, evolving table schemas, and an MCP server that chokes on certain KQL patterns. Those constraints shaped every decision.
 
-Before running any analysis queries, the skill needs to know what data exists. It does this by:
+---
 
-1. Listing workspaces via the Azure MCP server's `monitor_workspace_list` command, which returns the workspace GUID (`customerId`)
-2. Querying the Usage table to discover which log tables have data and their relative volumes
+## Finding Out What's in the Workspace
+
+Before running any analysis queries, the skill needs to know what log tables exist and have data. The Azure MCP server provides a `table_type_list` command for this purpose. I tried it. It requires permissions that most users don't have. In locked-down enterprise environments (which describes most production Azure tenancies), the call fails.
+
+I could require elevated permissions, limiting who can use the skill. Or I could find another way to discover tables.
+
+The Usage table solved it. Every Log Analytics workspace has one, and it's readable with standard Log Analytics Reader access:
 
 ```kql
 Usage
@@ -54,21 +37,21 @@ Usage
 | order by TotalMB desc
 ```
 
-The skill avoids using `table_type_list` because it requires extra permissions that many users don't have. The Usage table approach works with standard Log Analytics Reader access.
+This returns every table that received data in the last 24 hours, along with ingestion volume. The volume data turned out to be a bonus; it helps prioritise which tables to query first, since a table ingesting 500MB is more likely to contain interesting findings than one ingesting 2MB.
 
-A key lesson baked into the skill: if resource group enumeration fails due to permissions, it falls back to using the workspace GUID directly. Log queries often work even when resource group-level access is denied.
+This decision shaped the skill's approach to permissions more broadly. If resource group enumeration fails (which it does often in restricted environments), the skill falls back to using the workspace GUID directly. Log queries work even when resource group-level access is denied. The skill downgrades gracefully rather than failing outright, because the first query already proved that minimal permissions can still get you useful data.
 
-### Phase 2: Data Collection
+---
 
-With the data landscape mapped, the skill fires off parallel KQL queries against the discovered tables. For a typical AKS workspace, this includes:
+## Writing Queries That Survive MCP
 
-- HTTP 5xx errors from ingress logs in `ContainerLogV2`
-- HTTP 404 counts for client-side routing issues
-- stderr output by pod to catch application-level errors
-- Kubernetes events summarised by reason (Unhealthy, BackOff, FailedScheduling, etc.)
-- Total HTTP traffic volume for context
+The Azure MCP server passes KQL queries through to Azure Monitor, but it doesn't pass them perfectly. Complex regex patterns in `extract()` break. Patterns like `extract(@'HTTP/1\.[01]" (\d{3})', 1, LogMessage)` fail silently or return no results.
 
-All queries go through the same MCP command pattern:
+I discovered this after an early version of the skill produced reports claiming zero HTTP errors on clusters that were throwing 502s. The queries looked correct. The results were empty. The MCP server's regex handling was stripping or mangling the patterns somewhere in transit.
+
+I could try to debug the MCP server's regex handling, but that's not my code to fix, and a fix would break with the next server update. The alternative: rewrite the queries to avoid regex entirely.
+
+Simple string matching won out. Instead of parsing status codes with regex, the skill uses `where LogMessage contains '" 502 "'`. Less precise, but it works every time through MCP. All queries use the same MCP command pattern:
 
 ```json
 {
@@ -85,23 +68,67 @@ All queries go through the same MCP command pattern:
 }
 ```
 
-Running these in parallel rather than sequentially matters. A full analysis might involve 5-10 queries, and waiting for each one serially adds up fast.
+Running queries in parallel rather than sequentially matters here. A full analysis involves 5-10 queries, and waiting for each one serially adds up.
 
-### Phase 3: Analysis
+Another query-level constraint surfaced in the same period: table schema evolution. AKS moved from `ContainerLog` to `ContainerLogV2`, changing column names in the process (`LogMessage` instead of `LogEntry`, `LogSource` instead of `LogEntrySource`). The Usage table discovery from the previous step handles this; the skill checks which tables exist before constructing queries, so it uses the right column names for the workspace's actual schema.
 
-With raw data collected, the skill runs deeper analytical queries depending on the type of report requested. For a general health report, this includes:
+These constraints shaped the entire KQL query library. Every template in `references/kql-queries.md` avoids complex regex and uses `{hours}` placeholders for time ranges. The library covers six domains:
 
-- Error summary by severity across multiple tables
-- Exception frequency analysis (from `AppExceptions`)
-- Failed request patterns (from `AppRequests`)
-- Dependency failure rates (from `AppDependencies`)
-- Activity log anomalies (from `AzureActivity`)
+| Category | What It Covers |
+|----------|---------------|
+| Error Analysis | Severity summaries, top exceptions, error trends, stack traces |
+| Application Insights | Failed requests, slow requests, dependency failures, request volume |
+| Container/AKS | Container errors, HTTP status codes, Kubernetes events, pod logs |
+| Azure Activity | Failed operations, resource changes, authorisation failures |
+| Performance | Response time percentiles, degradation detection, system counters |
+| Security | Failed sign-ins, suspicious activity, access patterns |
 
-For targeted investigations (say, a specific pod or namespace) it filters all queries by the resource identifier and includes timeline analysis to show when issues started.
+---
 
-### Phase 4: Report Generation
+## Not All Stderr Is Errors
 
-The final output is a structured markdown report:
+The first report I ran against a production cluster flagged 12,000 "errors" in 24 hours. The cluster was healthy. The on-call engineer confirmed nothing was wrong.
+
+Early versions of the skill counted all stderr output as errors. This seemed reasonable; stderr is the error stream. But ArgoCD, some Java services, and several other tools write INFO-level JSON logs to stderr. This isn't a bug in those tools. It's a common pattern where applications write structured logs to stderr and reserve stdout for unstructured output, or where logging frameworks default to stderr regardless of severity.
+
+I had two options: flag all stderr as errors and let users mentally filter the noise, or add a sampling step that classifies stderr content before counting it.
+
+Flagging everything would have been simpler, but a report that cries wolf 12,000 times is a report nobody trusts. I added the sampling step. The skill now runs a sampling query against stderr output and checks whether the lines contain INFO or DEBUG level indicators in their JSON structure. Lines that do get excluded from error counts.
+
+This added a query to Phase 3 (analysis), but it's the difference between a report that gets ignored and one that gets acted on. The lesson went into `session-learnings.md`, which the skill reads on every run to avoid repeating known pitfalls.
+
+---
+
+## Making Every Finding Verifiable
+
+A report that says "142 errors in the last 24 hours" is useful only if you can check it. Log analysis that produces findings without evidence trains users to distrust it.
+
+I could include the raw KQL query text and ask users to copy it, open Azure Portal, navigate to the right workspace, paste the query, and run it. That works, but the friction means nobody does it.
+
+The alternative: generate clickable deep links that open Log Analytics with the query pre-loaded and ready to run. Azure's Log Analytics blade accepts KQL queries via URL, but the encoding is non-obvious. The query must be gzip compressed, base64 encoded, then URL-escaped.
+
+The `encode-azure-url.py` script handles this:
+
+```python
+def encode_kql_for_azure_portal(query: str) -> str:
+    compressed = gzip.compress(query.encode("utf-8"))
+    b64 = base64.b64encode(compressed).decode("ascii")
+    return (
+        b64.replace("+", "%2B")
+        .replace("/", "%2F")
+        .replace("=", "%3D")
+    )
+```
+
+The resulting URL embeds the tenant ID, resource ID, and encoded query into a portal deep-link. Click it and Log Analytics opens with the query ready to run. No copy-paste, no navigation.
+
+Every finding in the report includes one of these links alongside a severity classification:
+
+{% include svg/azure-logs-reporter/severity-classification.svg %}
+
+Each finding is assessed across four dimensions: frequency, scope (how many users or services are affected), recoverability (does the system auto-recover?), and business impact (customer-facing vs internal). The severity label gives you triage priority. The link gives you evidence.
+
+The report itself follows a consistent structure:
 
 ```markdown
 # Azure Logs Report
@@ -127,84 +154,42 @@ Issues to monitor or investigate...
 Prioritised action items...
 ```
 
-Every finding includes an Azure Portal link so you can click through and see the raw data. Users should never have to take the report on trust alone.
+Users should never have to take the report on trust alone.
 
-## The KQL Query Library
+---
 
-The `references/kql-queries.md` file contains a categorised library of reusable query templates covering six domains:
+## Keeping the Skill Extensible
 
-| Category | What It Covers |
-|----------|---------------|
-| Error Analysis | Severity summaries, top exceptions, error trends, stack traces |
-| Application Insights | Failed requests, slow requests, dependency failures, request volume |
-| Container/AKS | Container errors, HTTP status codes, Kubernetes events, pod logs |
-| Azure Activity | Failed operations, resource changes, authorisation failures |
-| Performance | Response time percentiles, degradation detection, system counters |
-| Security | Failed sign-ins, suspicious activity, access patterns |
+Every session against a new workspace reveals something. A table I hadn't seen before. A query that doesn't work for a specific AKS configuration. A permission edge case. The skill needed to absorb these lessons without requiring changes to the core workflow.
 
-Each template uses a `{hours}` placeholder that gets substituted based on the user's requested time period. The queries are designed to work reliably through the MCP server, which means they avoid complex regex patterns and the `extract()` function (which has known issues when passed through MCP).
+I could keep everything in one large `SKILL.md` file. Simpler to ship, easier to read in one place. But updating a query template means editing the same file that defines the workflow, and a formatting mistake in a KQL snippet could break the skill's ability to parse its own instructions.
 
-## Azure Portal Link Generation
+I split the skill into separate reference files instead.
 
-Azure's Log Analytics blade accepts KQL queries via URL, but the query must be:
+{% include svg/azure-logs-reporter/skill-structure.svg %}
 
-1. gzip compressed
-2. base64 encoded
-3. URL-safe character escaped (`+` becomes `%2B`, `/` becomes `%2F`, `=` becomes `%3D`)
+Claude Code reads `SKILL.md` to understand the phases and approach, then pulls from reference documents as needed:
 
-The `encode-azure-url.py` script handles this:
-
-```python
-def encode_kql_for_azure_portal(query: str) -> str:
-    compressed = gzip.compress(query.encode("utf-8"))
-    b64 = base64.b64encode(compressed).decode("ascii")
-    return (
-        b64.replace("+", "%2B")
-        .replace("/", "%2F")
-        .replace("=", "%3D")
-    )
-```
-
-The resulting URL embeds the tenant ID, resource ID, and encoded query into a portal deep-link that opens Log Analytics with the query pre-loaded and ready to run.
-
-## Severity Classification
-
-The skill classifies findings into four severity levels based on clear criteria:
-
-{% include svg/azure-logs-reporter/severity-classification.svg %}
-
-Each finding is also assessed for impact across four dimensions: frequency, scope (how many users/services affected), recoverability (does the system auto-recover?), and business impact (customer-facing vs internal).
-
-## Lessons Learned from Real Sessions
-
-The skill includes a `session-learnings.md` reference document that captures practical lessons from actual use.
-
-Not all stderr is errors. Many applications (ArgoCD, some Java services) write INFO-level JSON logs to stderr. The skill samples stderr logs before classifying them as errors rather than assuming all stderr output indicates problems.
-
-Modern table names matter. AKS has moved from `ContainerLog` to `ContainerLogV2`, with different column names (`LogMessage` instead of `LogEntry`, `LogSource` instead of `LogEntrySource`). The skill checks which tables exist via the Usage table before querying.
-
-Simple string matching beats regex through MCP. The Azure MCP server has issues with complex regex patterns. Instead of `extract(@'HTTP/1\.[01]" (\d{3})', 1, LogMessage)`, the skill uses `where LogMessage contains '" 502 '`. Simpler, more reliable, easier to debug.
-
-Query the full requested time range upfront. If a user asks for 7 days of data, query all 168 hours. Don't query a smaller window and discover retention limits only when asked for more. The skill reports if data coverage doesn't span the full requested period.
-
-## How the Pieces Fit Together
-
-The skill is designed as a knowledge-augmented workflow rather than a simple prompt. Claude Code reads the `SKILL.md` file to understand the phases and approach, then uses the reference documents as needed:
-
-- `kql-queries.md` provides the actual queries to run
+- `kql-queries.md` provides the query templates
 - `table-schemas.md` helps interpret results and construct filters
-- `azure-portal-links.md` and the Python script enable link generation
+- `azure-portal-links.md` and `encode-azure-url.py` enable link generation
 - `default-workspace.md` provides pre-configured connection details
-- `session-learnings.md` prevents repeating known pitfalls
+- `session-learnings.md` captures known pitfalls from real sessions
 
-This separation means the skill can be extended. Add a new query template to `kql-queries.md` and it's available on the next run. Update `session-learnings.md` with a new gotcha and future runs avoid the same trap.
+Add a query template to `kql-queries.md` and it's available on the next run. Update `session-learnings.md` with a new gotcha and future runs avoid the same trap. The skill improves without touching the core workflow.
+
+---
+
+## Query the Full Time Range
+
+This one is brief because the constraint leaves one viable option.
+
+An early version queried the last 4 hours regardless of what the user asked for, then expanded the window if needed. When someone asked for 7 days, the skill discovered that data coverage didn't span the full range only after multiple rounds of queries.
+
+Now the skill queries the full requested time range upfront. If someone asks for a week, it queries all 168 hours. If data coverage doesn't span the full period, the report says so explicitly. No surprises.
+
+---
 
 ## Getting Started
 
-To use the skill, you need:
-
-1. The Azure MCP server configured and accessible in your Claude Code environment
-2. Log Analytics Reader access to your target workspace
-3. The skill files in `.github/skills/azure-logs-reporter/`
-
-Then ask Claude Code to review your Azure logs. The skill handles workspace discovery, query execution, analysis, and report generation on its own.
+The skill needs three things: the Azure MCP server configured in your Claude Code environment, Log Analytics Reader access to your target workspace, and the skill files in `.github/skills/azure-logs-reporter/`. Then ask Claude Code to review your Azure logs. The skill handles workspace discovery, query execution, analysis, and report generation on its own.
