@@ -11,6 +11,8 @@ This document catalogues the research conducted to inform the design of the `boo
 
 The research was conducted across a single session using web search and targeted page fetches. Nine search queries were run, plus three direct page fetches for deeper reading. The findings were synthesised into a comprehensive reading guide before being distilled into the skill's SKILL.md, CSS stylesheet, conversion script, and NeoReader reference document.
 
+![Research flow: 9 searches and 3 deep reads synthesised into four deliverables](/assets/images/boox-epub-research/research-flow.svg)
+
 ---
 
 ## Search 1: NeoReader Format Support
@@ -99,6 +101,8 @@ The Boox firmware changelog revealed that the V2 engine was introduced to "suppo
 **Design impact:**
 This created the "Reliably Supported" vs "Unreliable/Unsupported" classification in the NeoReader CSS reference document. The skill's CSS was deliberately constrained to only use features in the "reliable" category — no floats, no visibility tricks, no flexbox/grid, no pseudo-elements. The V2 engine recommendation ("try V2 first, fall back to V1") came directly from this research.
 
+![NeoReader CSS support: reliably supported features vs unreliable or unsupported features](/assets/images/boox-epub-research/neoreader-css-support.svg)
+
 ---
 
 ## Search 5: Best Monospace Fonts for E-Ink Displays
@@ -121,6 +125,8 @@ For body text, the discussion favoured clean sans-serifs (Roboto, Source Sans, N
 
 **Design impact:**
 JetBrains Mono was selected as the primary embedded font. The CSS declares a fallback chain (`"JetBrains Mono", "Source Code Pro", monospace`) so that if embedding fails, a reasonable fallback is used. The font sizing at `0.82em` for code blocks was calibrated to balance character count per line (~75 chars) against readability at 300 PPI — informed by the MobileRead discussion about minimum readable sizes on e-ink.
+
+![Font comparison matrix: JetBrains Mono selected as the winner across x-height, stroke consistency, character distinction, and greyscale rendering](/assets/images/boox-epub-research/font-comparison.svg)
 
 ---
 
@@ -201,6 +207,8 @@ EPUB's reflowable layout is critical on the 10.3" screen — PDF's fixed layout 
 **Design impact:**
 This confirmed the decision to make EPUB the primary output format. The SKILL.md mentions PDF as a fallback for "complex fixed layouts only" and includes a PDF Pandoc command using custom paper dimensions matching the Boox screen for when PDF is genuinely needed. The `--top-level-division=chapter` flag ensures H1s create page breaks, giving the EPUB a book-like structure that works well with NeoReader's chapter navigation.
 
+![EPUB vs PDF comparison: EPUB as primary format for reflowable text, PDF as fallback for complex layouts](/assets/images/boox-epub-research/epub-vs-pdf.svg)
+
 ---
 
 ## Sources Not From Web Search
@@ -216,16 +224,4 @@ In addition to the web research, several design decisions drew on existing knowl
 
 ## Summary: Research → Design Mapping
 
-| Skill Component | Primary Research Source |
-|-----------------|----------------------|
-| EPUB3 as target format | Search 1 (format support), Search 9 (EPUB vs PDF) |
-| Pandoc conversion pipeline | Search 2 (cmichel.io), Search 6 (epub-styles) |
-| `epub-eink.css` stylesheet | Search 2 (eBookTricks, CSS patterns), Search 4 (V2 engine/unsupported features) |
-| JetBrains Mono font choice | Search 5 (e-ink font discussion), Search 8 (readability thread) |
-| Monochrome syntax highlighting | Search 6 (Pandoc themes), confirmed locally via `pandoc --list-highlight-styles` |
-| Code block sizing (0.82em, ~75 chars) | Search 7 (device specs), Search 5 (font sizing discussion) |
-| Mermaid → PNG pre-rendering | Search 1 (NeoReader doesn't support JS), confirmed via local `mmdc` availability |
-| NeoReader CSS reference doc | Search 4 (Onyx forums, V2 engine), Search 2 (Boox community CSS post) |
-| Greyscale visibility guide | Search 7 (16-level spec), Search 8 (font rendering discussion) |
-| Bolding slider recommendation | Search 8 (MobileRead user experiences) |
-| V2 engine recommendation | Search 4 (firmware changelog, forum reports) |
+![Bipartite graph connecting 9 research sources to 11 skill components, showing which research informed each design decision](/assets/images/boox-epub-research/research-design-mapping.svg)

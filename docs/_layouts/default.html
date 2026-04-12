@@ -6,10 +6,20 @@
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% if page.draft %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <script>
     (function() {
       var saved = localStorage.getItem('theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
+      // Draft toggle: ?drafts=1 enables, ?drafts=0 disables
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('drafts')) {
+        if (params.get('drafts') === '1') localStorage.setItem('show-drafts', '1');
+        else localStorage.removeItem('show-drafts');
+      }
+      if (localStorage.getItem('show-drafts') === '1') {
+        document.documentElement.setAttribute('data-show-drafts', '');
+      }
     })();
   </script>
   {% feed_meta %}

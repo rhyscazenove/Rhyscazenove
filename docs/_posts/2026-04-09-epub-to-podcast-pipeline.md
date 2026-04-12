@@ -1,5 +1,5 @@
 ---
-published: false
+draft: true
 layout: post
 title: "£25 for 42 Books I'd Never Read, So I Turned Them into AI Podcasts"
 date: 2026-04-09
