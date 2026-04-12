@@ -1,8 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 780" width="720" height="780" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#888"/>
-    </marker>
     <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#7ba4c9"/>
     </marker>
@@ -12,6 +9,9 @@
     <marker id="arrow-amber" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#c9a94e"/>
     </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.07"/>
+    </filter>
   </defs>
 
   <!-- ============================================ -->
@@ -22,11 +22,11 @@
   <text x="186" y="24" font-size="10" fill="#7a9cbd">Scripts 1 - 3</text>
 
   <!-- Data sources (pill shapes) -->
-  <rect x="145" y="42" width="150" height="40" rx="20" fill="#fff" stroke="#4a7aad" stroke-width="1.5"/>
+  <rect x="145" y="42" width="150" height="40" rx="20" fill="#fff" stroke="#4a7aad" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="220" y="58" font-size="10" fill="#444" text-anchor="middle" font-weight="600">Trello Board</text>
   <text x="220" y="70" font-size="8.5" fill="#888" text-anchor="middle">deployment cards</text>
 
-  <rect x="425" y="42" width="150" height="40" rx="20" fill="#fff" stroke="#4a7aad" stroke-width="1.5"/>
+  <rect x="425" y="42" width="150" height="40" rx="20" fill="#fff" stroke="#4a7aad" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="500" y="58" font-size="10" fill="#444" text-anchor="middle" font-weight="600">GitLab API</text>
   <text x="500" y="70" font-size="8.5" fill="#888" text-anchor="middle">on-prem + cloud</text>
 
@@ -34,7 +34,7 @@
   <line x1="220" y1="82" x2="220" y2="104" stroke="#7ba4c9" stroke-width="1.2" marker-end="url(#arrow-blue)"/>
 
   <!-- Script 1 -->
-  <rect x="100" y="106" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5"/>
+  <rect x="100" y="106" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="108" y="113" width="28" height="20" rx="4" fill="#4a7aad"/>
   <text x="122" y="127" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">1</text>
   <text x="148" y="126" font-size="11" fill="#111" font-weight="600">Fetch Trello Deployments</text>
@@ -44,17 +44,17 @@
   <line x1="220" y1="156" x2="220" y2="176" stroke="#7ba4c9" stroke-width="1.2" marker-end="url(#arrow-blue)"/>
 
   <!-- Script 2 -->
-  <rect x="100" y="178" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5"/>
+  <rect x="100" y="178" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="108" y="185" width="28" height="20" rx="4" fill="#4a7aad"/>
   <text x="122" y="199" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">2</text>
   <text x="148" y="198" font-size="11" fill="#111" font-weight="600">Analyze Each MR</text>
   <text x="148" y="215" font-size="9" fill="#666">Code changes, reviews, commits, approvals</text>
 
   <!-- GitLab -> Script 2 (side entry) -->
-  <path d="M 500,82 L 500,150 L 342,150 L 342,192" stroke="#7ba4c9" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
+  <path d="M 500,82 L 500,150 L 342,150 L 342,176" stroke="#7ba4c9" stroke-width="1.2" fill="none" marker-end="url(#arrow-blue)"/>
 
   <!-- Script 3 -->
-  <rect x="400" y="178" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5"/>
+  <rect x="400" y="178" width="240" height="50" rx="8" fill="#fff" stroke="#7ba4c9" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="408" y="185" width="28" height="20" rx="4" fill="#4a7aad"/>
   <text x="422" y="199" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">3</text>
   <text x="448" y="198" font-size="11" fill="#111" font-weight="600">Fetch Open MRs</text>
@@ -77,7 +77,7 @@
   <path d="M 220,228 L 220,330" stroke="#7bb58a" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
 
   <!-- Script 4 -->
-  <rect x="100" y="332" width="240" height="50" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.5"/>
+  <rect x="100" y="332" width="240" height="50" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="108" y="339" width="28" height="20" rx="4" fill="#3d7a4a"/>
   <text x="122" y="353" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">4</text>
   <text x="148" y="352" font-size="11" fill="#111" font-weight="600">Aggregate MR Files</text>
@@ -91,7 +91,7 @@
   <text x="542" y="270" font-size="8" fill="#888" font-style="italic">ongoing activity</text>
 
   <!-- Script 5 -->
-  <rect x="240" y="404" width="240" height="50" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.5"/>
+  <rect x="240" y="404" width="240" height="50" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="248" y="411" width="28" height="20" rx="4" fill="#3d7a4a"/>
   <text x="262" y="425" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">5</text>
   <text x="288" y="424" font-size="11" fill="#111" font-weight="600">Combine All Activity</text>
@@ -103,14 +103,14 @@
   <path d="M 420,454 L 530,476" stroke="#7bb58a" stroke-width="1.2" fill="none" marker-end="url(#arrow-green)"/>
 
   <!-- Script 5.1 -->
-  <rect x="40" y="478" width="230" height="40" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.2"/>
+  <rect x="40" y="478" width="230" height="40" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.2" filter="url(#shadow)"/>
   <rect x="48" y="485" width="32" height="20" rx="4" fill="#3d7a4a"/>
   <text x="64" y="499" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">5.1</text>
   <text x="90" y="497" font-size="10" fill="#111" font-weight="600">Time-series Metrics</text>
   <text x="90" y="510" font-size="8" fill="#666">Daily/weekly, per-user, per-project</text>
 
   <!-- Script 5.2 -->
-  <rect x="450" y="478" width="230" height="40" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.2"/>
+  <rect x="450" y="478" width="230" height="40" rx="8" fill="#fff" stroke="#7bb58a" stroke-width="1.2" filter="url(#shadow)"/>
   <rect x="458" y="485" width="32" height="20" rx="4" fill="#3d7a4a"/>
   <text x="474" y="499" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">5.2</text>
   <text x="500" y="497" font-size="10" fill="#111" font-weight="600">Project Historical Data</text>
@@ -130,7 +130,7 @@
   <line x1="360" y1="454" x2="360" y2="568" stroke="#c9a94e" stroke-width="1.2" marker-end="url(#arrow-amber)"/>
 
   <!-- Script 6 -->
-  <rect x="240" y="570" width="240" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.5"/>
+  <rect x="240" y="570" width="240" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="248" y="577" width="28" height="20" rx="4" fill="#9c7c2a"/>
   <text x="262" y="591" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">6</text>
   <text x="288" y="590" font-size="11" fill="#111" font-weight="600">AI-powered Reports</text>
@@ -144,21 +144,21 @@
   <path d="M 424,620 L 564,648" stroke="#c9a94e" stroke-width="1.2" fill="none" marker-end="url(#arrow-amber)"/>
 
   <!-- Script 7 -->
-  <rect x="32" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2"/>
+  <rect x="32" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2" filter="url(#shadow)"/>
   <rect x="40" y="657" width="28" height="20" rx="4" fill="#9c7c2a"/>
   <text x="54" y="671" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">7</text>
   <text x="80" y="670" font-size="11" fill="#111" font-weight="600">Developer Reports</text>
   <text x="80" y="687" font-size="9" fill="#666">Trends, consistency, accomplishments</text>
 
   <!-- Script 8 -->
-  <rect x="255" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2"/>
+  <rect x="255" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2" filter="url(#shadow)"/>
   <rect x="263" y="657" width="28" height="20" rx="4" fill="#9c7c2a"/>
   <text x="277" y="671" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">8</text>
   <text x="303" y="670" font-size="11" fill="#111" font-weight="600">User HTML Reports</text>
   <text x="303" y="687" font-size="9" fill="#666">Jinja2 templates, YoY comparison</text>
 
   <!-- Script 8.1 -->
-  <rect x="478" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2"/>
+  <rect x="478" y="650" width="210" height="50" rx="8" fill="#fff" stroke="#d4b24e" stroke-width="1.2" filter="url(#shadow)"/>
   <rect x="486" y="657" width="32" height="20" rx="4" fill="#9c7c2a"/>
   <text x="502" y="671" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">8.1</text>
   <text x="528" y="670" font-size="11" fill="#111" font-weight="600">Project HTML Reports</text>
