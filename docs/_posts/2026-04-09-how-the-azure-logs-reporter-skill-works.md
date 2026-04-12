@@ -3,16 +3,16 @@ draft: true
 layout: post
 title: "How the Azure Logs Reporter Skill Works"
 date: 2026-04-09
-categories: [azure, claude-code, observability]
-tags: [azure-monitor, kql, log-analytics, claude-code-skills, aks]
-description: "How the azure-logs-reporter skill for Claude Code works: an automated Azure Monitor log analyst that queries, classifies, and reports on your infrastructure health."
+categories: [azure, agent-skills, observability]
+tags: [azure-monitor, kql, log-analytics, agent-skills, aks]
+description: "How the azure-logs-reporter agent skill works: an automated Azure Monitor log analyst that queries, classifies, and reports on your infrastructure health."
 ---
 
 # How the Azure Logs Reporter Skill Works
 
 ContainerLogV2, KubeEvents, AzureDiagnostics, Application Insights. Each in a different Azure Portal blade, each needing its own KQL query, each with its own schema. For a team running a dozen services on AKS, checking logs daily is a tax nobody budgets for. Twenty minutes clicking through portal blades to figure out why pods are throwing 502s, repeated every time something looks wrong.
 
-I built a Claude Code skill to automate it. The azure-logs-reporter connects to Azure Monitor via the Azure MCP server, runs parallel KQL queries against your Log Analytics workspace, classifies findings by severity, and produces a markdown report with clickable Azure Portal links. You say "check the Azure logs" and it does the rest.
+I built an agent skill to automate it. The azure-logs-reporter connects to Azure Monitor via the Azure MCP server, runs parallel KQL queries against your Log Analytics workspace, classifies findings by severity, and produces a markdown report with clickable Azure Portal links. You say "check the Azure logs" and it does the rest.
 
 {% include svg/azure-logs-reporter/four-phase-workflow.svg %}
 
@@ -168,7 +168,7 @@ I split the skill into separate reference files instead.
 
 {% include svg/azure-logs-reporter/skill-structure.svg %}
 
-Claude Code reads `SKILL.md` to understand the phases and approach, then pulls from reference documents as needed:
+The agent reads `SKILL.md` to understand the phases and approach, then pulls from reference documents as needed:
 
 - `kql-queries.md` provides the query templates
 - `table-schemas.md` helps interpret results and construct filters
@@ -190,4 +190,4 @@ Now the skill queries the full requested time range upfront. If someone asks for
 
 ## Getting Started
 
-The skill needs three things: the Azure MCP server configured in your Claude Code environment, Log Analytics Reader access to your target workspace, and the skill files in `.github/skills/azure-logs-reporter/`. Then ask Claude Code to review your Azure logs. The skill handles workspace discovery, query execution, analysis, and report generation on its own.
+The skill needs three things: the Azure MCP server configured in your coding agent's environment, Log Analytics Reader access to your target workspace, and the skill files in `.github/skills/azure-logs-reporter/`. Then ask your agent to review your Azure logs. The skill handles workspace discovery, query execution, analysis, and report generation on its own.
